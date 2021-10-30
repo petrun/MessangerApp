@@ -13,6 +13,8 @@ target 'MessangerApp' do
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'
 
+  pod 'Then'
+  pod 'SnapKit', '~> 5.0.0'
   pod 'SwiftLint'
   pod 'Swinject'
   pod 'SwinjectAutoregistration'

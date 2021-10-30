@@ -57,18 +57,22 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - SnapKit (5.0.1)
   - SwiftLint (0.44.0)
   - Swinject (2.7.1)
   - SwinjectAutoregistration (2.8.1):
     - Swinject (= 2.7.1)
+  - Then (2.7.0)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
+  - SnapKit (~> 5.0.0)
   - SwiftLint
   - Swinject
   - SwinjectAutoregistration
+  - Then
 
 SPEC REPOS:
   trunk:
@@ -84,9 +88,11 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - SnapKit
     - SwiftLint
     - Swinject
     - SwinjectAutoregistration
+    - Then
 
 SPEC CHECKSUMS:
   Firebase: 629510f1a9ddb235f3a7c5c8ceb23ba887f0f814
@@ -101,10 +107,12 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   SwinjectAutoregistration: e83e362da3ca9c64a68290e89efbc40e378dff12
+  Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: fa17b63f880f437380890b0b40403b05ebd1e74e
+PODFILE CHECKSUM: f88ffee58863124c817d2287dfbcbabd5ef24688
 
 COCOAPODS: 1.10.1
