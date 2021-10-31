@@ -19,8 +19,8 @@ class LoginViewController: ViewController<LoginView> {
     // MARK: - Private Methods
 
     private func setupStyle() {
-//        navigationController?.navigationBar.isHidden = true
-//        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.barStyle = .black
     }
 
     private func addTargets() {
@@ -31,16 +31,15 @@ class LoginViewController: ViewController<LoginView> {
     // MARK: - Selectors
 
     @objc func handleLogin() {
-        print("handleLogin")
-//        guard let email = emailTextField.text, let password = passwordTextField.text else {
-//            return
-//        }
-//
-//        viewModel.handleLogin(email: email, password: password)
+        guard let email = mainView.emailTextField.text, let password = mainView.passwordTextField.text else {
+            print("Empty login or password")
+            return
+        }
+
+        viewModel.handleLogin(email: email, password: password)
     }
 
     @objc func handleShowSignUp() {
-        print("handleShowSignUp")
-//        viewModel.handleShowSignUp()
+        viewModel.handleShowSignUp()
     }
 }

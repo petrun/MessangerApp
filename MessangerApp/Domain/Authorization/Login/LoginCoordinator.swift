@@ -5,11 +5,10 @@
 //  Created by andy on 28.10.2021.
 //
 
-import Foundation
 import Swinject
 
 protocol LoginCoordinatorDelegate: AnyObject {
-
+    func showSignUp()
 }
 
 final class LoginCoordinator: Coordinator {
@@ -17,6 +16,7 @@ final class LoginCoordinator: Coordinator {
     var router: Router
 
     private let resolver: Resolver
+    private lazy var navigationController = UINavigationController()
 
     init(router: Router, resolver: Resolver) {
         self.router = router
@@ -26,6 +26,21 @@ final class LoginCoordinator: Coordinator {
     func present(animated: Bool, onDismissed: (() -> Void)?) {
         let viewController = resolver.resolve(LoginViewController.self)!
 
-        router.present(viewController, animated: animated, onDismissed: onDismissed)
+        if let viewModel = viewController.viewModel as? LoginViewModel {
+            viewModel.coordinatorDelegate = self
+        }
+
+        navigationController.setViewControllers([viewController], animated: true)
+
+        router.present(navigationController, animated: animated, onDismissed: onDismissed)
+    }
+}
+
+extension LoginCoordinator: LoginCoordinatorDelegate {
+    func showSignUp() {
+        RegistrationCoordinator(
+            router: NavigationRouter(navigationController: navigationController),
+            resolver: resolver
+        ).present(animated: true, onDismissed: nil)
     }
 }

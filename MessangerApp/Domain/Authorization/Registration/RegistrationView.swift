@@ -1,40 +1,31 @@
 //
-//  LoginView.swift
+//  RegistrationView.swift
 //  MessangerApp
 //
 //  Created by andy on 30.10.2021.
 //
 
+import Then
 import SnapKit
-import UIKit
 
-// MARK: - Appearance
-
-private extension Appearance {
-    var animationDuration: Double { 0.1 }
-    var parallaxValue: CGFloat { 10 }
-    var alphaContainerView: CGFloat { 0.5 }
-    var borderColor: UIColor { .gray }
-    var customFont: UIFont { .systemFont(ofSize: 14) }
-    var buttonCornerRadius: CGFloat { 10 }
-}
-
-// MARK: - Constants
-
-private extension Constants {
-    static let emailPlaceholder = "Введите e-mail"
-    static let textCharatersLimit = 140
-}
-
-// MARK: - Grid
-
-private extension Grid {
-
-}
-//equalTo(CGSize(width: 50, height: 100))
-
-class LoginView: UIView {
+class RegistrationView: UIView {
     // MARK: - Properties
+
+    lazy var imagePicker = UIImagePickerController().then {
+        $0.sourceType = .photoLibrary
+        $0.allowsEditing = true
+    }
+
+    lazy var addPhotoButton = UIButton(type: .system).then {
+        $0.setImage(UIImage(named: "plus_photo"), for: .normal)
+        $0.tintColor = .white
+        $0.imageView?.contentMode = .scaleAspectFill
+        $0.layer.masksToBounds = true
+    }
+
+    lazy var signUpButton = UIButton.submitButton(title: "Sign Up")
+
+    lazy var alreadyHaveAccountButton = UIButton.attributedButton("Already have an account?", "Login")
 
     lazy var emailTextField = UITextField.textField(withPlaceholder: "Email")
 
@@ -42,17 +33,11 @@ class LoginView: UIView {
         $0.isSecureTextEntry = true
     }
 
-    lazy var dontHaveAccountButton = UIButton.attributedButton("Don't have an account?", "Sign Up")
+    lazy var fullnameTextField = UITextField.textField(withPlaceholder: "Full Name")
 
-    lazy var loginButton = UIButton.submitButton(title: "Login")
+    lazy var usernameTextField = UITextField.textField(withPlaceholder: "Username")
 
     // MARK: - Private Properties
-
-    private lazy var logoImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.clipsToBounds = true
-        $0.image = UIImage(named: "TwitterLogo")
-    }
 
     private lazy var emailContainerView = UIView.inputContainerView(
         image: UIImage(named: "ic_mail_outline_white_2x-1")!,
@@ -64,6 +49,16 @@ class LoginView: UIView {
         textField: passwordTextField
     )
 
+    private lazy var fullnameContainerView = UIView.inputContainerView(
+        image: UIImage(named: "ic_person_outline_white_2x")!,
+        textField: fullnameTextField
+    )
+
+    private lazy var usernameContainerView = UIView.inputContainerView(
+        image: UIImage(named: "ic_person_outline_white_2x")!,
+        textField: usernameTextField
+    )
+
     private lazy var stack = UIStackView().then { stack in
         stack.axis = .vertical
         stack.spacing = 8
@@ -71,9 +66,13 @@ class LoginView: UIView {
         [
             emailContainerView,
             passwordContainerView,
-            loginButton
+            fullnameContainerView,
+            usernameContainerView,
+            signUpButton
         ].forEach { stack.addArrangedSubview($0) }
     }
+
+    // MARK: - Lifecycle
 
     init() {
         super.init(frame: .zero)
@@ -91,30 +90,31 @@ class LoginView: UIView {
 
     private func setupStyle() {
         backgroundColor = Constants.twitterBlue
+        addPhotoButton.layer.cornerRadius = 150 / 2
     }
 
     private func addSubviews() {
         add {
-            logoImageView
+            addPhotoButton
             stack
-            dontHaveAccountButton
+            alreadyHaveAccountButton
         }
     }
 
     private func makeConstraints() {
-        logoImageView.snp.makeConstraints { make in
+        addPhotoButton.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self)
             make.size.equalTo(grid.size150)
         }
 
         stack.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(grid.space16)
+            make.top.equalTo(addPhotoButton.snp.bottom).offset(grid.space16)
             make.left.equalTo(grid.space16)
             make.right.equalTo(-grid.space16)
         }
 
-        dontHaveAccountButton.snp.makeConstraints { make in
+        alreadyHaveAccountButton.snp.makeConstraints { make in
             make.bottom.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self)
         }

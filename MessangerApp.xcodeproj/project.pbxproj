@@ -13,6 +13,11 @@
 		A105DDC6272D815C0067A5ED /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDC5272D815C0067A5ED /* UIView+Extension.swift */; };
 		A105DDCA272D96D30067A5ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDC9272D96D30067A5ED /* ViewController.swift */; };
 		A105DDCD272D97490067A5ED /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDCC272D97490067A5ED /* LoginView.swift */; };
+		A105DDD1272DC5AE0067A5ED /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDD0272DC5AE0067A5ED /* RegistrationView.swift */; };
+		A105DDD4272DC5D50067A5ED /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDD3272DC5D50067A5ED /* RegistrationViewController.swift */; };
+		A105DDD7272DC62E0067A5ED /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDD6272DC62E0067A5ED /* RegistrationCoordinator.swift */; };
+		A105DDDA272DC73E0067A5ED /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDD9272DC73E0067A5ED /* RegistrationViewModel.swift */; };
+		A105DDDD272DC76B0067A5ED /* RegistrationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDDC272DC76B0067A5ED /* RegistrationAssembly.swift */; };
 		A11F53D827295A810031CEB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F53D727295A810031CEB4 /* AppDelegate.swift */; };
 		A11F53DC27295A810031CEB4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F53DB27295A810031CEB4 /* LoginViewController.swift */; };
 		A11F53E427295A810031CEB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11F53E227295A810031CEB4 /* LaunchScreen.storyboard */; };
@@ -47,6 +52,11 @@
 		A105DDC5272D815C0067A5ED /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		A105DDC9272D96D30067A5ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A105DDCC272D97490067A5ED /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A105DDD0272DC5AE0067A5ED /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		A105DDD3272DC5D50067A5ED /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		A105DDD6272DC62E0067A5ED /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
+		A105DDD9272DC73E0067A5ED /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		A105DDDC272DC76B0067A5ED /* RegistrationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationAssembly.swift; sourceTree = "<group>"; };
 		A11F53D427295A810031CEB4 /* MessangerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessangerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11F53D727295A810031CEB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A11F53DB27295A810031CEB4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +191,11 @@
 		A1927538272A23E200A18EE0 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				A105DDD0272DC5AE0067A5ED /* RegistrationView.swift */,
+				A105DDD3272DC5D50067A5ED /* RegistrationViewController.swift */,
+				A105DDD6272DC62E0067A5ED /* RegistrationCoordinator.swift */,
+				A105DDD9272DC73E0067A5ED /* RegistrationViewModel.swift */,
+				A105DDDC272DC76B0067A5ED /* RegistrationAssembly.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -390,8 +405,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1C1EB40272B0D2C0060ECF3 /* Coordinator.swift in Sources */,
+				A105DDDA272DC73E0067A5ED /* RegistrationViewModel.swift in Sources */,
 				A1C1EB91272C225F0060ECF3 /* ServicesAssembly.swift in Sources */,
 				A1C1EB88272B6AD40060ECF3 /* Appearance.swift in Sources */,
+				A105DDD1272DC5AE0067A5ED /* RegistrationView.swift in Sources */,
 				A1C1EB9C272C2A660060ECF3 /* UIColor+Extension.swift in Sources */,
 				A1C1EB39272B0C8A0060ECF3 /* NavigationRouter.swift in Sources */,
 				A1C1EB3C272B0CA90060ECF3 /* WindowRootRouter.swift in Sources */,
@@ -403,6 +420,7 @@
 				A192757C272AB30000A18EE0 /* RouterFactory.swift in Sources */,
 				A1927562272A2A0900A18EE0 /* LoginCoordinator.swift in Sources */,
 				A1C1EB85272B6A9E0060ECF3 /* UIView+Add.swift in Sources */,
+				A105DDDD272DC76B0067A5ED /* RegistrationAssembly.swift in Sources */,
 				A1C1EB95272C23990060ECF3 /* Constants.swift in Sources */,
 				A1C1EB60272B36D20060ECF3 /* LoggerProtocol.swift in Sources */,
 				A1C1EB8D272C22140060ECF3 /* LoginAssembly.swift in Sources */,
@@ -411,11 +429,13 @@
 				A1C1EB81272B695A0060ECF3 /* Grid.swift in Sources */,
 				A11F53D827295A810031CEB4 /* AppDelegate.swift in Sources */,
 				A105DDCD272D97490067A5ED /* LoginView.swift in Sources */,
+				A105DDD7272DC62E0067A5ED /* RegistrationCoordinator.swift in Sources */,
 				A1C1EB67272B44D60060ECF3 /* Assembler+Extension.swift in Sources */,
 				A1927553272A270B00A18EE0 /* AppCoordinator.swift in Sources */,
 				A105DDBE272D7C5C0067A5ED /* UIButtons.swift in Sources */,
 				A105DDC6272D815C0067A5ED /* UIView+Extension.swift in Sources */,
 				A1927512272A04AA00A18EE0 /* Log.swift in Sources */,
+				A105DDD4272DC5D50067A5ED /* RegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

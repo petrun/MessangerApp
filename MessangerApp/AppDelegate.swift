@@ -31,4 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+
+    func restartApp() {
+        appCoordinator = nil
+        window = nil
+
+        window = UIWindow()
+        appCoordinator = AppCoordinator(
+            router: resolver.resolve(RouterFactoryProtocol.self)!.makeWindowRootRouter(window: window!),
+            resolver: resolver
+        )
+
+        appCoordinator.present(animated: true, onDismissed: nil)
+    }
 }
