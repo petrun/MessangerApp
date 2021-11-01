@@ -8,43 +8,33 @@
 import SnapKit
 import UIKit
 
-// MARK: - Appearance
+// MARK: - Style
 
-private extension Appearance {
-    var animationDuration: Double { 0.1 }
-    var parallaxValue: CGFloat { 10 }
-    var alphaContainerView: CGFloat { 0.5 }
-    var borderColor: UIColor { .gray }
-    var customFont: UIFont { .systemFont(ofSize: 14) }
-    var buttonCornerRadius: CGFloat { 10 }
+private extension Style {
+    enum LoginView {
+        static let logoImageSize = CGSize(width: 24, height: 24)
+    }
 }
 
 // MARK: - Constants
 
-private extension Constants {
-    static let emailPlaceholder = "Введите e-mail"
-    static let textCharatersLimit = 140
-}
-
-// MARK: - Grid
-
-private extension Grid {
-
-}
-//equalTo(CGSize(width: 50, height: 100))
+//private extension Configuration {
+//    static let emailPlaceholder = "Введите e-mail"
+//    static let textCharatersLimit = 140
+//}
 
 class LoginView: UIView {
     // MARK: - Properties
 
-    lazy var emailTextField = UITextField.textField(withPlaceholder: "Email")
+    lazy var emailTextField = UITextField(withPlaceholder: "Email")
 
-    lazy var passwordTextField = UITextField.textField(withPlaceholder: "Password").then {
+    lazy var passwordTextField = UITextField(withPlaceholder: "Password").then {
         $0.isSecureTextEntry = true
     }
 
-    lazy var dontHaveAccountButton = UIButton.attributedButton("Don't have an account?", "Sign Up")
+    lazy var dontHaveAccountButton = UIButton(first: "Don't have an account?", second: "Sign Up")
 
-    lazy var loginButton = UIButton.submitButton(title: "Login")
+    lazy var loginButton = UIButton(submitTitle: "Login")
 
     // MARK: - Private Properties
 
@@ -54,13 +44,13 @@ class LoginView: UIView {
         $0.image = UIImage(named: "TwitterLogo")
     }
 
-    private lazy var emailContainerView = UIView.inputContainerView(
-        image: UIImage(named: "ic_mail_outline_white_2x-1")!,
+    private lazy var emailContainerView = UIView(
+        containerFrom: UIImage(named: "ic_mail_outline_white_2x-1")!,
         textField: emailTextField
     )
 
-    private lazy var passwordContainerView = UIView.inputContainerView(
-        image: UIImage(named: "ic_lock_outline_white_2x")!,
+    private lazy var passwordContainerView = UIView(
+        containerFrom: UIImage(named: "ic_lock_outline_white_2x")!,
         textField: passwordTextField
     )
 
@@ -90,7 +80,7 @@ class LoginView: UIView {
     // MARK: - Private Methods
 
     private func setupStyle() {
-        backgroundColor = Constants.twitterBlue
+        backgroundColor = Style.Colors.secondaryBG
     }
 
     private func addSubviews() {
@@ -105,18 +95,27 @@ class LoginView: UIView {
         logoImageView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self)
-            make.size.equalTo(grid.size150)
+            make.size.equalTo(Style.LoginView.logoImageSize)
         }
 
         stack.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(grid.space16)
-            make.left.equalTo(grid.space16)
-            make.right.equalTo(-grid.space16)
+            make.top.equalTo(logoImageView.snp.bottom).offset(Style.Spacers.space2)
+            make.left.equalTo(Style.Spacers.space2)
+            make.right.equalTo(-Style.Spacers.space2)
         }
 
         dontHaveAccountButton.snp.makeConstraints { make in
             make.bottom.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self)
         }
+    }
+}
+
+import SwiftUI
+
+@available(iOS 13, *)
+struct LoginViewPreview: PreviewProvider {
+    static var previews: some View {
+        LoginView().embedForPreview()
     }
 }

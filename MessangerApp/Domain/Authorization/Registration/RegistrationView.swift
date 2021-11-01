@@ -8,6 +8,14 @@
 import Then
 import SnapKit
 
+// MARK: - Style
+
+private extension Style {
+    enum RegistrationView {
+        static let logoImageSize = CGSize(width: 24, height: 24)
+    }
+}
+
 class RegistrationView: UIView {
     // MARK: - Properties
 
@@ -23,39 +31,39 @@ class RegistrationView: UIView {
         $0.layer.masksToBounds = true
     }
 
-    lazy var signUpButton = UIButton.submitButton(title: "Sign Up")
+    lazy var signUpButton = UIButton(submitTitle: "Sign Up")
 
-    lazy var alreadyHaveAccountButton = UIButton.attributedButton("Already have an account?", "Login")
+    lazy var alreadyHaveAccountButton = UIButton(first: "Already have an account?", second: "Login")
 
-    lazy var emailTextField = UITextField.textField(withPlaceholder: "Email")
+    lazy var emailTextField = UITextField(withPlaceholder: "Email")
 
-    lazy var passwordTextField = UITextField.textField(withPlaceholder: "Password").then {
+    lazy var passwordTextField = UITextField(withPlaceholder: "Password").then {
         $0.isSecureTextEntry = true
     }
 
-    lazy var fullnameTextField = UITextField.textField(withPlaceholder: "Full Name")
+    lazy var fullnameTextField = UITextField(withPlaceholder: "Full Name")
 
-    lazy var usernameTextField = UITextField.textField(withPlaceholder: "Username")
+    lazy var usernameTextField = UITextField(withPlaceholder: "Username")
 
     // MARK: - Private Properties
 
-    private lazy var emailContainerView = UIView.inputContainerView(
-        image: UIImage(named: "ic_mail_outline_white_2x-1")!,
+    private lazy var emailContainerView = UIView(
+        containerFrom: UIImage(named: "ic_mail_outline_white_2x-1")!,
         textField: emailTextField
     )
 
-    private lazy var passwordContainerView = UIView.inputContainerView(
-        image: UIImage(named: "ic_lock_outline_white_2x")!,
+    private lazy var passwordContainerView = UIView(
+        containerFrom: UIImage(named: "ic_lock_outline_white_2x")!,
         textField: passwordTextField
     )
 
-    private lazy var fullnameContainerView = UIView.inputContainerView(
-        image: UIImage(named: "ic_person_outline_white_2x")!,
+    private lazy var fullnameContainerView = UIView(
+        containerFrom: UIImage(named: "ic_person_outline_white_2x")!,
         textField: fullnameTextField
     )
 
-    private lazy var usernameContainerView = UIView.inputContainerView(
-        image: UIImage(named: "ic_person_outline_white_2x")!,
+    private lazy var usernameContainerView = UIView(
+        containerFrom: UIImage(named: "ic_person_outline_white_2x")!,
         textField: usernameTextField
     )
 
@@ -89,7 +97,7 @@ class RegistrationView: UIView {
     // MARK: - Private Methods
 
     private func setupStyle() {
-        backgroundColor = Constants.twitterBlue
+        backgroundColor = Style.Colors.secondaryBG
         addPhotoButton.layer.cornerRadius = 150 / 2
     }
 
@@ -105,18 +113,27 @@ class RegistrationView: UIView {
         addPhotoButton.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self)
-            make.size.equalTo(grid.size150)
+            make.size.equalTo(Style.RegistrationView.logoImageSize)
         }
 
         stack.snp.makeConstraints { make in
-            make.top.equalTo(addPhotoButton.snp.bottom).offset(grid.space16)
-            make.left.equalTo(grid.space16)
-            make.right.equalTo(-grid.space16)
+            make.top.equalTo(addPhotoButton.snp.bottom).offset(Style.Spacers.space2)
+            make.left.equalTo(Style.Spacers.space2)
+            make.right.equalTo(-Style.Spacers.space2)
         }
 
         alreadyHaveAccountButton.snp.makeConstraints { make in
             make.bottom.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self)
         }
+    }
+}
+
+import SwiftUI
+
+@available(iOS 13, *)
+struct RegistrationViewPreview: PreviewProvider {
+    static var previews: some View {
+        RegistrationView().embedForPreview()
     }
 }

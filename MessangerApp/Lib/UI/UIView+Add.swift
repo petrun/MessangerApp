@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 /// Конструктор функций для добавления дочерних вьюшек в иерархичном виде
 @_functionBuilder

@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 extension UIColor {
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {

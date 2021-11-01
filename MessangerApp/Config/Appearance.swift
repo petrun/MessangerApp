@@ -1,8 +1,5 @@
 //
-//  Appearance.swift
-//  MessangerApp
-//
-//  Created by andy on 29.10.2021.
+// @link https://github.com/Otkritie/ios-snapkit-guidelines
 //
 
 import UIKit

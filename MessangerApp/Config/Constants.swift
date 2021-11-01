@@ -9,13 +9,9 @@ import Foundation
 
 struct Constants {}
 
-//struct Constants {
-//    //
+//extension Constants {
+//    static let twitterBlue = UIColor.rgb(red: 29, green: 161, blue: 242)
 //}
-
-extension Constants {
-    static let twitterBlue = UIColor.rgb(red: 29, green: 161, blue: 242)
-}
 
 //public struct ConstantsWrapper<Base>: Constants {
 //    private let base: Base
