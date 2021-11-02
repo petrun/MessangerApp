@@ -12,51 +12,44 @@ import UIKit
 
 private extension Style {
     enum LoginView {
-        static let logoImageSize = CGSize(width: 24, height: 24)
+        static let logoImageSize = CGSize(width: 150, height: 150)
     }
 }
-
-// MARK: - Constants
-
-//private extension Configuration {
-//    static let emailPlaceholder = "Введите e-mail"
-//    static let textCharatersLimit = 140
-//}
 
 class LoginView: UIView {
     // MARK: - Properties
 
-    lazy var emailTextField = UITextField(withPlaceholder: "Email")
+    lazy var emailTextField = UITextField(withPlaceholder: L10n.emailPlaceholder)
 
-    lazy var passwordTextField = UITextField(withPlaceholder: "Password").then {
+    lazy var passwordTextField = UITextField(withPlaceholder: L10n.passwordLabel).then {
         $0.isSecureTextEntry = true
     }
 
-    lazy var dontHaveAccountButton = UIButton(first: "Don't have an account?", second: "Sign Up")
+    lazy var dontHaveAccountButton = UIButton(first: L10n.dontHaveAnAccountQuestionTitle, second: L10n.signUpTitle)
 
-    lazy var loginButton = UIButton(submitTitle: "Login")
+    lazy var loginButton = UIButton(submitTitle: L10n.loginTitle)
 
     // MARK: - Private Properties
 
     private lazy var logoImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
-        $0.image = UIImage(named: "TwitterLogo")
+        $0.image = Asset.twitterLogoWhite.image
     }
 
     private lazy var emailContainerView = UIView(
-        containerFrom: UIImage(named: "ic_mail_outline_white_2x-1")!,
+        containerFrom: Asset.iconEmailOutletWhite.image,
         textField: emailTextField
     )
 
     private lazy var passwordContainerView = UIView(
-        containerFrom: UIImage(named: "ic_lock_outline_white_2x")!,
+        containerFrom: Asset.iconLockOutletWhite.image,
         textField: passwordTextField
     )
 
     private lazy var stack = UIStackView().then { stack in
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = Style.Spacers.space1
         stack.distribution = .fillEqually
         [
             emailContainerView,

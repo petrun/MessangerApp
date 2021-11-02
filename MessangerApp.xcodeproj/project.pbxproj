@@ -22,7 +22,10 @@
 		A11F53DC27295A810031CEB4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F53DB27295A810031CEB4 /* LoginViewController.swift */; };
 		A11F53E427295A810031CEB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11F53E227295A810031CEB4 /* LaunchScreen.storyboard */; };
 		A11F53FE272964070031CEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11F53FD272964070031CEB4 /* GoogleService-Info.plist */; };
+		A13293C02730B64A003AAF9F /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13293BF2730B64A003AAF9F /* Assets.swift */; };
 		A14721A3272EF0A300C5B6FE /* UIKit+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14721A2272EF0A300C5B6FE /* UIKit+Preview.swift */; };
+		A15F72E82730A5C50065AB0C /* lint.sh in Resources */ = {isa = PBXBuildFile; fileRef = A15F72E52730A5C50065AB0C /* lint.sh */; };
+		A15F72E92730A5C50065AB0C /* generate-strings.sh in Resources */ = {isa = PBXBuildFile; fileRef = A15F72E62730A5C50065AB0C /* generate-strings.sh */; };
 		A1927512272A04AA00A18EE0 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1927511272A04AA00A18EE0 /* Log.swift */; };
 		A1927545272A259000A18EE0 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1927544272A259000A18EE0 /* Router.swift */; };
 		A1927553272A270B00A18EE0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1927552272A270B00A18EE0 /* AppCoordinator.swift */; };
@@ -41,8 +44,11 @@
 		A1C1EB8D272C22140060ECF3 /* LoginAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C1EB8C272C22140060ECF3 /* LoginAssembly.swift */; };
 		A1C1EB91272C225F0060ECF3 /* ServicesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C1EB90272C225F0060ECF3 /* ServicesAssembly.swift */; };
 		A1C1EB95272C23990060ECF3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C1EB94272C23990060ECF3 /* Constants.swift */; };
-		A1C1EB98272C24810060ECF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1C1EB97272C24800060ECF3 /* Assets.xcassets */; };
 		A1C1EB9C272C2A660060ECF3 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C1EB9B272C2A660060ECF3 /* UIColor+Extension.swift */; };
+		A1CD684A2730AFDA00F33E04 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = A1CD68492730AFDA00F33E04 /* swiftgen.yml */; };
+		A1CD685B2730B2B900F33E04 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CD68582730B2B900F33E04 /* Strings.swift */; };
+		A1CD685C2730B2B900F33E04 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1CD68592730B2B900F33E04 /* Localizable.strings */; };
+		A1CD68C52730B4E400F33E04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1CD68C42730B4E400F33E04 /* Assets.xcassets */; };
 		A1D32BAF27301D1200042CEA /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D32BAE27301D1200042CEA /* Style.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,7 +70,11 @@
 		A11F53E327295A810031CEB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A11F53E527295A810031CEB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11F53FD272964070031CEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A13293BF2730B64A003AAF9F /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		A13293C22730B6C0003AAF9F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A14721A2272EF0A300C5B6FE /* UIKit+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Preview.swift"; sourceTree = "<group>"; };
+		A15F72E52730A5C50065AB0C /* lint.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = lint.sh; sourceTree = "<group>"; };
+		A15F72E62730A5C50065AB0C /* generate-strings.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "generate-strings.sh"; sourceTree = "<group>"; };
 		A1927511272A04AA00A18EE0 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		A1927544272A259000A18EE0 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		A1927552272A270B00A18EE0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -83,8 +93,11 @@
 		A1C1EB8C272C22140060ECF3 /* LoginAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAssembly.swift; sourceTree = "<group>"; };
 		A1C1EB90272C225F0060ECF3 /* ServicesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesAssembly.swift; sourceTree = "<group>"; };
 		A1C1EB94272C23990060ECF3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A1C1EB97272C24800060ECF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../../Volumes/Archive/IOS Курсы/Twitter clone iOS/1. Building Main User Interface/Assets.xcassets"; sourceTree = "<group>"; };
 		A1C1EB9B272C2A660060ECF3 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		A1CD68492730AFDA00F33E04 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		A1CD68582730B2B900F33E04 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		A1CD685A2730B2B900F33E04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A1CD68C42730B4E400F33E04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1D32BAE27301D1200042CEA /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		BDB144E268BCACD02ECF44A5 /* Pods_MessangerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessangerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFD560E591ABEC8315206B9 /* Pods-MessangerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessangerApp.release.xcconfig"; path = "Target Support Files/Pods-MessangerApp/Pods-MessangerApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,10 +144,12 @@
 		A11F53CB27295A800031CEB4 = {
 			isa = PBXGroup;
 			children = (
+				A15F72E42730A5C50065AB0C /* Build-Phases */,
 				A11F53D627295A810031CEB4 /* MessangerApp */,
 				A11F53D527295A810031CEB4 /* Products */,
 				D1E0846B30D8DA63F576C4DB /* Pods */,
 				95BE9E82D5C9B29CC9DCC263 /* Frameworks */,
+				A1CD68492730AFDA00F33E04 /* swiftgen.yml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,13 +167,23 @@
 				A1C1EB52272B27160060ECF3 /* Config */,
 				A1C1EB46272B20F70060ECF3 /* Domain */,
 				A1C1EB45272B1F790060ECF3 /* Lib */,
+				A1CD68572730B2B900F33E04 /* Resources */,
 				A1927552272A270B00A18EE0 /* AppCoordinator.swift */,
 				A11F53D727295A810031CEB4 /* AppDelegate.swift */,
-				A1C1EB97272C24800060ECF3 /* Assets.xcassets */,
 				A11F53E527295A810031CEB4 /* Info.plist */,
 				A11F53FD272964070031CEB4 /* GoogleService-Info.plist */,
+				A1CD68C42730B4E400F33E04 /* Assets.xcassets */,
 			);
 			path = MessangerApp;
+			sourceTree = "<group>";
+		};
+		A15F72E42730A5C50065AB0C /* Build-Phases */ = {
+			isa = PBXGroup;
+			children = (
+				A15F72E52730A5C50065AB0C /* lint.sh */,
+				A15F72E62730A5C50065AB0C /* generate-strings.sh */,
+			);
+			path = "Build-Phases";
 			sourceTree = "<group>";
 		};
 		A192750E272A003B00A18EE0 /* Authorization */ = {
@@ -284,6 +309,16 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
+		A1CD68572730B2B900F33E04 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A13293BF2730B64A003AAF9F /* Assets.swift */,
+				A1CD68592730B2B900F33E04 /* Localizable.strings */,
+				A1CD68582730B2B900F33E04 /* Strings.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		D1E0846B30D8DA63F576C4DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +335,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A11F53E827295A810031CEB4 /* Build configuration list for PBXNativeTarget "MessangerApp" */;
 			buildPhases = (
+				A15F72F22730A7110065AB0C /* Generate strings */,
 				7C829F8ED637EF494E78419E /* [CP] Check Pods Manifest.lock */,
 				A11F53D027295A810031CEB4 /* Sources */,
 				A11F53D127295A810031CEB4 /* Frameworks */,
@@ -336,6 +372,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = A11F53CB27295A800031CEB4;
 			productRefGroup = A11F53D527295A810031CEB4 /* Products */;
@@ -354,7 +391,11 @@
 			files = (
 				A11F53E427295A810031CEB4 /* LaunchScreen.storyboard in Resources */,
 				A11F53FE272964070031CEB4 /* GoogleService-Info.plist in Resources */,
-				A1C1EB98272C24810060ECF3 /* Assets.xcassets in Resources */,
+				A1CD68C52730B4E400F33E04 /* Assets.xcassets in Resources */,
+				A15F72E82730A5C50065AB0C /* lint.sh in Resources */,
+				A1CD685C2730B2B900F33E04 /* Localizable.strings in Resources */,
+				A15F72E92730A5C50065AB0C /* generate-strings.sh in Resources */,
+				A1CD684A2730AFDA00F33E04 /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +423,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A15F72F22730A7110065AB0C /* Generate strings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate strings";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/Build-Phases/generate-strings.sh\n";
 		};
 		C042046FE513ECADD53CF665 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -415,10 +474,12 @@
 				A1C1EB9C272C2A660060ECF3 /* UIColor+Extension.swift in Sources */,
 				A1C1EB39272B0C8A0060ECF3 /* NavigationRouter.swift in Sources */,
 				A14721A3272EF0A300C5B6FE /* UIKit+Preview.swift in Sources */,
+				A13293C02730B64A003AAF9F /* Assets.swift in Sources */,
 				A1C1EB3C272B0CA90060ECF3 /* WindowRootRouter.swift in Sources */,
 				A1C1EB64272B36EA0060ECF3 /* ConsoleLogger.swift in Sources */,
 				A105DDC3272D807C0067A5ED /* UITextFields.swift in Sources */,
 				A105DDCA272D96D30067A5ED /* ViewController.swift in Sources */,
+				A1CD685B2730B2B900F33E04 /* Strings.swift in Sources */,
 				A1C1EB36272B0BAB0060ECF3 /* ModalNavigationRouter.swift in Sources */,
 				A11F53DC27295A810031CEB4 /* LoginViewController.swift in Sources */,
 				A192757C272AB30000A18EE0 /* RouterFactory.swift in Sources */,
@@ -454,6 +515,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		A1CD68592730B2B900F33E04 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1CD685A2730B2B900F33E04 /* Base */,
+				A13293C22730B6C0003AAF9F /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -461,6 +531,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -508,7 +579,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -522,6 +593,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -563,7 +635,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

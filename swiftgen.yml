@@ -1,0 +1,14 @@
+strings:
+  inputs: MessangerApp/Resources/Base.lproj
+  outputs:
+    - templateName: structured-swift5
+      output: MessangerApp/Resources/Strings.swift
+
+xcassets:
+  inputs:
+    - MessangerApp/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      params:
+        forceProvidesNamespaces: true
+      output: MessangerApp/Resources/Assets.swift

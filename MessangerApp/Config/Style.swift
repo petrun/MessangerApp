@@ -36,7 +36,7 @@ enum Style {
     }
 
     enum Spacers {
-        private static let spacer = CGFloat(8)
+        private static let spacer: CGFloat = 8
         static var space0: CGFloat { 0 }
         static var space1: CGFloat { 1 * Spacers.spacer }
         static var space2: CGFloat { 2 * Spacers.spacer }

@@ -12,7 +12,8 @@ import SnapKit
 
 private extension Style {
     enum RegistrationView {
-        static let logoImageSize = CGSize(width: 24, height: 24)
+        static let addPhotoButtonSize = CGSize(width: 150, height: 150)
+        static let addPhotoButtonTintColor = Style.BaseColors.white
     }
 }
 
@@ -25,51 +26,51 @@ class RegistrationView: UIView {
     }
 
     lazy var addPhotoButton = UIButton(type: .system).then {
-        $0.setImage(UIImage(named: "plus_photo"), for: .normal)
-        $0.tintColor = .white
+        $0.setImage(Asset.plusPhoto.image, for: .normal)
+        $0.tintColor = Style.RegistrationView.addPhotoButtonTintColor
         $0.imageView?.contentMode = .scaleAspectFill
         $0.layer.masksToBounds = true
     }
 
-    lazy var signUpButton = UIButton(submitTitle: "Sign Up")
+    lazy var signUpButton = UIButton(submitTitle: L10n.signUpTitle)
 
-    lazy var alreadyHaveAccountButton = UIButton(first: "Already have an account?", second: "Login")
+    lazy var alreadyHaveAccountButton = UIButton(first: L10n.alreadyHaveAnAccountQuestionTitle, second: L10n.loginTitle)
 
-    lazy var emailTextField = UITextField(withPlaceholder: "Email")
+    lazy var emailTextField = UITextField(withPlaceholder: L10n.emailPlaceholder)
 
-    lazy var passwordTextField = UITextField(withPlaceholder: "Password").then {
+    lazy var passwordTextField = UITextField(withPlaceholder: L10n.passwordPlaceholder).then {
         $0.isSecureTextEntry = true
     }
 
-    lazy var fullnameTextField = UITextField(withPlaceholder: "Full Name")
+    lazy var fullnameTextField = UITextField(withPlaceholder: L10n.fullNamePlaceholder)
 
-    lazy var usernameTextField = UITextField(withPlaceholder: "Username")
+    lazy var usernameTextField = UITextField(withPlaceholder: L10n.usernamePlaceholder)
 
     // MARK: - Private Properties
 
     private lazy var emailContainerView = UIView(
-        containerFrom: UIImage(named: "ic_mail_outline_white_2x-1")!,
+        containerFrom: Asset.iconEmailOutletWhite.image,
         textField: emailTextField
     )
 
     private lazy var passwordContainerView = UIView(
-        containerFrom: UIImage(named: "ic_lock_outline_white_2x")!,
+        containerFrom: Asset.iconLockOutletWhite.image,
         textField: passwordTextField
     )
 
     private lazy var fullnameContainerView = UIView(
-        containerFrom: UIImage(named: "ic_person_outline_white_2x")!,
+        containerFrom: Asset.iconPersonOutletWhite.image,
         textField: fullnameTextField
     )
 
     private lazy var usernameContainerView = UIView(
-        containerFrom: UIImage(named: "ic_person_outline_white_2x")!,
+        containerFrom: Asset.iconPersonOutletWhite.image,
         textField: usernameTextField
     )
 
     private lazy var stack = UIStackView().then { stack in
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = Style.Spacers.space1
         stack.distribution = .fillEqually
         [
             emailContainerView,
@@ -98,7 +99,7 @@ class RegistrationView: UIView {
 
     private func setupStyle() {
         backgroundColor = Style.Colors.secondaryBG
-        addPhotoButton.layer.cornerRadius = 150 / 2
+        addPhotoButton.layer.cornerRadius = Style.RegistrationView.addPhotoButtonSize.height / 2
     }
 
     private func addSubviews() {
@@ -113,7 +114,7 @@ class RegistrationView: UIView {
         addPhotoButton.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self)
-            make.size.equalTo(Style.RegistrationView.logoImageSize)
+            make.size.equalTo(Style.RegistrationView.addPhotoButtonSize)
         }
 
         stack.snp.makeConstraints { make in
