@@ -19,20 +19,32 @@ private extension Style {
 class LoginView: UIView {
     // MARK: - Properties
 
-    lazy var emailTextField = UITextField(withPlaceholder: L10n.Email.placeholder)
+    lazy var emailTextField = UITextField(
+        withPlaceholder: L10n.Email.placeholder,
+        theme: theme
+    )
 
-    lazy var passwordTextField = UITextField(withPlaceholder: L10n.Password.label).then {
+    lazy var passwordTextField = UITextField(
+        withPlaceholder: L10n.Password.label,
+        theme: theme
+    ).then {
         $0.isSecureTextEntry = true
     }
 
     lazy var dontHaveAccountButton = UIButton(
         first: L10n.DontHaveAnAccountQuestion.title,
-        second: L10n.SignUp.title
+        second: L10n.SignUp.title,
+        theme: theme
     )
 
-    lazy var loginButton = UIButton(submitTitle: L10n.Login.title)
+    lazy var loginButton = UIButton(
+        submitTitle: L10n.Login.title,
+        theme: theme
+    )
 
     // MARK: - Private Properties
+
+    private let theme = LoginTheme()
 
     private lazy var logoImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
@@ -42,12 +54,14 @@ class LoginView: UIView {
 
     private lazy var emailContainerView = UIView(
         containerFrom: Asset.Icons.emailOutletWhite.image,
-        textField: emailTextField
+        textField: emailTextField,
+        theme: theme
     )
 
     private lazy var passwordContainerView = UIView(
         containerFrom: Asset.Icons.lockOutletWhite.image,
-        textField: passwordTextField
+        textField: passwordTextField,
+        theme: theme
     )
 
     private lazy var stack = UIStackView().then { stack in
@@ -76,7 +90,7 @@ class LoginView: UIView {
     // MARK: - Private Methods
 
     private func setupStyle() {
-        backgroundColor = Style.Colors.secondaryBG
+        backgroundColor = theme.backgroundColor
     }
 
     private func addSubviews() {

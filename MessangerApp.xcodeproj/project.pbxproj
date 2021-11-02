@@ -51,6 +51,7 @@
 		A1CD68C52730B4E400F33E04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1CD68C42730B4E400F33E04 /* Assets.xcassets */; };
 		A1D32BAF27301D1200042CEA /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D32BAE27301D1200042CEA /* Style.swift */; };
 		A1ECB3F32730C43600DB280F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A1ECB3F22730C43600DB280F /* .swiftlint.yml */; };
+		A1ECB3F82731724100DB280F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ECB3F72731724100DB280F /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,7 @@
 		A1CD68C42730B4E400F33E04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1D32BAE27301D1200042CEA /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		A1ECB3F22730C43600DB280F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A1ECB3F72731724100DB280F /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		BDB144E268BCACD02ECF44A5 /* Pods_MessangerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessangerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFD560E591ABEC8315206B9 /* Pods-MessangerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessangerApp.release.xcconfig"; path = "Target Support Files/Pods-MessangerApp/Pods-MessangerApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -280,6 +282,7 @@
 				A1C1EB66272B44D60060ECF3 /* Assembler+Extension.swift */,
 				A1C1EB94272C23990060ECF3 /* Constants.swift */,
 				A1D32BAE27301D1200042CEA /* Style.swift */,
+				A1ECB3F72731724100DB280F /* Theme.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				A1C1EB39272B0C8A0060ECF3 /* NavigationRouter.swift in Sources */,
 				A14721A3272EF0A300C5B6FE /* UIKit+Preview.swift in Sources */,
 				A13293C02730B64A003AAF9F /* Assets.swift in Sources */,
+				A1ECB3F82731724100DB280F /* Theme.swift in Sources */,
 				A1C1EB3C272B0CA90060ECF3 /* WindowRootRouter.swift in Sources */,
 				A1C1EB64272B36EA0060ECF3 /* ConsoleLogger.swift in Sources */,
 				A105DDC3272D807C0067A5ED /* UITextFields.swift in Sources */,

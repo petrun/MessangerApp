@@ -13,7 +13,7 @@ import SnapKit
 private extension Style {
     enum RegistrationView {
         static let addPhotoButtonSize = CGSize(width: 150, height: 150)
-        static let addPhotoButtonTintColor = Style.BaseColors.white
+        static let addPhotoButtonTintColor = BaseColors.white
     }
 }
 
@@ -32,43 +32,65 @@ class RegistrationView: UIView {
         $0.layer.masksToBounds = true
     }
 
-    lazy var signUpButton = UIButton(submitTitle: L10n.SignUp.title)
+    lazy var signUpButton = UIButton(
+        submitTitle: L10n.SignUp.title,
+        theme: theme
+    )
 
     lazy var alreadyHaveAccountButton = UIButton(
         first: L10n.AlreadyHaveAnAccountQuestion.title,
-        second: L10n.Login.title
+        second: L10n.Login.title,
+        theme: theme
     )
 
-    lazy var emailTextField = UITextField(withPlaceholder: L10n.Email.placeholder)
+    lazy var emailTextField = UITextField(
+        withPlaceholder: L10n.Email.placeholder,
+        theme: theme
+    )
 
-    lazy var passwordTextField = UITextField(withPlaceholder: L10n.Password.placeholder).then {
+    lazy var passwordTextField = UITextField(
+        withPlaceholder: L10n.Password.placeholder,
+        theme: theme
+    ).then {
         $0.isSecureTextEntry = true
     }
 
-    lazy var fullnameTextField = UITextField(withPlaceholder: L10n.FullName.placeholder)
+    lazy var fullnameTextField = UITextField(
+        withPlaceholder: L10n.FullName.placeholder,
+        theme: theme
+    )
 
-    lazy var usernameTextField = UITextField(withPlaceholder: L10n.Username.placeholder)
+    lazy var usernameTextField = UITextField(
+        withPlaceholder: L10n.Username.placeholder,
+        theme: theme
+    )
 
     // MARK: - Private Properties
 
+    private lazy var theme = LoginTheme()
+
     private lazy var emailContainerView = UIView(
         containerFrom: Asset.Icons.emailOutletWhite.image,
-        textField: emailTextField
+        textField: emailTextField,
+        theme: theme
     )
 
     private lazy var passwordContainerView = UIView(
         containerFrom: Asset.Icons.lockOutletWhite.image,
-        textField: passwordTextField
+        textField: passwordTextField,
+        theme: theme
     )
 
     private lazy var fullnameContainerView = UIView(
         containerFrom: Asset.Icons.personOutletWhite.image,
-        textField: fullnameTextField
+        textField: fullnameTextField,
+        theme: theme
     )
 
     private lazy var usernameContainerView = UIView(
         containerFrom: Asset.Icons.personOutletWhite.image,
-        textField: usernameTextField
+        textField: usernameTextField,
+        theme: theme
     )
 
     private lazy var stack = UIStackView().then { stack in
@@ -101,7 +123,7 @@ class RegistrationView: UIView {
     // MARK: - Private Methods
 
     private func setupStyle() {
-        backgroundColor = Style.Colors.secondaryBG
+        backgroundColor = theme.backgroundColor
         addPhotoButton.layer.cornerRadius = Style.RegistrationView.addPhotoButtonSize.height / 2
     }
 
