@@ -37,16 +37,16 @@ class LoginView: UIView {
     private lazy var logoImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
-        $0.image = Asset.twitterLogoWhite.image
+        $0.image = Asset.Logo.white.image
     }
 
     private lazy var emailContainerView = UIView(
-        containerFrom: Asset.iconEmailOutletWhite.image,
+        containerFrom: Asset.Icons.emailOutletWhite.image,
         textField: emailTextField
     )
 
     private lazy var passwordContainerView = UIView(
-        containerFrom: Asset.iconLockOutletWhite.image,
+        containerFrom: Asset.Icons.lockOutletWhite.image,
         textField: passwordTextField
     )
 

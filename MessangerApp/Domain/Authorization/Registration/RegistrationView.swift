@@ -52,22 +52,22 @@ class RegistrationView: UIView {
     // MARK: - Private Properties
 
     private lazy var emailContainerView = UIView(
-        containerFrom: Asset.iconEmailOutletWhite.image,
+        containerFrom: Asset.Icons.emailOutletWhite.image,
         textField: emailTextField
     )
 
     private lazy var passwordContainerView = UIView(
-        containerFrom: Asset.iconLockOutletWhite.image,
+        containerFrom: Asset.Icons.lockOutletWhite.image,
         textField: passwordTextField
     )
 
     private lazy var fullnameContainerView = UIView(
-        containerFrom: Asset.iconPersonOutletWhite.image,
+        containerFrom: Asset.Icons.personOutletWhite.image,
         textField: fullnameTextField
     )
 
     private lazy var usernameContainerView = UIView(
-        containerFrom: Asset.iconPersonOutletWhite.image,
+        containerFrom: Asset.Icons.personOutletWhite.image,
         textField: usernameTextField
     )
 

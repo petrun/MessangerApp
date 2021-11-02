@@ -22,25 +22,29 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
   internal static let accentColor = ColorAsset(name: "AccentColor")
-  internal static let baselineArrowBackWhite = ImageAsset(name: "baseline_arrow_back_white")
-  internal static let comment = ImageAsset(name: "comment")
-  internal static let downArrow = ImageAsset(name: "down_arrow")
-  internal static let homeUnselected = ImageAsset(name: "home_unselected")
-  internal static let iconEmailOutletWhite = ImageAsset(name: "icon_email_outlet_white")
-  internal static let iconLockOutletWhite = ImageAsset(name: "icon_lock_outlet_white")
-  internal static let iconMenuOutletWhite = ImageAsset(name: "icon_menu_outlet_white")
-  internal static let iconPersonOutletWhite = ImageAsset(name: "icon_person_outlet_white")
-  internal static let like = ImageAsset(name: "like")
-  internal static let likeFilled = ImageAsset(name: "like_filled")
-  internal static let likeUnselected = ImageAsset(name: "like_unselected")
-  internal static let mail = ImageAsset(name: "mail")
-  internal static let newTweet = ImageAsset(name: "new_tweet")
+  internal enum Icons {
+    internal static let arrowBackWhite = ImageAsset(name: "arrow_back_white")
+    internal static let comment = ImageAsset(name: "comment")
+    internal static let downArrow = ImageAsset(name: "down_arrow")
+    internal static let emailOutletWhite = ImageAsset(name: "email_outlet_white")
+    internal static let homeUnselected = ImageAsset(name: "home_unselected")
+    internal static let like = ImageAsset(name: "like")
+    internal static let likeFilled = ImageAsset(name: "like_filled")
+    internal static let likeUnselected = ImageAsset(name: "like_unselected")
+    internal static let lockOutletWhite = ImageAsset(name: "lock_outlet_white")
+    internal static let mail = ImageAsset(name: "mail")
+    internal static let menuOutletWhite = ImageAsset(name: "menu_outlet_white")
+    internal static let newTweet = ImageAsset(name: "new_tweet")
+    internal static let personOutletWhite = ImageAsset(name: "person_outlet_white")
+    internal static let retweet = ImageAsset(name: "retweet")
+    internal static let searchUnselected = ImageAsset(name: "search_unselected")
+    internal static let share = ImageAsset(name: "share")
+  }
+  internal enum Logo {
+    internal static let blue = ImageAsset(name: "blue")
+    internal static let white = ImageAsset(name: "white")
+  }
   internal static let plusPhoto = ImageAsset(name: "plus_photo")
-  internal static let retweet = ImageAsset(name: "retweet")
-  internal static let searchUnselected = ImageAsset(name: "search_unselected")
-  internal static let share = ImageAsset(name: "share")
-  internal static let twitterLogoBlue = ImageAsset(name: "twitter_logo_blue")
-  internal static let twitterLogoWhite = ImageAsset(name: "twitter_logo_white")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
