@@ -10,24 +10,48 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-  /// Already have an account?
-  internal static let alreadyHaveAnAccountQuestionTitle = L10n.tr("Localizable", "already_have_an_account_question_title")
-  /// Don't have an account?
-  internal static let dontHaveAnAccountQuestionTitle = L10n.tr("Localizable", "dont_have_an_account_question_title")
-  /// Email
-  internal static let emailPlaceholder = L10n.tr("Localizable", "email_placeholder")
-  /// Full Name
-  internal static let fullNamePlaceholder = L10n.tr("Localizable", "full_name_placeholder")
-  /// Login
-  internal static let loginTitle = L10n.tr("Localizable", "login_title")
-  /// Password
-  internal static let passwordLabel = L10n.tr("Localizable", "password_label")
-  /// Password
-  internal static let passwordPlaceholder = L10n.tr("Localizable", "password_placeholder")
-  /// Sign Up
-  internal static let signUpTitle = L10n.tr("Localizable", "sign_up_title")
-  /// Username
-  internal static let usernamePlaceholder = L10n.tr("Localizable", "username_placeholder")
+
+  internal enum AlreadyHaveAnAccountQuestion {
+    /// Already have an account?
+    internal static let title = L10n.tr("Localizable", "already_have_an_account_question.title")
+  }
+
+  internal enum DontHaveAnAccountQuestion {
+    /// Don't have an account?
+    internal static let title = L10n.tr("Localizable", "dont_have_an_account_question.title")
+  }
+
+  internal enum Email {
+    /// Email
+    internal static let placeholder = L10n.tr("Localizable", "email.placeholder")
+  }
+
+  internal enum FullName {
+    /// Full Name
+    internal static let placeholder = L10n.tr("Localizable", "full_name.placeholder")
+  }
+
+  internal enum Login {
+    /// Login
+    internal static let title = L10n.tr("Localizable", "login.title")
+  }
+
+  internal enum Password {
+    /// Password
+    internal static let label = L10n.tr("Localizable", "password.label")
+    /// Password
+    internal static let placeholder = L10n.tr("Localizable", "password.placeholder")
+  }
+
+  internal enum SignUp {
+    /// Sign Up
+    internal static let title = L10n.tr("Localizable", "sign_up.title")
+  }
+
+  internal enum Username {
+    /// Username
+    internal static let placeholder = L10n.tr("Localizable", "username.placeholder")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

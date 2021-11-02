@@ -32,19 +32,22 @@ class RegistrationView: UIView {
         $0.layer.masksToBounds = true
     }
 
-    lazy var signUpButton = UIButton(submitTitle: L10n.signUpTitle)
+    lazy var signUpButton = UIButton(submitTitle: L10n.SignUp.title)
 
-    lazy var alreadyHaveAccountButton = UIButton(first: L10n.alreadyHaveAnAccountQuestionTitle, second: L10n.loginTitle)
+    lazy var alreadyHaveAccountButton = UIButton(
+        first: L10n.AlreadyHaveAnAccountQuestion.title,
+        second: L10n.Login.title
+    )
 
-    lazy var emailTextField = UITextField(withPlaceholder: L10n.emailPlaceholder)
+    lazy var emailTextField = UITextField(withPlaceholder: L10n.Email.placeholder)
 
-    lazy var passwordTextField = UITextField(withPlaceholder: L10n.passwordPlaceholder).then {
+    lazy var passwordTextField = UITextField(withPlaceholder: L10n.Password.placeholder).then {
         $0.isSecureTextEntry = true
     }
 
-    lazy var fullnameTextField = UITextField(withPlaceholder: L10n.fullNamePlaceholder)
+    lazy var fullnameTextField = UITextField(withPlaceholder: L10n.FullName.placeholder)
 
-    lazy var usernameTextField = UITextField(withPlaceholder: L10n.usernamePlaceholder)
+    lazy var usernameTextField = UITextField(withPlaceholder: L10n.Username.placeholder)
 
     // MARK: - Private Properties
 

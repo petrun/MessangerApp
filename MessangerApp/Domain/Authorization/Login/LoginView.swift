@@ -19,15 +19,18 @@ private extension Style {
 class LoginView: UIView {
     // MARK: - Properties
 
-    lazy var emailTextField = UITextField(withPlaceholder: L10n.emailPlaceholder)
+    lazy var emailTextField = UITextField(withPlaceholder: L10n.Email.placeholder)
 
-    lazy var passwordTextField = UITextField(withPlaceholder: L10n.passwordLabel).then {
+    lazy var passwordTextField = UITextField(withPlaceholder: L10n.Password.label).then {
         $0.isSecureTextEntry = true
     }
 
-    lazy var dontHaveAccountButton = UIButton(first: L10n.dontHaveAnAccountQuestionTitle, second: L10n.signUpTitle)
+    lazy var dontHaveAccountButton = UIButton(
+        first: L10n.DontHaveAnAccountQuestion.title,
+        second: L10n.SignUp.title
+    )
 
-    lazy var loginButton = UIButton(submitTitle: L10n.loginTitle)
+    lazy var loginButton = UIButton(submitTitle: L10n.Login.title)
 
     // MARK: - Private Properties
 

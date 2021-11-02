@@ -1,9 +1,11 @@
-"password_label" = "Password";
-"login_title" = "Login";
-"email_placeholder" = "Email";
-"dont_have_an_account_question_title" = "Don't have an account?";
-"sign_up_title" = "Sign Up";
-"already_have_an_account_question_title" = "Already have an account?";
-"password_placeholder" = "Password";
-"full_name_placeholder" = "Full Name";
-"username_placeholder" = "Username";
+// Fields
+"password.label" = "Password";
+"login.title" = "Login";
+"email.placeholder" = "Email";
+"password.placeholder" = "Password";
+"full_name.placeholder" = "Full Name";
+"username.placeholder" = "Username";
+
+"dont_have_an_account_question.title" = "Don't have an account?";
+"sign_up.title" = "Sign Up";
+"already_have_an_account_question.title" = "Already have an account?";
