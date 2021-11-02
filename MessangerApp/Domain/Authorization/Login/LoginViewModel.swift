@@ -15,7 +15,7 @@ protocol LoginViewModelProtocol: AnyObject {
 final class LoginViewModel {
 //    private let authService: AuthService
 //    private let logger: LoggerProtocol
-    var coordinatorDelegate: LoginCoordinatorDelegate?
+    var coordinatorHandler: LoginCoordinatorDelegate?
 
 //    init(authService: AuthService, logger: LoggerProtocol){
 //        self.authService = authService
@@ -38,6 +38,6 @@ extension LoginViewModel: LoginViewModelProtocol {
     }
 
     func handleShowSignUp() {
-        coordinatorDelegate?.showSignUp()
+        coordinatorHandler?.showSignUp()
     }
 }

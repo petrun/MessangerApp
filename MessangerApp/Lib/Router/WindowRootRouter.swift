@@ -9,7 +9,7 @@ final class WindowRootRouter {
 }
 
 extension WindowRootRouter: Router {
-    public func present(_ viewController: UIViewController, animated: Bool, onDismissed: ( ()->Void)? ) {
+    public func present(_ viewController: UIViewController, animated: Bool, onDismissed: ( () -> Void)? ) {
         window.rootViewController = viewController
         window.makeKeyAndVisible()
     }

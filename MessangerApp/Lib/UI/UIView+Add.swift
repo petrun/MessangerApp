@@ -17,7 +17,9 @@ extension UIView {
     /// Добавить несколько вьюшек
     /// - Parameter block: Блок, возвращающий массив вьюшек
     @discardableResult
-    public func add(@AddViewBuilder _ block: () -> ([UIView])) -> UIView {
+    public func add(
+        @AddViewBuilder _ block: () -> ([UIView])
+    ) -> UIView {
         if let stackView = self as? UIStackView {
             block().forEach { stackView.addArrangedSubview($0) }
         } else {
@@ -29,7 +31,9 @@ extension UIView {
     /// Добавить одну вьюшку
     /// - Parameter block: Блок, возвращающий вьюшку
     @discardableResult
-    public func add(@AddViewBuilder _ block: () -> (UIView)) -> UIView {
+    public func add(
+        @AddViewBuilder _ block: () -> (UIView)
+    ) -> UIView {
         if let stackView = self as? UIStackView {
             stackView.addArrangedSubview(block())
         } else {
@@ -42,7 +46,10 @@ extension UIView {
     /// - Parameter insets: Инсеты дочерней вьюшки
     /// - Parameter block: Блок, возвращающий вьюшку
     @discardableResult
-    public func add(insets: UIEdgeInsets, @AddViewBuilder _ block: () -> (UIView)) -> UIView {
+    public func add(
+        insets: UIEdgeInsets,
+        @AddViewBuilder _ block: () -> (UIView)
+    ) -> UIView {
         let view = block()
         add { view }
         view.snp.makeConstraints {
@@ -58,7 +65,10 @@ extension UIView {
     /// - Parameter index: Индекс вставки вьюшки
     /// - Parameter block: Блок, возвращающий вьюшку
     @discardableResult
-    public func insert(at index: Int, @AddViewBuilder _ block: () -> (UIView)) -> UIView {
+    public func insert(
+        at index: Int,
+        @AddViewBuilder _ block: () -> (UIView)
+    ) -> UIView {
         if let stackView = self as? UIStackView {
             stackView.insertArrangedSubview(block(), at: index)
         } else {

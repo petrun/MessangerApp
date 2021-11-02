@@ -74,4 +74,3 @@ extension ModalNavigationRouter: UINavigationControllerDelegate {
         performOnDismissed(for: dismissedViewController)
     }
 }
-

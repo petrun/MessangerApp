@@ -51,4 +51,3 @@ extension NavigationRouter: UINavigationControllerDelegate {
         performOnDismissed(for: dismissedViewController)
     }
 }
-

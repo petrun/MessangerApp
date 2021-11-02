@@ -12,11 +12,10 @@ class RegistrationAssembly: Assembly {
     func assemble(container: Container) {
         container.autoregister(RegistrationViewModelProtocol.self, initializer: RegistrationViewModel.init)
 
-        container.register(RegistrationViewController.self) {r in
+        container.register(RegistrationViewController.self) {
             let controller = RegistrationViewController()
-            controller.viewModel = r.resolve(RegistrationViewModelProtocol.self)
+            controller.viewModel = $0.resolve(RegistrationViewModelProtocol.self)
             return controller
         }
     }
 }
-

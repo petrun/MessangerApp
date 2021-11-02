@@ -10,7 +10,7 @@ extension UIView {
             $0.backgroundColor = Style.Views.ContainerFrom.dividerBackgroundColor
         }
 
-        //Add Subviews
+        // Add Subviews
         add {
             imageView
             textField

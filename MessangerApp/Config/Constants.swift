@@ -8,23 +8,3 @@
 import Foundation
 
 struct Constants {}
-
-//extension Constants {
-//    static let twitterBlue = UIColor.rgb(red: 29, green: 161, blue: 242)
-//}
-
-//public struct ConstantsWrapper<Base>: Constants {
-//    private let base: Base
-//    init(_ base: Base) {
-//        self.base = base
-//    }
-//}
-//
-//public protocol ConstantsCompatible: AnyObject {}
-//
-//extension ConstantsCompatible {
-//    public var constants: ConstantsWrapper<Self> { ConstantsWrapper(self) }
-//}
-//
-//extension UIView: ConstantsCompatible {}
-//extension UIViewController: ConstantsCompatible {}

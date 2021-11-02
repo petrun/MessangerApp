@@ -27,7 +27,7 @@ final class LoginCoordinator: Coordinator {
         let viewController = resolver.resolve(LoginViewController.self)!
 
         if let viewModel = viewController.viewModel as? LoginViewModel {
-            viewModel.coordinatorDelegate = self
+            viewModel.coordinatorHandler = self
         }
 
         navigationController.setViewControllers([viewController], animated: true)

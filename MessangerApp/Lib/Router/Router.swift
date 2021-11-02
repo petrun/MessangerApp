@@ -2,7 +2,7 @@ import UIKit
 
 public protocol Router: AnyObject {
     func present(_ viewController: UIViewController, animated: Bool)
-    func present(_ viewController: UIViewController, animated: Bool, onDismissed: (()->Void)?)
+    func present(_ viewController: UIViewController, animated: Bool, onDismissed: (() -> Void)?)
     func dismiss(animated: Bool)
 }
 

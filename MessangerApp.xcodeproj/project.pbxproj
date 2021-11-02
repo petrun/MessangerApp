@@ -50,6 +50,7 @@
 		A1CD685C2730B2B900F33E04 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1CD68592730B2B900F33E04 /* Localizable.strings */; };
 		A1CD68C52730B4E400F33E04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1CD68C42730B4E400F33E04 /* Assets.xcassets */; };
 		A1D32BAF27301D1200042CEA /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D32BAE27301D1200042CEA /* Style.swift */; };
+		A1ECB3F32730C43600DB280F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A1ECB3F22730C43600DB280F /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		A1CD685A2730B2B900F33E04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A1CD68C42730B4E400F33E04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1D32BAE27301D1200042CEA /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		A1ECB3F22730C43600DB280F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BDB144E268BCACD02ECF44A5 /* Pods_MessangerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessangerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFD560E591ABEC8315206B9 /* Pods-MessangerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessangerApp.release.xcconfig"; path = "Target Support Files/Pods-MessangerApp/Pods-MessangerApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +151,7 @@
 				A11F53D527295A810031CEB4 /* Products */,
 				D1E0846B30D8DA63F576C4DB /* Pods */,
 				95BE9E82D5C9B29CC9DCC263 /* Frameworks */,
+				A1ECB3F22730C43600DB280F /* .swiftlint.yml */,
 				A1CD68492730AFDA00F33E04 /* swiftgen.yml */,
 			);
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			buildConfigurationList = A11F53E827295A810031CEB4 /* Build configuration list for PBXNativeTarget "MessangerApp" */;
 			buildPhases = (
 				A15F72F22730A7110065AB0C /* Generate strings */,
+				A1CCE1B32730C27F00569C31 /* SwiftLint */,
 				7C829F8ED637EF494E78419E /* [CP] Check Pods Manifest.lock */,
 				A11F53D027295A810031CEB4 /* Sources */,
 				A11F53D127295A810031CEB4 /* Frameworks */,
@@ -389,6 +393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1ECB3F32730C43600DB280F /* .swiftlint.yml in Resources */,
 				A11F53E427295A810031CEB4 /* LaunchScreen.storyboard in Resources */,
 				A11F53FE272964070031CEB4 /* GoogleService-Info.plist in Resources */,
 				A1CD68C52730B4E400F33E04 /* Assets.xcassets in Resources */,
@@ -441,6 +446,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "$SRCROOT/Build-Phases/generate-strings.sh\n";
+		};
+		A1CCE1B32730C27F00569C31 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/Build-Phases/lint.sh\n";
 		};
 		C042046FE513ECADD53CF665 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

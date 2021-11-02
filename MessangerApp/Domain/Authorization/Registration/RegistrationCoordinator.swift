@@ -26,7 +26,7 @@ final class RegistrationCoordinator: Coordinator {
         let viewController = resolver.resolve(RegistrationViewController.self)!
 
         if let viewModel = viewController.viewModel as? RegistrationViewModel {
-            viewModel.coordinatorDelegate = self
+            viewModel.coordinatorHandler = self
         }
 
         router.present(viewController, animated: animated, onDismissed: onDismissed)

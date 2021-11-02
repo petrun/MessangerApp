@@ -22,7 +22,7 @@ protocol RegistrationViewModelProtocol: AnyObject {
 final class RegistrationViewModel {
 //    private let authService: AuthService
 //    private let logger: LoggerProtocol
-    var coordinatorDelegate: RegistrationCoordinatorDelegate?
+    var coordinatorHandler: RegistrationCoordinatorDelegate?
 
 //    init(authService: AuthService, logger: LoggerProtocol) {
 //        self.authService = authService
@@ -58,6 +58,6 @@ extension RegistrationViewModel: RegistrationViewModelProtocol {
 
     func handleShowLogin() {
         print("Call RegistrationViewModel.handleSignUp")
-        coordinatorDelegate?.backToLogin()
+        coordinatorHandler?.backToLogin()
     }
 }
