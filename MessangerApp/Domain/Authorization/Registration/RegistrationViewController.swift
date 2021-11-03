@@ -41,28 +41,19 @@ final class RegistrationViewController: ViewController<RegistrationView> {
     }
 
     @objc func handleSignUp() {
-        guard let profileImage = profileImage else {
-            print("DEBUG: Please select a profile image...")
-            return
-        }
+        let validator = Validator()
 
-        guard
-            let email = mainView.emailTextField.text,
-            let password = mainView.passwordTextField.text,
-            let fullname = mainView.fullnameTextField.text,
-            let username = mainView.usernameTextField.text?.lowercased(),
-            let imageData = profileImage.jpegData(compressionQuality: 0.3)
-        else {
-            return
-        }
+        validator.registerField(
+            mainView.emailTextField,
+            errorLabel: mainView.emailErrorLabel,
+            rules: [RequiredRule(), EmailRule()])
 
-        viewModel.handleSignUp(
-            email: email,
-            password: password,
-            fullname: fullname,
-            username: username,
-            imageData: imageData
-        )
+        validator.registerField(
+            mainView.passwordTextField,
+//            errorLabel: mainView.emailErrorLabel,
+            rules: [RequiredRule(), MinLengthRule(length: 5)])
+
+        validator.validate(self)
     }
 
     @objc func handleAddProfilePhoto() {
@@ -84,5 +75,54 @@ extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigat
         mainView.addPhotoButton.layer.borderWidth = 3
 
         dismiss(animated: true)
+    }
+}
+
+extension RegistrationViewController: ValidationDelegate {
+    func validationSuccessful() {
+        print("validationSuccessful")
+//        guard let profileImage = profileImage else {
+//            print("DEBUG: Please select a profile image...")
+//            return
+//        }
+//
+//        guard
+//            let email = mainView.emailTextField.text,
+//            let password = mainView.passwordTextField.text,
+//            let fullname = mainView.fullnameTextField.text,
+//            let username = mainView.usernameTextField.text?.lowercased(),
+//            let imageData = profileImage.jpegData(compressionQuality: 0.3)
+//        else {
+//            return
+//        }
+//
+//        viewModel.handleSignUp(
+//            email: email,
+//            password: password,
+//            fullname: fullname,
+//            username: username,
+//            imageData: imageData
+//        )
+    }
+
+    func validationFailed(_ errors: [(Validatable, ValidationError)]) {
+        print("validationFailed")
+        print(errors)
+
+        for (field, error) in errors {
+            guard let field = field as? UITextField else {
+                print("ERROR Cast")
+                return
+            }
+
+            field.layer.borderColor = UIColor.red.cgColor
+            field.layer.borderWidth = 1.0
+            error.errorLabel?.text = error.errorMessage
+//            error.errorLabel
+//            field.layer.borderColor = UIColor(.red)
+//            field.layer.borderWidth = 1.0
+//            error.errorLabel?.text = error.errorMessage // works if you added labels
+//            error.errorLabel?.hidden = false
+        }
     }
 }

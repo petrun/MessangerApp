@@ -26,6 +26,18 @@
 		A14721A3272EF0A300C5B6FE /* UIKit+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14721A2272EF0A300C5B6FE /* UIKit+Preview.swift */; };
 		A15F72E82730A5C50065AB0C /* lint.sh in Resources */ = {isa = PBXBuildFile; fileRef = A15F72E52730A5C50065AB0C /* lint.sh */; };
 		A15F72E92730A5C50065AB0C /* generate-strings.sh in Resources */ = {isa = PBXBuildFile; fileRef = A15F72E62730A5C50065AB0C /* generate-strings.sh */; };
+		A191BDC7273337F000C76185 /* Validatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDC6273337F000C76185 /* Validatable.swift */; };
+		A191BDCC27333A6700C76185 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDCB27333A6700C76185 /* Rule.swift */; };
+		A191BDCF27333A8B00C76185 /* RequiredRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDCE27333A8B00C76185 /* RequiredRule.swift */; };
+		A191BDD227333AA400C76185 /* MinLengthRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDD127333AA400C76185 /* MinLengthRule.swift */; };
+		A191BDD527333AC400C76185 /* ConfirmationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDD427333AC400C76185 /* ConfirmationRule.swift */; };
+		A191BDD827333B1200C76185 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDD727333B1200C76185 /* ValidationError.swift */; };
+		A191BDDB27333BA600C76185 /* ValidationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDDA27333BA600C76185 /* ValidationDelegate.swift */; };
+		A191BDDE27333BEF00C76185 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDDD27333BEF00C76185 /* Validator.swift */; };
+		A191BDE127333DE600C76185 /* ValidatorDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDE027333DE500C76185 /* ValidatorDictionary.swift */; };
+		A191BDE627333F3A00C76185 /* ValidationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDE527333F3A00C76185 /* ValidationRule.swift */; };
+		A191BDE9273340B600C76185 /* RegexRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDE8273340B600C76185 /* RegexRule.swift */; };
+		A191BDEC2733419000C76185 /* EmailRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A191BDEB2733419000C76185 /* EmailRule.swift */; };
 		A1927512272A04AA00A18EE0 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1927511272A04AA00A18EE0 /* Log.swift */; };
 		A1927545272A259000A18EE0 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1927544272A259000A18EE0 /* Router.swift */; };
 		A1927553272A270B00A18EE0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1927552272A270B00A18EE0 /* AppCoordinator.swift */; };
@@ -50,6 +62,7 @@
 		A1CD685C2730B2B900F33E04 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1CD68592730B2B900F33E04 /* Localizable.strings */; };
 		A1CD68C52730B4E400F33E04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1CD68C42730B4E400F33E04 /* Assets.xcassets */; };
 		A1D32BAF27301D1200042CEA /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D32BAE27301D1200042CEA /* Style.swift */; };
+		A1DA94BF27320CFE00C37852 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DA94BE27320CFE00C37852 /* AuthService.swift */; };
 		A1ECB3F32730C43600DB280F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A1ECB3F22730C43600DB280F /* .swiftlint.yml */; };
 		A1ECB3F82731724100DB280F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ECB3F72731724100DB280F /* Theme.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +90,18 @@
 		A14721A2272EF0A300C5B6FE /* UIKit+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Preview.swift"; sourceTree = "<group>"; };
 		A15F72E52730A5C50065AB0C /* lint.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = lint.sh; sourceTree = "<group>"; };
 		A15F72E62730A5C50065AB0C /* generate-strings.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "generate-strings.sh"; sourceTree = "<group>"; };
+		A191BDC6273337F000C76185 /* Validatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validatable.swift; sourceTree = "<group>"; };
+		A191BDCB27333A6700C76185 /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
+		A191BDCE27333A8B00C76185 /* RequiredRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequiredRule.swift; sourceTree = "<group>"; };
+		A191BDD127333AA400C76185 /* MinLengthRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinLengthRule.swift; sourceTree = "<group>"; };
+		A191BDD427333AC400C76185 /* ConfirmationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationRule.swift; sourceTree = "<group>"; };
+		A191BDD727333B1200C76185 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
+		A191BDDA27333BA600C76185 /* ValidationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationDelegate.swift; sourceTree = "<group>"; };
+		A191BDDD27333BEF00C76185 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		A191BDE027333DE500C76185 /* ValidatorDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDictionary.swift; sourceTree = "<group>"; };
+		A191BDE527333F3A00C76185 /* ValidationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRule.swift; sourceTree = "<group>"; };
+		A191BDE8273340B600C76185 /* RegexRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexRule.swift; sourceTree = "<group>"; };
+		A191BDEB2733419000C76185 /* EmailRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRule.swift; sourceTree = "<group>"; };
 		A1927511272A04AA00A18EE0 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		A1927544272A259000A18EE0 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		A1927552272A270B00A18EE0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -101,6 +126,7 @@
 		A1CD685A2730B2B900F33E04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A1CD68C42730B4E400F33E04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1D32BAE27301D1200042CEA /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		A1DA94BE27320CFE00C37852 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A1ECB3F22730C43600DB280F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A1ECB3F72731724100DB280F /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		BDB144E268BCACD02ECF44A5 /* Pods_MessangerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessangerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +217,33 @@
 			path = "Build-Phases";
 			sourceTree = "<group>";
 		};
+		A191BDC1273330A000C76185 /* Validator */ = {
+			isa = PBXGroup;
+			children = (
+				A191BDC6273337F000C76185 /* Validatable.swift */,
+				A191BDDA27333BA600C76185 /* ValidationDelegate.swift */,
+				A191BDD727333B1200C76185 /* ValidationError.swift */,
+				A191BDDD27333BEF00C76185 /* Validator.swift */,
+				A191BDE027333DE500C76185 /* ValidatorDictionary.swift */,
+				A191BDCA27333A5400C76185 /* Rules */,
+			);
+			path = Validator;
+			sourceTree = "<group>";
+		};
+		A191BDCA27333A5400C76185 /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				A191BDD427333AC400C76185 /* ConfirmationRule.swift */,
+				A191BDEB2733419000C76185 /* EmailRule.swift */,
+				A191BDD127333AA400C76185 /* MinLengthRule.swift */,
+				A191BDE8273340B600C76185 /* RegexRule.swift */,
+				A191BDCE27333A8B00C76185 /* RequiredRule.swift */,
+				A191BDCB27333A6700C76185 /* Rule.swift */,
+				A191BDE527333F3A00C76185 /* ValidationRule.swift */,
+			);
+			path = Rules;
+			sourceTree = "<group>";
+		};
 		A192750E272A003B00A18EE0 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,11 +308,13 @@
 		A1C1EB45272B1F790060ECF3 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				A1C1EB3E272B0D1D0060ECF3 /* Coordinator */,
+				A1DA94BD27320CE600C37852 /* Services */,
 				A105DDC8272D96C50067A5ED /* Generics */,
 				A1C1EB83272B6A910060ECF3 /* UI */,
 				A1C1EB5E272B36BC0060ECF3 /* Logger */,
-				A1C1EB3E272B0D1D0060ECF3 /* Coordinator */,
 				A1C1EB33272B0B620060ECF3 /* Router */,
+				A191BDC1273330A000C76185 /* Validator */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -323,6 +378,14 @@
 				A1CD68582730B2B900F33E04 /* Strings.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A1DA94BD27320CE600C37852 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A1DA94BE27320CFE00C37852 /* AuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		D1E0846B30D8DA63F576C4DB /* Pods */ = {
@@ -498,10 +561,12 @@
 				A1C1EB88272B6AD40060ECF3 /* Appearance.swift in Sources */,
 				A105DDD1272DC5AE0067A5ED /* RegistrationView.swift in Sources */,
 				A1C1EB9C272C2A660060ECF3 /* UIColor+Extension.swift in Sources */,
+				A191BDE127333DE600C76185 /* ValidatorDictionary.swift in Sources */,
 				A1C1EB39272B0C8A0060ECF3 /* NavigationRouter.swift in Sources */,
 				A14721A3272EF0A300C5B6FE /* UIKit+Preview.swift in Sources */,
 				A13293C02730B64A003AAF9F /* Assets.swift in Sources */,
 				A1ECB3F82731724100DB280F /* Theme.swift in Sources */,
+				A191BDCF27333A8B00C76185 /* RequiredRule.swift in Sources */,
 				A1C1EB3C272B0CA90060ECF3 /* WindowRootRouter.swift in Sources */,
 				A1C1EB64272B36EA0060ECF3 /* ConsoleLogger.swift in Sources */,
 				A105DDC3272D807C0067A5ED /* UITextFields.swift in Sources */,
@@ -510,22 +575,33 @@
 				A1C1EB36272B0BAB0060ECF3 /* ModalNavigationRouter.swift in Sources */,
 				A11F53DC27295A810031CEB4 /* LoginViewController.swift in Sources */,
 				A192757C272AB30000A18EE0 /* RouterFactory.swift in Sources */,
+				A191BDDB27333BA600C76185 /* ValidationDelegate.swift in Sources */,
 				A1927562272A2A0900A18EE0 /* LoginCoordinator.swift in Sources */,
 				A1C1EB85272B6A9E0060ECF3 /* UIView+Add.swift in Sources */,
+				A191BDCC27333A6700C76185 /* Rule.swift in Sources */,
 				A105DDDD272DC76B0067A5ED /* RegistrationAssembly.swift in Sources */,
+				A191BDC7273337F000C76185 /* Validatable.swift in Sources */,
 				A1C1EB95272C23990060ECF3 /* Constants.swift in Sources */,
 				A1C1EB60272B36D20060ECF3 /* LoggerProtocol.swift in Sources */,
+				A191BDDE27333BEF00C76185 /* Validator.swift in Sources */,
 				A1C1EB8D272C22140060ECF3 /* LoginAssembly.swift in Sources */,
+				A191BDE627333F3A00C76185 /* ValidationRule.swift in Sources */,
+				A191BDD227333AA400C76185 /* MinLengthRule.swift in Sources */,
+				A191BDD827333B1200C76185 /* ValidationError.swift in Sources */,
+				A191BDEC2733419000C76185 /* EmailRule.swift in Sources */,
+				A191BDD527333AC400C76185 /* ConfirmationRule.swift in Sources */,
 				A1927545272A259000A18EE0 /* Router.swift in Sources */,
 				A1927583272ABB6700A18EE0 /* LoginViewModel.swift in Sources */,
 				A11F53D827295A810031CEB4 /* AppDelegate.swift in Sources */,
 				A1D32BAF27301D1200042CEA /* Style.swift in Sources */,
 				A105DDCD272D97490067A5ED /* LoginView.swift in Sources */,
 				A105DDD7272DC62E0067A5ED /* RegistrationCoordinator.swift in Sources */,
+				A1DA94BF27320CFE00C37852 /* AuthService.swift in Sources */,
 				A1C1EB67272B44D60060ECF3 /* Assembler+Extension.swift in Sources */,
 				A1927553272A270B00A18EE0 /* AppCoordinator.swift in Sources */,
 				A105DDBE272D7C5C0067A5ED /* UIButtons.swift in Sources */,
 				A105DDC6272D815C0067A5ED /* UIViews.swift in Sources */,
+				A191BDE9273340B600C76185 /* RegexRule.swift in Sources */,
 				A1927512272A04AA00A18EE0 /* Log.swift in Sources */,
 				A105DDD4272DC5D50067A5ED /* RegistrationViewController.swift in Sources */,
 			);

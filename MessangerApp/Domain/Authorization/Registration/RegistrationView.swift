@@ -48,6 +48,8 @@ class RegistrationView: UIView {
         theme: theme
     )
 
+    lazy var emailErrorLabel = UILabel()
+
     lazy var passwordTextField = UITextField(
         withPlaceholder: L10n.Password.placeholder,
         theme: theme
