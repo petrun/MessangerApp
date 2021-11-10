@@ -20,7 +20,12 @@ final class AppCoordinator: Coordinator {
     }
 
     func present(animated: Bool, onDismissed: (() -> Void)?) {
-        let coordinator = LoginCoordinator(router: router, resolver: resolver)
+        let authService = resolver.resolve(AuthServiceProtocol.self)!
+
+        let coordinator: Coordinator = authService.currentUserId != nil ?
+            MainTabBarCoordinator(router: router, resolver: resolver) :
+            LoginCoordinator(router: router, resolver: resolver)
+
         coordinator.present(animated: animated, onDismissed: onDismissed)
     }
 }

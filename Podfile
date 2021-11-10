@@ -1,4 +1,4 @@
-platform :ios, '12.1'
+platform :ios, '13.0'
 
 target 'MessangerApp' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -13,9 +13,11 @@ target 'MessangerApp' do
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'
 
+  pod 'MessageKit'
   pod 'Then'
   pod 'SnapKit', '~> 5.0.0'
   pod 'SwiftLint'
+  pod 'SwiftyBeaver'
   pod 'Swinject'
   pod 'SwinjectAutoregistration'
 
@@ -33,7 +35,7 @@ end
 post_install do |installer|
  installer.pods_project.targets.each do |target|
   target.build_configurations.each do |config|
-   config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.1'
+   config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
   end
  end
 end

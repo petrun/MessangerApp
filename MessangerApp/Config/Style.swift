@@ -8,10 +8,15 @@ import UIKit
 enum BaseColors {
     static let white = UIColor.white
     static let black = UIColor.black
-    static let blue = UIColor.rgb(red: 29, green: 161, blue: 242)
+    static let blue = UIColor(red: 29, green: 161, blue: 242)
 }
 
 enum Style {
+    static var textColor: UIColor { BaseColors.black }
+    static var backgroundColor: UIColor { BaseColors.white }
+    static var buttonBackgroundColor: UIColor { Asset.backgroundColor.color }
+    static var buttonTextColor: UIColor { BaseColors.white }
+
     private enum FontSizes {
         static var base: CGFloat { 15 }
         static var sub: CGFloat { 13 }

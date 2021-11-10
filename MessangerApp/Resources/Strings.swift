@@ -11,11 +11,6 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
-  internal enum AlreadyHaveAnAccountQuestion {
-    /// Already have an account?
-    internal static let title = L10n.tr("Localizable", "already_have_an_account_question.title")
-  }
-
   internal enum DontHaveAnAccountQuestion {
     /// Don't have an account?
     internal static let title = L10n.tr("Localizable", "dont_have_an_account_question.title")
@@ -29,6 +24,11 @@ internal enum L10n {
   internal enum FullName {
     /// Full Name
     internal static let placeholder = L10n.tr("Localizable", "full_name.placeholder")
+  }
+
+  internal enum IHaveAnAccount {
+    /// I have an account
+    internal static let title = L10n.tr("Localizable", "i_have_an_account.title")
   }
 
   internal enum Login {

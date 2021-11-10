@@ -3,9 +3,11 @@ import Swinject
 extension Assembler {
     static let sharedAssembler = Assembler(
         [
+            ChatAssembly(),
             ServicesAssembly(),
             LoginAssembly(),
-            RegistrationAssembly()
+            RegistrationAssembly(),
+            ChatsAssembly()
         ],
         container: Container()
     )

@@ -41,9 +41,9 @@ internal enum Asset {
     internal static let share = ImageAsset(name: "share")
   }
   internal enum Logo {
-    internal static let blue = ImageAsset(name: "blue")
-    internal static let white = ImageAsset(name: "white")
+    internal static let main = ImageAsset(name: "main")
   }
+  internal static let backgroundColor = ColorAsset(name: "backgroundColor")
   internal static let plusPhoto = ImageAsset(name: "plus_photo")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
