@@ -4,18 +4,15 @@ import SwiftyBeaver
 
 class ServicesAssembly: Assembly {
     func assemble(container: Container) {
-        container.autoregister(
-            RouterFactoryProtocol.self,
-            initializer: RouterFactory.init
-        )
+        // AuthService
+        container.autoregister(AuthServiceProtocol.self, initializer: AuthService.init)
         .inObjectScope(ObjectScope.container)
 
-        container.autoregister(
-            AuthServiceProtocol.self,
-            initializer: AuthService.init
-        )
+        // ChatStorage
+        container.autoregister(ChatStorageProtocol.self, initializer: ChatStorage.init)
         .inObjectScope(ObjectScope.container)
 
+        // Logger
         container.register(LoggerService.self) {_ in
             let console = ConsoleDestination()
             console.format = "$DHH:mm:ss.SSS$d $L [$N.$F:$l] $M $X"
@@ -28,6 +25,22 @@ class ServicesAssembly: Assembly {
 
             return SwiftyBeaverLoggerService(destinations: [console])
         }
+        .inObjectScope(ObjectScope.container)
+
+        // MessageStorage
+        container.autoregister(MessageStorageProtocol.self, initializer: MessageStorage.init)
+        .inObjectScope(ObjectScope.container)
+
+        // RouterFactory
+        container.autoregister(RouterFactoryProtocol.self, initializer: RouterFactory.init)
+        .inObjectScope(ObjectScope.container)
+
+        // TypingService
+        container.autoregister(TypingServiceProtocol.self, initializer: TypingService.init)
+        .inObjectScope(ObjectScope.container)
+
+        // UserStorage
+        container.autoregister(UserStorageProtocol.self, initializer: UserStorage.init)
         .inObjectScope(ObjectScope.container)
     }
 }

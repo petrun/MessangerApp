@@ -10,11 +10,19 @@ import SwinjectAutoregistration
 
 class ChatAssembly: Assembly {
     func assemble(container: Container) {
-//        container.autoregister(RegistrationViewModelProtocol.self, initializer: RegistrationViewModel.init)
+        container.register(ChatViewModelProtocol.self) { (r: Resolver, chat: Chat) in
+            ChatViewModel(
+                chat: chat,
+                authService: r.resolve(AuthServiceProtocol.self)!,
+                messageStorage: r.resolve(MessageStorageProtocol.self)!,
+                typingService: r.resolve(TypingServiceProtocol.self)!
+            )
+        }
 
-        container.register(ChatViewController.self) { _ in
+        container.register(ChatViewController.self) { (r: Resolver, chat: Chat) in
             let controller = ChatViewController()
-//            controller.viewModel = $0.resolve(RegistrationViewModelProtocol.self)
+            controller.viewModel = r.resolve(ChatViewModelProtocol.self, argument: chat)
+
             return controller
         }
     }

@@ -9,12 +9,16 @@ target 'MessangerApp' do
 
   # Pods for MessangerApp
 
-  pod 'Firebase/Database'
-  pod 'Firebase/Storage'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'FirebaseFirestoreSwift', '~> 8.9.0-beta'
 
+  pod 'JGProgressHUD'
   pod 'MessageKit'
   pod 'Then'
+  pod 'SDWebImage', '~> 5.0'
   pod 'SnapKit', '~> 5.0.0'
   pod 'SwiftLint'
   pod 'SwiftyBeaver'

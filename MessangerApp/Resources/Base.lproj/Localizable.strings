@@ -9,3 +9,8 @@
 "dont_have_an_account_question.title" = "Don't have an account?";
 "sign_up.title" = "Sign Up";
 "i_have_an_account.title" = "I have an account";
+
+"chats.title" = "Chats";
+"groups.title" = "Groups";
+"users.title" = "Users";
+"settings.title" = "Settings";

@@ -9,3 +9,8 @@
 "dont_have_an_account_question.title" = "Нет аккаунта?";
 "sign_up.title" = "Зарегистрироваться";
 "i_have_an_account.title" = "У меня есть аккаунт";
+
+"chats.title" = "Чаты";
+"groups.title" = "Группы";
+"users.title" = "Юзеры";
+"settings.title" = "Настройки";

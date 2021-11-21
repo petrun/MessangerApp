@@ -11,18 +11,20 @@ final class ChatCoordinator: Coordinator {
     var children: [Coordinator] = []
     var router: Router
 
+    private let chat: Chat
     private let resolver: Resolver
     private lazy var navigationController = UINavigationController()
 
-    init(router: Router, resolver: Resolver) {
+    init(chat: Chat, router: Router, resolver: Resolver) {
+        self.chat = chat
         self.router = router
         self.resolver = resolver
     }
 
     func present(animated: Bool, onDismissed: (() -> Void)?) {
-        let viewController = resolver.resolve(ChatViewController.self)!
+        let viewController = resolver.resolve(ChatViewController.self, argument: chat)!
 
-//        if let viewModel = viewController.viewModel as? RegistrationViewModel {
+//        if let viewModel = viewController.viewModel as? ChatViewModel {
 //            viewModel.coordinatorHandler = self
 //        }
 

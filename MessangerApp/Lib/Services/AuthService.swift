@@ -1,12 +1,14 @@
 import FirebaseAuth
 
 protocol AuthServiceProtocol {
+    typealias UserId = String
     var currentUserId: String? { get }
+    var currentUser: User? { get }
 
     func login(
         withEmail email: String,
         password: String,
-        completion: @escaping (Result<User, Error>) -> Void
+        completion: @escaping (Result<UserId, Error>) -> Void
     )
 
     func logout(completion: @escaping () -> Void)
@@ -14,7 +16,7 @@ protocol AuthServiceProtocol {
     func register(
         withEmail email: String,
         password: String,
-        completion: @escaping (Result<User, Error>) -> Void
+        completion: @escaping (Result<UserId, Error>) -> Void
     )
 }
 
@@ -25,17 +27,22 @@ class AuthService: AuthServiceProtocol {
         Auth.auth().currentUser?.uid
     }
 
+    var currentUser: User? {
+        guard let uid = Auth.auth().currentUser?.uid else { return nil }
+        return User(uid: uid, name: "Andy")
+    }
+
     func login(
         withEmail email: String,
         password: String,
-        completion: @escaping (Result<User, Error>) -> Void
+        completion: @escaping (Result<UserId, Error>) -> Void
     ) {
         auth.signIn(withEmail: email, password: password) { result, error in
             guard let result = result else {
                 completion(.failure(error!))
                 return
             }
-            completion(.success(result.user))
+            completion(.success(result.user.uid))
         }
     }
 
@@ -51,14 +58,14 @@ class AuthService: AuthServiceProtocol {
     func register(
         withEmail email: String,
         password: String,
-        completion: @escaping (Result<User, Error>) -> Void
+        completion: @escaping (Result<UserId, Error>) -> Void
     ) {
         auth.createUser(withEmail: email, password: password) { result, error in
             guard let result = result else {
                 completion(.failure(error!))
                 return
             }
-            completion(.success(result.user))
+            completion(.success(result.user.uid))
         }
     }
 }

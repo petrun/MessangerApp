@@ -1,94 +1,154 @@
-//
-//  ChatViewController.swift
-//  MessangerApp
-//
-//  Created by andy on 07.11.2021.
-//
-
 import InputBarAccessoryView
 import MessageKit
+import Then
 
-struct Sender: SenderType {
-    let senderId: String
-    let displayName: String
+private extension Style {
+    enum ChatViewController {
+        static var inputBarButtonItemSize: CGSize { .init(width: 30, height: 30) }
+    }
 }
-
-struct Chat {
-}
-
-struct MessageItem: MessageType {
-    let sender: SenderType
-    let messageId: String
-    let sentDate: Date
-    let kind: MessageKind
-}
-
 
 class ChatViewController: MessagesViewController {
-    let sender = Sender(senderId: "any_unique_id", displayName: "Andy")
-    // receiver
-    var messages: [MessageType] = []
+    let refreshController = UIRefreshControl()
+    var viewModel: ChatViewModelProtocol!
 
-//    private let chat: Chat
-//
-//    init(sender: Sender, chat: Chat) {
-//        self.chat = chat
-//
-//        super.init(nibName: nil, bundle: nil)
-//    }
+    private let style = Style.ChatViewController.self
 
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    lazy var micButton = InputBarButtonItem().then {
+        $0.image = UIImage(
+            systemName: "mic",
+            withConfiguration: UIImage.SymbolConfiguration(
+                pointSize: style.inputBarButtonItemSize.height,
+                weight: .regular
+            )
+        )?.withRenderingMode(.alwaysOriginal)
+        $0.setSize(style.inputBarButtonItemSize, animated: false)
+        $0.onTouchUpInside { _ in
+            print("mic button pressed")
+        }
+    }
+
+    private lazy var attachButton = InputBarButtonItem().then {
+        $0.image = UIImage(
+            systemName: "plus",
+            withConfiguration: UIImage.SymbolConfiguration(
+                pointSize: style.inputBarButtonItemSize.height,
+                weight: .regular
+            )
+        )?.withRenderingMode(.alwaysOriginal)
+        $0.setSize(style.inputBarButtonItemSize, animated: false)
+        $0.onTouchUpInside { _ in
+            print("attach button pressed")
+        }
+    }
+
+    private lazy var leftBarButtonView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+    private lazy var titleLabel = UILabel(frame: CGRect(x: 5, y: 0, width: 180, height: 25)).then {
+        $0.textAlignment = .left
+        $0.font = .systemFont(ofSize: 16, weight: .medium)
+        $0.adjustsFontSizeToFitWidth = true
+    }
+    private lazy var subTitleLabel = UILabel(frame: CGRect(x: 5, y: 22, width: 180, height: 20)).then {
+        $0.textAlignment = .left
+        $0.font = .systemFont(ofSize: 13, weight: .medium)
+        $0.adjustsFontSizeToFitWidth = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        messageInputBar.delegate = self
+        viewModel.delegate = self
+
+        configureLeftBarButton()
+        configureCustomTitle()
+
+        configureMessagesCollectionView()
+        configureMessageInputBar()
+
+        viewModel.start()
+    }
+
+    private func configureLeftBarButton() {
+        navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(
+                image: UIImage(systemName: "chevron.left"),
+                style: .plain,
+                target: self,
+                action: #selector(backButtonPressed)
+            )
+        ]
+    }
+
+    private func configureCustomTitle() {
+        leftBarButtonView.add {
+            titleLabel
+            subTitleLabel
+        }
+
+        let letfBarButtonItem = UIBarButtonItem(customView: leftBarButtonView)
+        navigationItem.leftBarButtonItems?.append(letfBarButtonItem)
+
+        titleLabel.text = viewModel.chatTitle
+    }
+
+    private func configureMessagesCollectionView() {
+//        messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesDataSource = self
-        messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messagesCollectionView.messagesLayoutDelegate = self
 
-        messagesCollectionView.backgroundColor = .lightGray
+        messagesCollectionView.refreshControl = refreshController
+        messagesCollectionView.backgroundView = UIImageView(image: Asset.background.image)
 
-        title = "Friend username"
-
-//        configureMessageInputBar()
+        scrollsToLastItemOnKeyboardBeginsEditing = true
+        maintainPositionOnKeyboardFrameChanged = true
     }
 
-    func configureMessageInputBar() {
-        messageInputBar.isTranslucent = true
-        messageInputBar.separatorLine.isHidden = true
-        messageInputBar.backgroundView.backgroundColor = UIColor.white
-        messageInputBar.inputTextView.backgroundColor = .white
-        messageInputBar.inputTextView.placeholderTextColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
-        messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 14, left: 30, bottom: 14, right: 36)
-        messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 14, left: 36, bottom: 14, right: 36)
-        messageInputBar.inputTextView.layer.borderColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 0.4033635232)
-        messageInputBar.inputTextView.layer.borderWidth = 0.2
-        messageInputBar.inputTextView.layer.cornerRadius = 18.0
-        messageInputBar.inputTextView.layer.masksToBounds = true
-        messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 14, left: 0, bottom: 14, right: 0)
+    private func configureMessageInputBar() {
+        messageInputBar.delegate = self
 
-//        messageView.textView.placeholderText = "New message..."
-//        messageView.textView.placeholderTextColor = .lightGray
+        // LeftStackView
+        messageInputBar.setStackViewItems([attachButton], forStack: .left, animated: false)
+        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
 
-        messageInputBar.inputTextView.placeholderLabel.text = "New message..."
+        // RightStackView
+        updateMicButtonStatus(show: true)
 
+        // InputTextView
+        messageInputBar.inputTextView.isImagePasteEnabled = false
+//        messageInputBar.backgroundView.backgroundColor = .systemBackground
+//        messageInputBar.inputTextView.backgroundColor = .systemBackground
 
-        messageInputBar.inputTextView.layer.backgroundColor = UIColor.green.cgColor
-        messageInputBar.rightStackView.layer.backgroundColor = UIColor.red.cgColor
-
-
-        messageInputBar.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        messageInputBar.layer.shadowRadius = 5
-        messageInputBar.layer.shadowOpacity = 0.3
-        messageInputBar.layer.shadowOffset = CGSize(width: 0, height: 4)
-
-        configureSendButton()
+//        messageInputBar.isTranslucent = true
+//        messageInputBar.separatorLine.isHidden = true
+//        messageInputBar.backgroundView.backgroundColor = UIColor.white
+//        messageInputBar.inputTextView.backgroundColor = .white
+//        messageInputBar.inputTextView.placeholderTextColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
+//        messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 14, left: 30, bottom: 14, right: 36)
+//        messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 14, left: 36, bottom: 14, right: 36)
+//        messageInputBar.inputTextView.layer.borderColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 0.4033635232)
+//        messageInputBar.inputTextView.layer.borderWidth = 0.2
+//        messageInputBar.inputTextView.layer.cornerRadius = 18.0
+//        messageInputBar.inputTextView.layer.masksToBounds = true
+//        messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 14, left: 0, bottom: 14, right: 0)
+//
+////        messageView.textView.placeholderText = "New message..."
+////        messageView.textView.placeholderTextColor = .lightGray
+//
+//        messageInputBar.inputTextView.placeholderLabel.text = "New message..."
+//
+//        messageInputBar.inputTextView.layer.backgroundColor = UIColor.green.cgColor
+//        messageInputBar.rightStackView.layer.backgroundColor = UIColor.red.cgColor
+//
+//        messageInputBar.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        messageInputBar.layer.shadowRadius = 5
+//        messageInputBar.layer.shadowOpacity = 0.3
+//        messageInputBar.layer.shadowOffset = CGSize(width: 0, height: 4)
+//
+//        configureSendButton()
     }
 
-    func configureSendButton() {
+    private func configureSendButton() {
         messageInputBar.sendButton.setImage(Asset.Icons.comment.image, for: .normal)
         messageInputBar.sendButton.tintColor = .blue
 
@@ -99,104 +159,46 @@ class ChatViewController: MessagesViewController {
         messageInputBar.middleContentViewPadding.right = -38
     }
 
-    private func insertNewMessage(message: MessageType) {
-//        guard !messages.contains(where: message) else { return }
+    // MARK: - Selectors
 
-        messages.append(message)
-        messagesCollectionView.reloadData()
-    }
-}
+    @objc private func backButtonPressed() {
+        // TODO: remove listeners
 
-extension ChatViewController: MessagesDataSource {
-    func currentSender() -> SenderType {
-        sender
+        navigationController?.popToRootViewController(animated: true)
     }
 
-    func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        messages[indexPath.section]
-    }
-
-    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        messages.count
-    }
-}
-
-extension ChatViewController: MessagesLayoutDelegate {
-//    func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
-//        CGSize(width: 0, height: 8)
-//    }
-}
-
-extension ChatViewController: MessagesDisplayDelegate {
-    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-//        .red
-
-
-        switch message.kind {
-        case .emoji:
-            return .clear
-        default:
-            guard let dataSource = messagesCollectionView.messagesDataSource else {
-                return .white
-            }
-//            return dataSource.isFromCurrentSender(message: message) ? .outgoingMessageBackground : .incomingMessageBackground
-            return dataSource.isFromCurrentSender(message: message) ? .white : .red
+    func updateMicButtonStatus(show: Bool) {
+        if show {
+            messageInputBar.setStackViewItems([micButton], forStack: .right, animated: false)
+            messageInputBar.setRightStackViewWidthConstant(to: 30, animated: false)
+        } else {
+            messageInputBar.setStackViewItems([messageInputBar.sendButton], forStack: .right, animated: false)
+            messageInputBar.setRightStackViewWidthConstant(to: 55, animated: false)
         }
     }
 
-    func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        .blue
-    }
+    // MARK: - UIScrollViewDelegate
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard refreshController.isRefreshing else { return }
 
-    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-//        avatarView.frame = .zero
-        avatarView.initials = nil
-    }
-
-    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-        .bubble
+        print("Call scrollViewDidEndDecelerating")
+        viewModel.loadMoreMassages { [weak self] in
+            guard let self = self else { return }
+            print("CALL COMPLETION")
+            self.messagesCollectionView.reloadDataAndKeepOffset()
+            self.refreshController.endRefreshing()
+        }
     }
 }
 
-extension ChatViewController: InputBarAccessoryViewDelegate {
-    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        let message = MessageItem(
-            sender: sender,
-            messageId: UUID().uuidString,
-            sentDate: Date(),
-            kind: MessageKind.text(text)
-        )
-        insertNewMessage(message: message)
-        inputBar.inputTextView.text = ""
+
+extension ChatViewController: ChatViewModelDelegate {
+    func reloadData() {
+        messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToLastItem()
     }
 
-//    /// Called when the default send button has been selected
-//    ///
-//    /// - Parameters:
-//    ///   - inputBar: The InputBarAccessoryView
-//    ///   - text: The current text in the InputBarAccessoryView's InputTextView
-//    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String)
-//
-//    /// Called when the instrinsicContentSize of the InputBarAccessoryView has changed. Can be used for adjusting content insets
-//    /// on other views to make sure the InputBarAccessoryView does not cover up any other view
-//    ///
-//    /// - Parameters:
-//    ///   - inputBar: The InputBarAccessoryView
-//    ///   - size: The new instrinsicContentSize
-//    func inputBar(_ inputBar: InputBarAccessoryView, didChangeIntrinsicContentTo size: CGSize)
-//
-//    /// Called when the InputBarAccessoryView's InputTextView's text has changed. Useful for adding your own logic without the
-//    /// need of assigning a delegate or notification
-//    ///
-//    /// - Parameters:
-//    ///   - inputBar: The InputBarAccessoryView
-//    ///   - text: The current text in the InputBarAccessoryView's InputTextView
-//    func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String)
-//
-//    /// Called when a swipe gesture was recognized on the InputBarAccessoryView's InputTextView
-//    ///
-//    /// - Parameters:
-//    ///   - inputBar: The InputBarAccessoryView
-//    ///   - gesture: The gesture that was recognized
-//    func inputBar(_ inputBar: InputBarAccessoryView, didSwipeTextViewWith gesture: UISwipeGestureRecognizer)
+    func updateTypingIndicator(_ isTyping: Bool) {
+        subTitleLabel.text = isTyping ? "Typing..." : ""
+    }
 }

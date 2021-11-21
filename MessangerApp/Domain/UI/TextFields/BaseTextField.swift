@@ -20,8 +20,8 @@ private extension Style {
 }
 
 class BaseTextField: UITextField {
-    convenience init() {
-        self.init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
 
         let style = Style.BaseTextField()
 
@@ -36,5 +36,9 @@ class BaseTextField: UITextField {
         snp.makeConstraints { make in
             make.height.equalTo(style.height)
         }
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

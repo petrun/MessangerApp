@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompleteProfileViewController: ViewController<CompleteProfileView>  {
+class CompleteProfileViewController: ViewController<CompleteProfileView> {
     // MARK: - Properties
 
     var viewModel: CompleteProfileViewModelProtocol!

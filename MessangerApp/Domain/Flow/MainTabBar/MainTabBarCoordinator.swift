@@ -3,8 +3,8 @@ import Swinject
 private extension Style {
     enum MainTabBar {
         static let messageImage = UIImage(systemName: "message")!
-        static let groupsImage = UIImage(systemName: "person.3")!
-        static let usersImage = UIImage(systemName: "person")!
+        static let groupsImage = UIImage(systemName: "quote.bubble")!
+        static let usersImage = UIImage(systemName: "person.2")!
         static let settingsImage = UIImage(systemName: "gearshape")!
     }
 }
@@ -27,26 +27,26 @@ class MainTabBarCoordinator: Coordinator {
         let routerFactory = resolver.resolve(RouterFactoryProtocol.self)!
 
         mainTabBarController.viewControllers = [
-            createNavigationController(image: Style.MainTabBar.messageImage) {
-                ChatsCoordinator(
+//            createNavigationController(image: Style.MainTabBar.messageImage, title: L10n.Chats.title) {
+//                ChatsCoordinator(
+//                    router: routerFactory.makeNavigationRouter(navigationController: $0),
+//                    resolver: resolver
+//                )
+//            },
+//            createNavigationController(image: Style.MainTabBar.groupsImage, title: L10n.Groups.title) {
+//                ChatsCoordinator(
+//                    router: routerFactory.makeNavigationRouter(navigationController: $0),
+//                    resolver: resolver
+//                )
+//            },
+            createNavigationController(image: Style.MainTabBar.usersImage, title: L10n.Users.title) {
+                UsersCoordinator(
                     router: routerFactory.makeNavigationRouter(navigationController: $0),
                     resolver: resolver
                 )
             },
-            createNavigationController(image: Style.MainTabBar.groupsImage) {
-                ChatsCoordinator(
-                    router: routerFactory.makeNavigationRouter(navigationController: $0),
-                    resolver: resolver
-                )
-            },
-            createNavigationController(image: Style.MainTabBar.usersImage) {
-                ChatsCoordinator(
-                    router: routerFactory.makeNavigationRouter(navigationController: $0),
-                    resolver: resolver
-                )
-            },
-            createNavigationController(image: Style.MainTabBar.settingsImage) {
-                ChatsCoordinator(
+            createNavigationController(image: Style.MainTabBar.settingsImage, title: L10n.Settings.title) {
+                SettingsCoordinator(
                     router: routerFactory.makeNavigationRouter(navigationController: $0),
                     resolver: resolver
                 )
@@ -58,11 +58,12 @@ class MainTabBarCoordinator: Coordinator {
 
     private func createNavigationController(
         image: UIImage,
+        title: String,
         initCoordinator: (UINavigationController) -> Coordinator
     ) -> UINavigationController {
         let navigationController = UINavigationController()
         navigationController.tabBarItem.image = image
-//        navigationController.tabBarItem.title = "Home"
+        navigationController.tabBarItem.title = title
         navigationController.navigationBar.barTintColor = .white
 
         initCoordinator(navigationController).present(animated: false, onDismissed: nil)

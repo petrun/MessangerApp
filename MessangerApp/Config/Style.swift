@@ -16,6 +16,7 @@ enum Style {
     static var backgroundColor: UIColor { BaseColors.white }
     static var buttonBackgroundColor: UIColor { Asset.backgroundColor.color }
     static var buttonTextColor: UIColor { BaseColors.white }
+    static var backgroundColor2: UIColor { .init(hex: 0xEFEFF4) }
 
     private enum FontSizes {
         static var base: CGFloat { 15 }

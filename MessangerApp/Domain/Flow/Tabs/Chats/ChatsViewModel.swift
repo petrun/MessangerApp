@@ -8,9 +8,23 @@
 import Foundation
 
 protocol ChatsViewModelProtocol: AnyObject {
+    func loadChats()
+//    func count() -> Int
+//    func itemForRowAt(indexPath: IndexPath)
+}
+
+protocol ChatsViewModelDelegate: AnyObject {
+    func reloadData()
 }
 
 final class ChatsViewModel {
+    weak var delegate: ChatsViewModelDelegate?
+
+    private var users: [User] = [] {
+        didSet {
+            delegate?.reloadData()
+        }
+    }
 //    private let authService: AuthServiceProtocol
 //    private let logger: LoggerService
 //    var coordinatorHandler: RegistrationCoordinatorDelegate?
@@ -22,4 +36,17 @@ final class ChatsViewModel {
 }
 
 extension ChatsViewModel: ChatsViewModelProtocol {
+    func loadChats() {
+//        let userStorage = UserStorage()
+//        userStorage.getPage(lastSnapshot: nil) { result in
+//            switch result {
+//            case .success(let users):
+//                self.users = users
+//                print("success")
+//            case .failure(let error):
+//                print("failure")
+//                print(error)
+//            }
+//        }
+    }
 }

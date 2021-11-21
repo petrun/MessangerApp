@@ -43,6 +43,8 @@ internal enum Asset {
   internal enum Logo {
     internal static let main = ImageAsset(name: "main")
   }
+  internal static let avatar = ImageAsset(name: "avatar")
+  internal static let background = ImageAsset(name: "background")
   internal static let backgroundColor = ColorAsset(name: "backgroundColor")
   internal static let plusPhoto = ImageAsset(name: "plus_photo")
 }
