@@ -5,8 +5,8 @@
 //  Created by andy on 18.11.2021.
 //
 
-import UIKit
 import MessageKit
+import UIKit
 
 struct ImageMediaItem: MediaItem {
     var url: URL?
@@ -24,6 +24,5 @@ struct ImageMediaItem: MediaItem {
         self.url = imageURL
         self.size = CGSize(width: 240, height: 240)
         self.placeholderImage = UIImage()
-//            UIImage(imageLiteralResourceName: "image_message_placeholder")
     }
 }

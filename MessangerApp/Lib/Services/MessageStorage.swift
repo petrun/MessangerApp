@@ -127,6 +127,10 @@ extension MessageStorage: MessageStorageProtocol {
                 .collection("messages")
                 .document(message.messageId)
                 .setData(from: message)
+
+            // TODO: Send notification
+            // TODO: Update chatLastMessage
+            // TODO: Update chat unview count
         } catch {
             print(error.localizedDescription)
         }

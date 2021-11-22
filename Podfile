@@ -15,6 +15,7 @@ target 'MessangerApp' do
   pod 'Firebase/Storage'
   pod 'FirebaseFirestoreSwift', '~> 8.9.0-beta'
 
+  pod 'Gallery'
   pod 'JGProgressHUD'
   pod 'MessageKit'
   pod 'Then'
@@ -25,7 +26,6 @@ target 'MessangerApp' do
   pod 'Swinject'
   pod 'SwinjectAutoregistration'
 
-  #pod 'Gallery'
   #pod 'RealmSwift'
 
   #pod 'ProgressHUD'

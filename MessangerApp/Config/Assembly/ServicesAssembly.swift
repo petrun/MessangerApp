@@ -12,6 +12,10 @@ class ServicesAssembly: Assembly {
         container.autoregister(ChatStorageProtocol.self, initializer: ChatStorage.init)
         .inObjectScope(ObjectScope.container)
 
+        // FileStorageService
+        container.autoregister(FileStorageProtocol.self, initializer: FileStorage.init)
+        .inObjectScope(ObjectScope.container)
+
         // Logger
         container.register(LoggerService.self) {_ in
             let console = ConsoleDestination()
@@ -33,6 +37,10 @@ class ServicesAssembly: Assembly {
 
         // RouterFactory
         container.autoregister(RouterFactoryProtocol.self, initializer: RouterFactory.init)
+        .inObjectScope(ObjectScope.container)
+
+        // SendMessageHandler
+        container.autoregister(SendMessageHandlerProtocol.self, initializer: SendMessageHandler.init)
         .inObjectScope(ObjectScope.container)
 
         // TypingService

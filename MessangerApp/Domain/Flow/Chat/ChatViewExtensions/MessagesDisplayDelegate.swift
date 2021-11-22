@@ -6,6 +6,7 @@
 //
 
 import MessageKit
+import SDWebImage
 
 extension ChatViewController: MessagesDisplayDelegate {
     func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
@@ -24,6 +25,17 @@ extension ChatViewController: MessagesDisplayDelegate {
         )
     }
 
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        switch message.kind {
+        case .photo(let mediaItem):
+            if let url = mediaItem.url {
+                imageView.sd_setImage(with: url)
+            }
+        default:
+            break
+        }
+    }
+
 //    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
 //        switch message.kind {
 //        case .emoji:
@@ -36,15 +48,7 @@ extension ChatViewController: MessagesDisplayDelegate {
 //        }
 //    }
 
-//    func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-//        .blue
-//    }
-
 //    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
 //        avatarView.initials = nil
-//    }
-
-//    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-//        .bubble
 //    }
 }

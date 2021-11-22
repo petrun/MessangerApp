@@ -393,6 +393,7 @@ PODS:
   - FirebaseStorage (8.9.0):
     - FirebaseCore (~> 8.0)
     - GTMSessionFetcher/Core (~> 1.5)
+  - Gallery (2.4.0)
   - GoogleDataTransport (9.1.2):
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
@@ -467,6 +468,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - FirebaseFirestoreSwift (~> 8.9.0-beta)
+  - Gallery
   - JGProgressHUD
   - MessageKit
   - SDWebImage (~> 5.0)
@@ -489,6 +491,7 @@ SPEC REPOS:
     - FirebaseFirestore
     - FirebaseFirestoreSwift
     - FirebaseStorage
+    - Gallery
     - GoogleDataTransport
     - GoogleUtilities
     - "gRPC-C++"
@@ -519,6 +522,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 15ae9648476436efed698a909e44c4737498f9b4
   FirebaseFirestoreSwift: 2ca5da7c13b5d43a34696a7b84a702ef584da5f5
   FirebaseStorage: 452c98c31ccb40b819764bf3039426c4388d9939
+  Gallery: b7fc1aeb68a39ad6d2c423574750196bf9b25e5c
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
@@ -538,6 +542,6 @@ SPEC CHECKSUMS:
   SwinjectAutoregistration: e83e362da3ca9c64a68290e89efbc40e378dff12
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 3de46b4a5d70589657c7bb0ba281b0c206653c6a
+PODFILE CHECKSUM: 305f4528ba9eedbd0317bdb3a935c9144f8b5c6d
 
 COCOAPODS: 1.11.2

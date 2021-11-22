@@ -1,3 +1,4 @@
+import Gallery
 import InputBarAccessoryView
 import MessageKit
 import Then
@@ -37,9 +38,7 @@ class ChatViewController: MessagesViewController {
             )
         )?.withRenderingMode(.alwaysOriginal)
         $0.setSize(style.inputBarButtonItemSize, animated: false)
-        $0.onTouchUpInside { _ in
-            print("attach button pressed")
-        }
+        $0.onTouchUpInside { [weak self] _ in self?.attachButtonPressed() }
     }
 
     private lazy var leftBarButtonView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
@@ -159,12 +158,34 @@ class ChatViewController: MessagesViewController {
         messageInputBar.middleContentViewPadding.right = -38
     }
 
-    // MARK: - Selectors
+    // MARK: - Actions
 
     @objc private func backButtonPressed() {
         // TODO: remove listeners
 
         navigationController?.popToRootViewController(animated: true)
+    }
+
+    private func attachButtonPressed() {
+        messageInputBar.inputTextView.resignFirstResponder()
+
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        actionSheet.addAction(title: "Camera") { [weak self] _ in
+            self?.showImageGallery(camera: true)
+        }
+
+        actionSheet.addAction(title: "Library") { [weak self] _ in
+            self?.showImageGallery(camera: false)
+        }
+
+        actionSheet.addAction(title: "Location") { _ in
+            print("share Location")
+        }
+
+        actionSheet.addCancelAction(title: "Cancel")
+
+        present(actionSheet, animated: true)
     }
 
     func updateMicButtonStatus(show: Bool) {
@@ -182,15 +203,27 @@ class ChatViewController: MessagesViewController {
         guard refreshController.isRefreshing else { return }
 
         print("Call scrollViewDidEndDecelerating")
-        viewModel.loadMoreMassages { [weak self] in
+        viewModel.loadMoreMessages { [weak self] in
             guard let self = self else { return }
             print("CALL COMPLETION")
             self.messagesCollectionView.reloadDataAndKeepOffset()
             self.refreshController.endRefreshing()
         }
     }
-}
 
+    // MARK: - Gallery
+    private func showImageGallery(camera: Bool) {
+        let gallery = GalleryController()
+        gallery.delegate = self
+
+        Config.tabsToShow = camera ? [.cameraTab] : [.imageTab, .videoTab]
+        Config.Camera.imageLimit = 1
+        Config.initialTab = .imageTab
+        Config.VideoEditor.maximumDuration = 30
+
+        present(gallery, animated: true)
+    }
+}
 
 extension ChatViewController: ChatViewModelDelegate {
     func reloadData() {
@@ -200,5 +233,31 @@ extension ChatViewController: ChatViewModelDelegate {
 
     func updateTypingIndicator(_ isTyping: Bool) {
         subTitleLabel.text = isTyping ? "Typing..." : ""
+    }
+}
+
+extension ChatViewController: GalleryControllerDelegate {
+    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+        if !images.isEmpty {
+            images.first!.resolve { [weak self] image in
+                guard let self = self, let image = image else { return }
+
+                self.viewModel.sendMessage(image: image)
+            }
+        }
+
+        controller.dismiss(animated: true)
+    }
+
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        controller.dismiss(animated: true)
+    }
+
+    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
+        controller.dismiss(animated: true)
+    }
+
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+        controller.dismiss(animated: true)
     }
 }

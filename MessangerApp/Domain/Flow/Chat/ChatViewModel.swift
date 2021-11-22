@@ -21,9 +21,13 @@ protocol ChatViewModelProtocol {
 
     func start()
     func messageForItem(at indexPath: IndexPath) -> MessageType
-    func sendMessage(kind: MessageKind)
-    func loadMoreMassages(completion: @escaping () -> Void)
+//    func sendMessage(_ outgoingMessage: OutgoingMessage)
+    func loadMoreMessages(completion: @escaping () -> Void)
     func isTyping()
+
+    //send messages
+    func sendMessage(text: String)
+    func sendMessage(image: UIImage)
 }
 
 class ChatViewModel {
@@ -38,6 +42,7 @@ class ChatViewModel {
     private var messages: [MessageType] = []
     private let authService: AuthServiceProtocol
     private let messageStorage: MessageStorageProtocol
+    private let sendMessageHandler: SendMessageHandlerProtocol
 
     // Typing
     private let typingService: TypingServiceProtocol
@@ -50,12 +55,14 @@ class ChatViewModel {
         chat: Chat,
         authService: AuthServiceProtocol,
         messageStorage: MessageStorageProtocol,
-        typingService: TypingServiceProtocol
+        typingService: TypingServiceProtocol,
+        sendMessageHandler: SendMessageHandlerProtocol
     ) {
         self.chat = chat
         self.authService = authService
         self.messageStorage = messageStorage
         self.typingService = typingService
+        self.sendMessageHandler = sendMessageHandler
 
         currentUser = authService.currentUser!
         receiver = Sender(senderId: chat.membersIds.first!, displayName: "Receiver")
@@ -70,7 +77,9 @@ class ChatViewModel {
         // TODO: Remove listeners
         print("Deinit")
 
-        typingService.set(typing: false, chatId: chat.id!, userId: currentUser.uid)
+        if typingCounter > 0 {
+            typingService.set(typing: false, chatId: chat.id!, userId: currentUser.uid)
+        }
         typingListener?.remove()
     }
 
@@ -131,24 +140,15 @@ extension ChatViewModel: ChatViewModelProtocol {
         messages[indexPath.section]
     }
 
-    func sendMessage(kind: MessageKind) {
-        let message = Message(sender: currentSender, kind: kind)
-        messageStorage.sendMessage(chat: chat, message: message)
-//        delegate?.reloadData()
+    func sendMessage(text: String) {
+        sendMessageHandler.sendMessage(text: text, chat: chat, sender: currentSender)
     }
 
-//    for component in data {
-//        let user = SampleData.shared.currentSender
-//        if let str = component as? String {
-//            let message = MockMessage(text: str, user: user, messageId: UUID().uuidString, date: Date())
-//            insertMessage(message)
-//        } else if let img = component as? UIImage {
-//            let message = MockMessage(image: img, user: user, messageId: UUID().uuidString, date: Date())
-//            insertMessage(message)
-//        }
-//    }
+    func sendMessage(image: UIImage) {
+        sendMessageHandler.sendMessage(image: image, chat: chat, sender: currentSender)
+    }
 
-    func loadMoreMassages(completion: @escaping () -> Void) {
+    func loadMoreMessages(completion: @escaping () -> Void) {
         guard let firstMessage = messages.first else {
             completion()
             return

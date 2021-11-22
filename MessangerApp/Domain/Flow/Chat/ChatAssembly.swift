@@ -15,7 +15,8 @@ class ChatAssembly: Assembly {
                 chat: chat,
                 authService: r.resolve(AuthServiceProtocol.self)!,
                 messageStorage: r.resolve(MessageStorageProtocol.self)!,
-                typingService: r.resolve(TypingServiceProtocol.self)!
+                typingService: r.resolve(TypingServiceProtocol.self)!,
+                sendMessageHandler: r.resolve(SendMessageHandlerProtocol.self)!
             )
         }
 

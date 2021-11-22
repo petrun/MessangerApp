@@ -1,5 +1,5 @@
 //
-//  FileStorageService.swift
+//  FileStorage.swift
 //  MessangerApp
 //
 //  Created by andy on 15.11.2021.
@@ -10,10 +10,10 @@ import FirebaseStorage
 typealias FileUploadCompletion = (Result<URL, Error>) -> Void
 
 protocol FileStorageProtocol {
-    func updateImage(image: UIImage, completion: @escaping FileUploadCompletion)
+    func uploadImage(image: UIImage, folder: String, completion: @escaping FileUploadCompletion)
 }
 
-final class FileStorageService {
+final class FileStorage {
     private let storage = Storage.storage().reference()
 
     // upload video
@@ -39,10 +39,10 @@ final class FileStorageService {
     }
 }
 
-extension FileStorageService: FileStorageProtocol {
-    func updateImage(image: UIImage, completion: @escaping FileUploadCompletion) {
+extension FileStorage: FileStorageProtocol {
+    func uploadImage(image: UIImage, folder: String, completion: @escaping FileUploadCompletion) {
         guard let imageData = image.jpegData(compressionQuality: 0.3) else { return }
 
-        uploadFile(data: imageData, folder: "images", completion: completion)
+        uploadFile(data: imageData, folder: folder, completion: completion)
     }
 }

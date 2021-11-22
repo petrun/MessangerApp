@@ -13,7 +13,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         for component in inputBar.inputTextView.components {
             switch component {
             case let text as String:
-                viewModel.sendMessage(kind: .text(text))
+                viewModel.sendMessage(text: text)
             default:
                 print("Unknown component type", component)
             }
