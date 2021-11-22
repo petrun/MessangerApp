@@ -454,6 +454,7 @@ PODS:
   - SDWebImage (5.12.1):
     - SDWebImage/Core (= 5.12.1)
   - SDWebImage/Core (5.12.1)
+  - SKPhotoBrowser (7.0.0)
   - SnapKit (5.0.1)
   - SwiftLint (0.45.0)
   - SwiftyBeaver (1.9.5)
@@ -472,6 +473,7 @@ DEPENDENCIES:
   - JGProgressHUD
   - MessageKit
   - SDWebImage (~> 5.0)
+  - SKPhotoBrowser
   - SnapKit (~> 5.0.0)
   - SwiftLint
   - SwiftyBeaver
@@ -504,6 +506,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SDWebImage
+    - SKPhotoBrowser
     - SnapKit
     - SwiftLint
     - SwiftyBeaver
@@ -535,6 +538,7 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
+  SKPhotoBrowser: 6aaa8f232752e87c7e76bace183bead0a137097d
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
   SwiftyBeaver: 84069991dd5dca07d7069100985badaca7f0ce82
@@ -542,6 +546,6 @@ SPEC CHECKSUMS:
   SwinjectAutoregistration: e83e362da3ca9c64a68290e89efbc40e378dff12
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 305f4528ba9eedbd0317bdb3a935c9144f8b5c6d
+PODFILE CHECKSUM: 9a0f44667704ae9cb1fe319f573b1ef3a23a578c
 
 COCOAPODS: 1.11.2

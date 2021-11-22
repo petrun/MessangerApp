@@ -91,7 +91,7 @@ class ChatViewController: MessagesViewController {
     }
 
     private func configureMessagesCollectionView() {
-//        messagesCollectionView.messageCellDelegate = self
+        messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -250,6 +250,8 @@ extension ChatViewController: GalleryControllerDelegate {
     }
 
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        viewModel.sendMessage(video: video)
+
         controller.dismiss(animated: true)
     }
 

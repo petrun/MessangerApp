@@ -24,6 +24,7 @@ extension MessageKind: Codable {
     private enum MessageKindType: String {
         case photo
         case text
+        case video
     }
 
     public init(from decoder: Decoder) throws {
@@ -39,7 +40,10 @@ extension MessageKind: Codable {
                 throw CodingError.emptyValue
             }
             self = .photo(ImageMediaItem(imageURL: imageUrl))
+        case .video:
+            self = .video(try container.decode(VideoMediaItem.self, forKey: .content))
         default:
+            print("ERROR unknownMessageKindType \(type)")
             throw CodingError.unknownMessageKindType(type)
         }
     }
@@ -50,10 +54,15 @@ extension MessageKind: Codable {
         case .text(let text):
             try container.encode(MessageKindType.text.rawValue, forKey: .type)
             try container.encode(text, forKey: .content)
-        case .photo(let photo):
+        case .photo(let mediaItem):
             try container.encode(MessageKindType.photo.rawValue, forKey: .type)
-            try container.encode(photo.url?.absoluteString, forKey: .content)
+            try container.encode(mediaItem.url?.absoluteString, forKey: .content)
+        case .video(let mediaItem):
+            guard let videoItem = mediaItem as? VideoMediaItem else { return }
+            try container.encode(MessageKindType.video.rawValue, forKey: .type)
+            try container.encode(videoItem, forKey: .content)
         default:
+            print("ERROR unknownValue")
             throw CodingError.unknownValue
         }
     }

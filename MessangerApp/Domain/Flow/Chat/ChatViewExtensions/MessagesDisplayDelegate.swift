@@ -31,6 +31,10 @@ extension ChatViewController: MessagesDisplayDelegate {
             if let url = mediaItem.url {
                 imageView.sd_setImage(with: url)
             }
+        case .video(let mediaItem):
+            if let url = mediaItem.url {
+                imageView.sd_setImage(with: url)
+            }
         default:
             break
         }

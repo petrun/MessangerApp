@@ -47,6 +47,10 @@ class ServicesAssembly: Assembly {
         container.autoregister(TypingServiceProtocol.self, initializer: TypingService.init)
         .inObjectScope(ObjectScope.container)
 
+        // UploadVideoHandlerProtocol
+        container.autoregister(UploadVideoHandlerProtocol.self, initializer: UploadVideoHandler.init)
+        .inObjectScope(ObjectScope.container)
+
         // UserStorage
         container.autoregister(UserStorageProtocol.self, initializer: UserStorage.init)
         .inObjectScope(ObjectScope.container)

@@ -20,6 +20,7 @@ target 'MessangerApp' do
   pod 'MessageKit'
   pod 'Then'
   pod 'SDWebImage', '~> 5.0'
+  pod 'SKPhotoBrowser'
   pod 'SnapKit', '~> 5.0.0'
   pod 'SwiftLint'
   pod 'SwiftyBeaver'
@@ -29,9 +30,7 @@ target 'MessangerApp' do
   #pod 'RealmSwift'
 
   #pod 'ProgressHUD'
-  #pod 'SKPhotoBrowser'
 
-  #pod 'MessageKit'
   #pod 'InputBarAccessoryView'
 
 end

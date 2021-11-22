@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import Gallery
 import MessageKit
 
 protocol ChatViewModelDelegate: AnyObject {
@@ -28,6 +29,7 @@ protocol ChatViewModelProtocol {
     //send messages
     func sendMessage(text: String)
     func sendMessage(image: UIImage)
+    func sendMessage(video: Video)
 }
 
 class ChatViewModel {
@@ -146,6 +148,10 @@ extension ChatViewModel: ChatViewModelProtocol {
 
     func sendMessage(image: UIImage) {
         sendMessageHandler.sendMessage(image: image, chat: chat, sender: currentSender)
+    }
+
+    func sendMessage(video: Video) {
+        sendMessageHandler.sendMessage(video: video, chat: chat, sender: currentSender)
     }
 
     func loadMoreMessages(completion: @escaping () -> Void) {
