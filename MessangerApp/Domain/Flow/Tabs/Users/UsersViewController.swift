@@ -18,15 +18,20 @@ class UsersViewController: UITableViewController {
         super.viewDidLoad()
         title = "Users"
 
-        view.backgroundColor = .yellow
+//        view.backgroundColor = .yellow
 
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: userCellIdentifier)
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 65, bottom: 0, right: 0)
 
         viewModel.delegate = self
 
         viewModel.loadUsers()
     }
+}
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension UsersViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.count()
     }
@@ -50,9 +55,11 @@ class UsersViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        80
+        50
     }
 }
+
+// MARK: - UsersViewModelDelegate
 
 extension UsersViewController: UsersViewModelDelegate {
     func reloadData() {

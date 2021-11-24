@@ -51,6 +51,14 @@ class ServicesAssembly: Assembly {
         container.autoregister(UploadVideoHandlerProtocol.self, initializer: UploadVideoHandler.init)
         .inObjectScope(ObjectScope.container)
 
+        // UserProfile
+        container.register(UserProfileProtocol.self) {
+            UserProfile(
+                cache: Cache(),
+                userStorage: $0.resolve(UserStorageProtocol.self)!
+            )
+        }
+
         // UserStorage
         container.autoregister(UserStorageProtocol.self, initializer: UserStorage.init)
         .inObjectScope(ObjectScope.container)

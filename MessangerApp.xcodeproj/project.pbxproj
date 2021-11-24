@@ -29,6 +29,12 @@
 		A11F53DC27295A810031CEB4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F53DB27295A810031CEB4 /* LoginViewController.swift */; };
 		A11F53E427295A810031CEB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11F53E227295A810031CEB4 /* LaunchScreen.storyboard */; };
 		A11F53FE272964070031CEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11F53FD272964070031CEB4 /* GoogleService-Info.plist */; };
+		A1210733274D81EF0052E330 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1210732274D81EF0052E330 /* UserProfile.swift */; };
+		A1210737274D88800052E330 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1210736274D88800052E330 /* Cache.swift */; };
+		A121073C274DAE250052E330 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A121073B274DAE1F0052E330 /* SF-Pro-Text-Semibold.otf */; };
+		A121073F274DAE600052E330 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A121073E274DAE600052E330 /* SF-Pro-Text-Regular.otf */; };
+		A1210742274DAF450052E330 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1210741274DAF450052E330 /* Fonts.swift */; };
+		A1210746274DD01F0052E330 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A1210744274DCF070052E330 /* SF-Pro-Text-Medium.otf */; };
 		A13293C02730B64A003AAF9F /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13293BF2730B64A003AAF9F /* Assets.swift */; };
 		A139FA942742A6060081A473 /* ChatStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A139FA932742A6060081A473 /* ChatStorage.swift */; };
 		A14721A3272EF0A300C5B6FE /* UIKit+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14721A2272EF0A300C5B6FE /* UIKit+Preview.swift */; };
@@ -144,6 +150,12 @@
 		A11F53E327295A810031CEB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A11F53E527295A810031CEB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11F53FD272964070031CEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A1210732274D81EF0052E330 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		A1210736274D88800052E330 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		A121073B274DAE1F0052E330 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
+		A121073E274DAE600052E330 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		A1210741274DAF450052E330 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		A1210744274DCF070052E330 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
 		A13293BF2730B64A003AAF9F /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		A13293C22730B6C0003AAF9F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A139FA932742A6060081A473 /* ChatStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStorage.swift; sourceTree = "<group>"; };
@@ -356,6 +368,32 @@
 				A1CD68C42730B4E400F33E04 /* Assets.xcassets */,
 			);
 			path = MessangerApp;
+			sourceTree = "<group>";
+		};
+		A1210735274D88710052E330 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				A1210736274D88800052E330 /* Cache.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		A1210739274DADEA0052E330 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A121073A274DAE010052E330 /* SF Pro Text */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A121073A274DAE010052E330 /* SF Pro Text */ = {
+			isa = PBXGroup;
+			children = (
+				A1210744274DCF070052E330 /* SF-Pro-Text-Medium.otf */,
+				A121073E274DAE600052E330 /* SF-Pro-Text-Regular.otf */,
+				A121073B274DAE1F0052E330 /* SF-Pro-Text-Semibold.otf */,
+			);
+			path = "SF Pro Text";
 			sourceTree = "<group>";
 		};
 		A15120D4274C090A00502271 /* Gallery */ = {
@@ -604,6 +642,7 @@
 		A1C1EB45272B1F790060ECF3 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				A1210735274D88710052E330 /* Cache */,
 				A15120D4274C090A00502271 /* Gallery */,
 				A1533A3E274471790070CD64 /* DateTime */,
 				A1533A342743DB2A0070CD64 /* Firebase */,
@@ -672,7 +711,9 @@
 		A1CD68572730B2B900F33E04 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A1210739274DADEA0052E330 /* Fonts */,
 				A13293BF2730B64A003AAF9F /* Assets.swift */,
+				A1210741274DAF450052E330 /* Fonts.swift */,
 				A1CD68592730B2B900F33E04 /* Localizable.strings */,
 				A1CD68582730B2B900F33E04 /* Strings.swift */,
 			);
@@ -691,6 +732,7 @@
 				A1B8E3182749BA300050F86D /* TypingService.swift */,
 				A1DEF420274B17D7003BFB88 /* SendMessageHandler.swift */,
 				A15120D1274BE12700502271 /* UploadVideoHandler.swift */,
+				A1210732274D81EF0052E330 /* UserProfile.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -786,12 +828,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A121073F274DAE600052E330 /* SF-Pro-Text-Regular.otf in Resources */,
 				A1ECB3F32730C43600DB280F /* .swiftlint.yml in Resources */,
 				A11F53E427295A810031CEB4 /* LaunchScreen.storyboard in Resources */,
+				A121073C274DAE250052E330 /* SF-Pro-Text-Semibold.otf in Resources */,
 				A1742631273D40BF00679ECE /* Storyboard.storyboard in Resources */,
 				A11F53FE272964070031CEB4 /* GoogleService-Info.plist in Resources */,
 				A1CD68C52730B4E400F33E04 /* Assets.xcassets in Resources */,
 				A15F72E82730A5C50065AB0C /* lint.sh in Resources */,
+				A1210746274DD01F0052E330 /* SF-Pro-Text-Medium.otf in Resources */,
 				A1CD685C2730B2B900F33E04 /* Localizable.strings in Resources */,
 				A15F72E92730A5C50065AB0C /* generate-strings.sh in Resources */,
 				A1CD684A2730AFDA00F33E04 /* swiftgen.yml in Resources */,
@@ -933,11 +978,13 @@
 				A1C1EB85272B6A9E0060ECF3 /* UIView+Add.swift in Sources */,
 				A171F63E273B3E6300BC066B /* ChatsViewModel.swift in Sources */,
 				A139FA942742A6060081A473 /* ChatStorage.swift in Sources */,
+				A1210733274D81EF0052E330 /* UserProfile.swift in Sources */,
 				A191BDCC27333A6700C76185 /* Rule.swift in Sources */,
 				A105DDDD272DC76B0067A5ED /* RegistrationAssembly.swift in Sources */,
 				A191BDC7273337F000C76185 /* Validatable.swift in Sources */,
 				A1533A322743DA370070CD64 /* FBCollectionReference.swift in Sources */,
 				A1C1EB95272C23990060ECF3 /* Constants.swift in Sources */,
+				A1210737274D88800052E330 /* Cache.swift in Sources */,
 				A1C1EB60272B36D20060ECF3 /* LoggerService.swift in Sources */,
 				A191BDDE27333BEF00C76185 /* Validator.swift in Sources */,
 				A15120D2274BE12700502271 /* UploadVideoHandler.swift in Sources */,
@@ -961,6 +1008,7 @@
 				A11F53D827295A810031CEB4 /* AppDelegate.swift in Sources */,
 				A1F564022745AADE00883FFD /* ChatViewModel.swift in Sources */,
 				A1D32BAF27301D1200042CEA /* Style.swift in Sources */,
+				A1210742274DAF450052E330 /* Fonts.swift in Sources */,
 				A105DDCD272D97490067A5ED /* LoginView.swift in Sources */,
 				A197B20B273E980100AB6FD7 /* ChatTableViewCell.swift in Sources */,
 				A1DEF3DD274B001C003BFB88 /* UIAlertController+Extension.swift in Sources */,

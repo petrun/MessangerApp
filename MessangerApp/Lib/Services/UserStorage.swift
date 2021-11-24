@@ -17,6 +17,7 @@ protocol UserStorageProtocol {
         limit: Int,
         completion: @escaping (Result<[User], Error>) -> Void
     )
+    func getUser(uid: String, completion: @escaping (Result<User, Error>) -> Void)
 }
 
 protocol CollectionProtocol {

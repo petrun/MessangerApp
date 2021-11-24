@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        configureAppearance()
 
         window = UIWindow()
 
@@ -30,6 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator.present(animated: true, onDismissed: nil)
 
         return true
+    }
+
+    func configureAppearance() {
+        let candyGreen = UIColor(red: 67.0/255.0, green: 205.0/255.0, blue: 135.0/255.0, alpha: 1.0)
+
+        UISearchBar.appearance().tintColor = candyGreen
+        UINavigationBar.appearance().tintColor = candyGreen
     }
 
     func restartApp() {

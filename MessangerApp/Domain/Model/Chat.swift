@@ -19,6 +19,9 @@ struct Chat {
     @ServerTimestamp var lastUpdateAt = Date()
     var type: ChatType
     var membersIds: [String]
+    var title: String?
+    var imageUrl: URL?
+//    var lastMessage: Message?
 }
 
 extension Chat: Codable {

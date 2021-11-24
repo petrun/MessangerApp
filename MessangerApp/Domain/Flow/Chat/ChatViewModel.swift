@@ -22,11 +22,10 @@ protocol ChatViewModelProtocol {
 
     func start()
     func messageForItem(at indexPath: IndexPath) -> MessageType
-//    func sendMessage(_ outgoingMessage: OutgoingMessage)
     func loadMoreMessages(completion: @escaping () -> Void)
     func isTyping()
 
-    //send messages
+    // Send messages
     func sendMessage(text: String)
     func sendMessage(image: UIImage)
     func sendMessage(video: Video)
@@ -40,7 +39,7 @@ class ChatViewModel {
     private let messagesLimit = 20
     private let chat: Chat
     private let currentUser: User
-    private let receiver: Sender
+//    private let receiver: Sender
     private var messages: [MessageType] = []
     private let authService: AuthServiceProtocol
     private let messageStorage: MessageStorageProtocol
@@ -67,12 +66,10 @@ class ChatViewModel {
         self.sendMessageHandler = sendMessageHandler
 
         currentUser = authService.currentUser!
-        receiver = Sender(senderId: chat.membersIds.first!, displayName: "Receiver")
+//        receiver = Sender(senderId: chat.membersIds.first!, displayName: "Receiver")
         currentSender = Sender(senderId: currentUser.uid, displayName: currentUser.name)
 
-        switch chat.type {
-        case .privateChat: chatTitle = receiver.displayName
-        }
+        chatTitle = chat.title ?? "Empty chat title"
     }
 
     deinit {

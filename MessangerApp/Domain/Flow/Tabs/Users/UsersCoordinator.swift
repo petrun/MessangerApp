@@ -49,6 +49,7 @@ extension UsersCoordinator: UsersCoordinatorDelegate {
 ////        ).present(animated: true, onDismissed: nil)
 //    }
 
+    // TODO: - Refactoring, move logic to viewModel
     func showChat(user: User) {
         guard let currentUser = authService.currentUser else {
             print("Current user is empty")

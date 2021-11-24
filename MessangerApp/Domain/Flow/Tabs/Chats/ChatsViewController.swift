@@ -9,51 +9,100 @@ import UIKit
 
 private let chatCellIdentifier = "chatCellIdentifier"
 
+private extension Style {
+    enum ChatsViewController {
+        static var cellHeight: CGFloat { 74 }
+    }
+}
+
 class ChatsViewController: UITableViewController {
     // MARK: - Properties
 
     var viewModel: ChatsViewModelProtocol!
 
-    private var users: [User] = [] {
-        didSet {
-            tableView.reloadData()
-        }
+    // MARK: - Private properties
+
+    private lazy var style = Style.ChatsViewController.self
+
+    private lazy var searchController = UISearchController(searchResultsController: nil)
+    private var isFiltering: Bool {
+        searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
     }
-//    private let chat: Chat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        title = "Chats"
+
+        title = L10n.Chats.title
 
         view.backgroundColor = .systemGray5
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: chatCellIdentifier)
+        tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: chatCellIdentifier)
 
-//        let userStorage = UserStorage()
-//        userStorage.getPage(lastSnapshot: nil) { result in
-//            switch result {
-//            case .success(let users):
-//                self.users = users
-//                print("success")
-//            case .failure(let error):
-//                print("failure")
-//                print(error)
-//            }
-//        }
+        setupSearchController()
+
+        viewModel.delegate = self
+        viewModel.loadChats()
     }
 
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search chats"
+
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+}
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
+
+extension ChatsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        users.count
+//        searchController.isActive
+        print("CALL get COUNT \(isFiltering)")
+        return viewModel.count(isFiltering: isFiltering)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: chatCellIdentifier,
             for: indexPath
-        ) as! UITableViewCell
-        let user = users[indexPath.row]
+        ) as! ChatTableViewCell
+        let chat = viewModel.itemForRowAt(indexPath: indexPath, isFiltering: isFiltering)
 
-        cell.textLabel?.text = user.name
+        cell.configure(chat: chat)
+
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+
+        viewModel.didSelectRowAt(indexPath: indexPath, isFiltering: isFiltering)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        style.cellHeight
+    }
+}
+
+// MARK: - ChatsViewModelDelegate
+
+extension ChatsViewController: ChatsViewModelDelegate {
+    func reloadData() {
+        tableView.reloadData()
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension ChatsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        print("CALL updateSearchResults: \(searchController.searchBar.text!)")
+        viewModel.filterChats(searchText: searchController.searchBar.text!)
+
+//        let searchBar = searchController.searchBar
+//          searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+//        filterContentForSearchText(searchBar.text!)
     }
 }

@@ -68,7 +68,7 @@ final class ChatStorage {
 
     func getChats(for user: User, completion: @escaping (Result<[Chat], Error>) -> Void) {
         db.collection(collectionName)
-            .whereField("membersIds", arrayContains: user.uid)
+//            .whereField("membersIds", arrayContains: user.uid)
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     completion(.failure(error))

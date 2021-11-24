@@ -12,3 +12,9 @@ xcassets:
       params:
         forceProvidesNamespaces: true
       output: MessangerApp/Resources/Assets.swift
+
+fonts:
+  inputs: MessangerApp/Resources/Fonts
+  outputs:
+    templateName: swift5
+    output: MessangerApp/Resources/Fonts.swift

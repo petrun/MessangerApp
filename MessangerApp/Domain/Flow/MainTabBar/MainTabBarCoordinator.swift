@@ -33,12 +33,12 @@ class MainTabBarCoordinator: Coordinator {
 //                    resolver: resolver
 //                )
 //            },
-//            createNavigationController(image: Style.MainTabBar.groupsImage, title: L10n.Groups.title) {
-//                ChatsCoordinator(
-//                    router: routerFactory.makeNavigationRouter(navigationController: $0),
-//                    resolver: resolver
-//                )
-//            },
+            createNavigationController(image: Style.MainTabBar.groupsImage, title: L10n.Groups.title) {
+                ChatsCoordinator(
+                    router: routerFactory.makeNavigationRouter(navigationController: $0),
+                    resolver: resolver
+                )
+            },
             createNavigationController(image: Style.MainTabBar.usersImage, title: L10n.Users.title) {
                 UsersCoordinator(
                     router: routerFactory.makeNavigationRouter(navigationController: $0),

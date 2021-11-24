@@ -8,7 +8,7 @@
 import Swinject
 
 protocol ChatsCoordinatorDelegate: AnyObject {
-    func showChat()
+    func showChat(chat: Chat)
 }
 
 final class ChatsCoordinator: Coordinator {
@@ -26,15 +26,18 @@ final class ChatsCoordinator: Coordinator {
     func present(animated: Bool, onDismissed: (() -> Void)?) {
         let viewController = resolver.resolve(ChatsViewController.self)!
 
-//        if let viewModel = viewController.viewModel as? RegistrationViewModel {
-//            viewModel.coordinatorHandler = self
-//        }
+        (viewController.viewModel as? ChatsViewModel)?.coordinatorHandler = self
 
         router.present(viewController, animated: animated, onDismissed: onDismissed)
     }
 }
 
 extension ChatsCoordinator: ChatsCoordinatorDelegate {
-    func showChat() {
+    func showChat(chat: Chat) {
+        ChatCoordinator(
+            chat: chat,
+            router: self.router,
+            resolver: resolver
+        ).present(animated: true, onDismissed: nil)
     }
 }

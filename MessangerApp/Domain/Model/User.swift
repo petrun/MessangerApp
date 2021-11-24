@@ -7,6 +7,7 @@
 
 import FirebaseFirestoreSwift
 import Firebase
+import MessageKit
 
 struct User: Codable {
     let uid: String
@@ -16,4 +17,9 @@ struct User: Codable {
     var status: String?
 
     var sender: Sender { .init(senderId: uid, displayName: name) }
+}
+
+extension User: SenderType {
+    var senderId: String { uid }
+    var displayName: String { name }
 }

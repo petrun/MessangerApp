@@ -3,14 +3,16 @@ import SnapKit
 
 private extension Style {
     enum UserTableViewCell {
-        static var profileImageSize: CGSize { .init(width: 58, height: 58) }
-        static var usernameLabelFont: UIFont { .systemFont(ofSize: 16, weight: .medium) }
-        static var descriptionLabelFont: UIFont { .systemFont(ofSize: 13, weight: .medium) }
+        static var profileImageSize: CGSize { .init(width: 40, height: 40) }
+        static var usernameLabelFont: UIFont { FontFamily.SFProText.medium.font(size: 17) }
+        static var onlineLabelFont: UIFont { FontFamily.SFProText.regular.font(size: 13) }
+        static var isNotOnlineColor: UIColor { .init(hex: 0x7E7E82) }
+        static var isOnlineColor: UIColor { .init(hex: 0x037EE5) }
     }
 }
 
 final class UserTableViewCell: UITableViewCell {
-    // MARK: - Properties
+    // MARK: - View properties
 
     lazy var profileImageView = UIImageView().then {
         $0.layer.cornerRadius = style.profileImageSize.height / 2
@@ -20,22 +22,13 @@ final class UserTableViewCell: UITableViewCell {
         $0.font = style.usernameLabelFont
     }
 
-    lazy var descriptionLabel = UILabel().then {
-        $0.font = style.descriptionLabelFont
+    lazy var onlineLabel = UILabel().then {
+        $0.font = style.onlineLabelFont
     }
 
-    private lazy var stack = UIStackView().then { stack in
-        stack.axis = .vertical
-        stack.spacing = Style.Spacers.space1
-        stack.distribution = .fill
-        [
-            usernameLabel,
-            descriptionLabel
-        ].forEach { stack.addArrangedSubview($0) }
-    }
+    // MARK: - Properties
 
     private let style = Style.UserTableViewCell.self
-    private var user: User!
 
     // MARK: - Lifecycle
 
@@ -44,19 +37,26 @@ final class UserTableViewCell: UITableViewCell {
 
         add {
             profileImageView
-            stack
+            usernameLabel
+            onlineLabel
         }
 
         profileImageView.snp.makeConstraints { make in
             make.centerY.equalTo(self)
-            make.left.equalTo(16)
+            make.left.equalTo(Style.Spacers.space2)
             make.size.equalTo(self.style.profileImageSize)
         }
 
-        stack.snp.makeConstraints { make in
-            make.centerY.equalTo(self)
-            make.left.equalTo(profileImageView.snp.right).offset(16)
-            make.right.equalTo(16)
+        usernameLabel.snp.makeConstraints { make in
+            make.top.equalTo(5)
+            make.left.equalTo(profileImageView.snp.right).offset(Style.Spacers.space1)
+            make.right.equalTo(self).offset(-Style.Spacers.space1)
+        }
+
+        onlineLabel.snp.makeConstraints { make in
+            make.left.equalTo(profileImageView.snp.right).offset(Style.Spacers.space1)
+            make.top.equalTo(usernameLabel.snp.bottom).offset(1)
+            make.right.equalTo(self).offset(-Style.Spacers.space1)
         }
     }
 
@@ -65,10 +65,19 @@ final class UserTableViewCell: UITableViewCell {
     }
 
     func configure(user: User) {
-        self.user = user
-
         profileImageView.image = Asset.avatar.image
         usernameLabel.text = user.name
-        descriptionLabel.text = "1233"
+//        onlineLabel.text = "last seen 1 hour ago"
+        setOnline(isOnline: false, lastVisitDate: Date())
+    }
+
+    private func setOnline(isOnline: Bool, lastVisitDate: Date) {
+        if isOnline {
+            onlineLabel.textColor = style.isOnlineColor
+            onlineLabel.text = "online"
+        } else {
+            onlineLabel.textColor = style.isNotOnlineColor
+            onlineLabel.text = "last seen 1 hour ago"
+        }
     }
 }
