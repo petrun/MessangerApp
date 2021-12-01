@@ -11,6 +11,7 @@
 "i_have_an_account.title" = "I have an account";
 
 "chats.title" = "Chats";
-"groups.title" = "Groups";
 "users.title" = "Users";
 "settings.title" = "Settings";
+
+"error.title" = "Error";

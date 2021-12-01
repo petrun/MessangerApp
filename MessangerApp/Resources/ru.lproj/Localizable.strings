@@ -11,6 +11,7 @@
 "i_have_an_account.title" = "У меня есть аккаунт";
 
 "chats.title" = "Чаты";
-"groups.title" = "Группы";
-"users.title" = "Юзеры";
+"users.title" = "Пользователи";
 "settings.title" = "Настройки";
+
+"error.title" = "Ошибка";

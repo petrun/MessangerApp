@@ -2,8 +2,7 @@ import Swinject
 
 private extension Style {
     enum MainTabBar {
-        static let messageImage = UIImage(systemName: "message")!
-        static let groupsImage = UIImage(systemName: "quote.bubble")!
+        static let chatsImage = UIImage(systemName: "quote.bubble")!
         static let usersImage = UIImage(systemName: "person.2")!
         static let settingsImage = UIImage(systemName: "gearshape")!
     }
@@ -27,13 +26,7 @@ class MainTabBarCoordinator: Coordinator {
         let routerFactory = resolver.resolve(RouterFactoryProtocol.self)!
 
         mainTabBarController.viewControllers = [
-//            createNavigationController(image: Style.MainTabBar.messageImage, title: L10n.Chats.title) {
-//                ChatsCoordinator(
-//                    router: routerFactory.makeNavigationRouter(navigationController: $0),
-//                    resolver: resolver
-//                )
-//            },
-            createNavigationController(image: Style.MainTabBar.groupsImage, title: L10n.Groups.title) {
+            createNavigationController(image: Style.MainTabBar.chatsImage, title: L10n.Chats.title) {
                 ChatsCoordinator(
                     router: routerFactory.makeNavigationRouter(navigationController: $0),
                     resolver: resolver

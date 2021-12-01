@@ -31,7 +31,7 @@ extension RegistrationViewModel: RegistrationViewModelProtocol {
             case .success:
                 self.coordinatorHandler?.showMainPage()
             case .failure(let error):
-                AlertService.showAlert(style: .alert, title: "Error", message: error.localizedDescription)
+                showAlert(title: L10n.Error.title, message: error.localizedDescription)
             }
         }
     }
