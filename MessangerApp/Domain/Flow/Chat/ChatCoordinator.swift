@@ -22,12 +22,10 @@ final class ChatCoordinator: Coordinator {
     }
 
     func present(animated: Bool, onDismissed: (() -> Void)?) {
-        let viewController = resolver.resolve(ChatViewController.self, argument: chat)!
-
-//        if let viewModel = viewController.viewModel as? ChatViewModel {
-//            viewModel.coordinatorHandler = self
-//        }
-
-        router.present(viewController, animated: animated, onDismissed: onDismissed)
+        router.present(
+            resolver.resolve(ChatViewController.self, argument: chat)!,
+            animated: animated,
+            onDismissed: onDismissed
+        )
     }
 }

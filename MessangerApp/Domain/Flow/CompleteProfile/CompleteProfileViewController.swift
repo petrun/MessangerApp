@@ -78,7 +78,7 @@ extension CompleteProfileViewController: UIImagePickerControllerDelegate, UINavi
     }
 }
 
-//extension CompleteProfileViewController: ValidationDelegate {
+// extension CompleteProfileViewController: ValidationDelegate {
 //    func validationSuccessful() {
 //        print("validationSuccessful")
 ////        guard let profileImage = profileImage else {
@@ -115,4 +115,4 @@ extension CompleteProfileViewController: UIImagePickerControllerDelegate, UINavi
 //            error.errorLabel?.isHidden = false
 //        }
 //    }
-//}
+// }

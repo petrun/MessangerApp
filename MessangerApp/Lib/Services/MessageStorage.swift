@@ -6,43 +6,54 @@
 //
 
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 import MessageKit
 
 protocol MessageStorageProtocol {
     func getMessages(
         chat: Chat,
         limit: Int,
-        beforeMessage: MessageType?,
-        completion: @escaping (Result<[MessageType], Error>) -> Void
+        beforeMessage: Message?,
+        completion: @escaping (Result<[Message], Error>) -> Void
     )
+
     func listenForNewMessages(
         chat: Chat,
-        lastMessage: MessageType?,
-        completion: @escaping (Result<MessageType, Error>) -> Void
+        lastMessage: Message?,
+        completion: @escaping (Result<Message, Error>) -> Void
+    ) -> ListenerRegistration
+
+    func sendMessage(
+        chat: Chat,
+        sender: User,
+        kind: MessageKind,
+        completion: @escaping (Result<Message, Error>) -> Void
     )
-    func sendMessage(chat: Chat, message: Message)
 }
 
 final class MessageStorage {
     private lazy var db = Firestore.firestore()
     private let collectionName = "messages"
+    private let firebaseFirestoreWrapper: FirebaseFirestoreWrapperProtocol
+    private let messageDataMapper: MessageDataMapper
+
+    init(
+        firebaseFirestoreWrapper: FirebaseFirestoreWrapperProtocol,
+        messageDataMapper: MessageDataMapper
+    ) {
+        self.firebaseFirestoreWrapper = firebaseFirestoreWrapper
+        self.messageDataMapper = messageDataMapper
+    }
 }
 
 extension MessageStorage: MessageStorageProtocol {
     func getMessages(
         chat: Chat,
         limit: Int,
-        beforeMessage: MessageType?,
-        completion: @escaping (Result<[MessageType], Error>) -> Void
+        beforeMessage: Message?,
+        completion: @escaping (Result<[Message], Error>) -> Void
     ) {
-        guard let chatId = chat.id else {
-            print("ChatId is empty")
-            return
-        }
-
         var query = db.collection(collectionName)
-            .document(chatId)
+            .document(chat.id)
             .collection("messages")
             .order(by: "sentDate", descending: true)
             .limit(to: limit)
@@ -56,83 +67,93 @@ extension MessageStorage: MessageStorageProtocol {
             )
         }
 
-        query
-            .getDocuments { querySnapshot, error in
-                if let error = error {
-                    completion(.failure(error))
+        firebaseFirestoreWrapper.getDocuments(query) { result in
+            switch result {
+            case .success(let documents):
+                let dispatchGroup = DispatchGroup()
+                var messages: [Message] = []
+
+                documents.reversed().forEach { [weak self] snapshot in
+                    dispatchGroup.enter()
+                    self?.messageDataMapper.toObject(data: snapshot.data()) { message in
+                        if let message = message {
+                            messages.append(message)
+                        }
+
+                        dispatchGroup.leave()
+                    }
                 }
 
-                guard let documents = querySnapshot?.documents else {
-                    print("No messages")
-                    completion(.success([]))
-                    return
+                dispatchGroup.notify(queue: .main) {
+                    print("RETURN MESSAGES", messages.count)
+                    messages.sort { $0.sentDate < $1.sentDate }
+                    completion(.success(messages))
                 }
-
-                completion(.success(
-                    documents.reversed().compactMap { try? $0.data(as: Message.self) }
-                ))
+            case .failure(let error):
+                completion(.failure(error))
             }
+        }
     }
 
     func listenForNewMessages(
         chat: Chat,
-        lastMessage: MessageType?,
-        completion: @escaping (Result<MessageType, Error>) -> Void
-    ) {
-        guard let chatId = chat.id else {
-            print("ChatId is empty")
-            return
-        }
-
-        db.collection(collectionName)
-            .document(chatId)
-            .collection("messages")
-            .whereField("sentDate", isGreaterThan: lastMessage?.sentDate ?? Date())
-            .addSnapshotListener { querySnapshot, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-
-                guard let snapshot = querySnapshot else { return }
-
-                for change in snapshot.documentChanges {
+        lastMessage: Message?,
+        completion: @escaping (Result<Message, Error>) -> Void
+    ) -> ListenerRegistration {
+        firebaseFirestoreWrapper.addListener(
+            query: db.collection(collectionName)
+                .document(chat.id)
+                .collection("messages")
+                .whereField("sentDate", isGreaterThan: lastMessage?.sentDate ?? Date())
+        ) { [weak self] result in
+            switch result {
+            case .success(let documentChanges):
+                for change in documentChanges {
                     switch change.type {
                     case .added:
-                        guard let message = try? change.document.data(as: Message.self) else {
-                            return
+                        self?.messageDataMapper.toObject(data: change.document.data()) { message in
+                            guard let message = message else { return }
+
+                            print("Added new message \(message)")
+                            completion(.success(message))
                         }
-
-                        print("Added new message \(message)")
-
-                        completion(.success(message))
-                    case .modified:
-                        break
-                    case .removed:
+                    default:
                         break
                     }
                 }
+            case .failure(let error):
+                completion(.failure(error))
             }
+        }
     }
 
-    func sendMessage(chat: Chat, message: Message) {
-        guard let chatId = chat.id else {
-            print("ChatId is empty")
-            return
-        }
+    func sendMessage(
+        chat: Chat,
+        sender: User,
+        kind: MessageKind,
+        completion: @escaping (Result<Message, Error>) -> Void
+    ) {
+        let message = Message(messageId: UUID().uuidString, sender: sender, sentDate: Date(), kind: kind)
 
         do {
-            try firebaseReference(.messages)
-                .document(chatId)
-                .collection("messages")
-                .document(message.messageId)
-                .setData(from: message)
+            firebaseFirestoreWrapper.setData(
+                ref: db.collection(collectionName)
+                    .document(chat.id)
+                    .collection("messages")
+                    .document(message.messageId),
+                data: try messageDataMapper.toData(object: message)
+            ) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(message))
+                }
+            }
 
             // TODO: Send notification
-            // TODO: Update chatLastMessage
             // TODO: Update chat unview count
         } catch {
-            print(error.localizedDescription)
+            completion(.failure(error))
         }
     }
 }

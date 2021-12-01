@@ -67,3 +67,18 @@ extension MessageKind: Codable {
         }
     }
 }
+
+extension MessageKind {
+    var previewText: String? {
+        switch self {
+        case .text(let text):
+            return text
+        case .photo:
+            return "Photo"
+        case .video:
+            return "Video"
+        default:
+            return "Unknown message type"
+        }
+    }
+}

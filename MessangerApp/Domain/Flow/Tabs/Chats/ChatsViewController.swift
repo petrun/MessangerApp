@@ -41,7 +41,7 @@ class ChatsViewController: UITableViewController {
         setupSearchController()
 
         viewModel.delegate = self
-        viewModel.loadChats()
+        viewModel.start()
     }
 
     private func setupSearchController() {
@@ -58,9 +58,7 @@ class ChatsViewController: UITableViewController {
 
 extension ChatsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        searchController.isActive
-        print("CALL get COUNT \(isFiltering)")
-        return viewModel.count(isFiltering: isFiltering)
+        viewModel.count(isFiltering: isFiltering)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,9 +66,8 @@ extension ChatsViewController {
             withIdentifier: chatCellIdentifier,
             for: indexPath
         ) as! ChatTableViewCell
-        let chat = viewModel.itemForRowAt(indexPath: indexPath, isFiltering: isFiltering)
 
-        cell.configure(chat: chat)
+        cell.configure(chat: viewModel.itemForRowAt(indexPath: indexPath, isFiltering: isFiltering))
 
         return cell
     }
@@ -100,9 +97,5 @@ extension ChatsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         print("CALL updateSearchResults: \(searchController.searchBar.text!)")
         viewModel.filterChats(searchText: searchController.searchBar.text!)
-
-//        let searchBar = searchController.searchBar
-//          searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
-//        filterContentForSearchText(searchBar.text!)
     }
 }

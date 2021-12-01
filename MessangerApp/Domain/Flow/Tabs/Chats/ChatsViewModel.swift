@@ -5,11 +5,11 @@
 //  Created by andy on 10.11.2021.
 //
 
-import Foundation
+import FirebaseFirestore
 
 protocol ChatsViewModelProtocol: AnyObject {
     var delegate: ChatsViewModelDelegate? { get set }
-    func loadChats()
+    func start()
     func filterChats(searchText: String)
 
     func count(isFiltering: Bool) -> Int
@@ -36,60 +36,89 @@ final class ChatsViewModel {
         }
     }
 
-    private let authService: AuthServiceProtocol
+    private var listenForChatsUpdates: ListenerRegistration?
+
     private let chatStorage: ChatStorageProtocol
     private let currentUser: User
     private let logger: LoggerService
     private let userProfile: UserProfileProtocol
 
     init(
-        authService: AuthServiceProtocol,
         chatStorage: ChatStorageProtocol,
         logger: LoggerService,
-        userProfile: UserProfileProtocol
+        userProfile: UserProfileProtocol,
+        userSession: UserSessionProtocol
     ) {
-        self.authService = authService
         self.chatStorage = chatStorage
         self.logger = logger
         self.userProfile = userProfile
 
-        currentUser = authService.currentUser!
+        currentUser = userSession.user!
     }
-}
 
-extension ChatsViewModel: ChatsViewModelProtocol {
-    func loadChats() {
+    deinit {
+        print("Chats Deinit")
+
+        listenForChatsUpdates?.remove()
+    }
+
+    func start() {
+        getChats()
+    }
+
+    private func getChats() {
         chatStorage.getChats(for: currentUser) { [weak self] result in
             guard let self = self else { return }
 
             switch result {
             case .success(let chats):
                 print("Chats loaded", chats.count)
-                // TODO: - Need bulk load users for chats
-                chats.forEach { [weak self] chat in
-                    guard let self = self else { return }
-
-                    switch chat.type {
-                    case .privateChat:
-                        self.userProfile.get(
-                            chat.membersIds.first(where: { $0 != self.currentUser.uid })!
-                        ) { [weak self] user in
-                            guard let self = self, let user = user else { return }
-
-                            var newChat = chat
-                            newChat.title = user.name
-                            newChat.imageUrl = user.profileImageUrl
-
-                            self.chats.append(newChat)
-                        }
-                    }
-                }
+                self.chats = chats
             case .failure(let error):
-                print("Failure load chats \(error)")
+                print("Failure load chats", error)
             }
+
+            self.addListenForChatsUpdates()
         }
     }
 
+    private func addListenForChatsUpdates() {
+        guard listenForChatsUpdates == nil else { return }
+
+        print("CALL add addListenForNewMessages")
+
+        listenForChatsUpdates = chatStorage.addListener(for: currentUser) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let change):
+                switch change {
+                case .added(let chat):
+                    guard
+                        !self.chats.contains(where: { $0.id == chat.id })
+                    else { return }
+
+                    print("CHAT ADDED", chat)
+                    self.chats.insert(chat, at: 0)
+                    self.delegate?.reloadData()
+                case .modified(let chat):
+                    guard
+                        let index = self.chats.firstIndex(where: { $0.id == chat.id })
+                    else { return }
+
+                    print("CHAT MODIFIED", chat)
+                    self.chats[index] = chat
+                    self.chats.sort { $0.lastUpdateAt > $1.lastUpdateAt }
+                    self.delegate?.reloadData()
+                }
+            case .failure(let error):
+                print("listenForNewMessages failure", error)
+            }
+        }
+    }
+}
+
+extension ChatsViewModel: ChatsViewModelProtocol {
     func count(isFiltering: Bool) -> Int {
         isFiltering ? filteredChats.count : chats.count
     }

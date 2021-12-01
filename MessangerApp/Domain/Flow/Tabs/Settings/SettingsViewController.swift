@@ -76,7 +76,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: settingsBaseCellIdentifier,
                 for: indexPath
-            ) as! UITableViewCell
+            )
 
             cell.textLabel?.text = "link"
             cell.accessoryType = .disclosureIndicator
@@ -85,7 +85,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: settingsBaseCellIdentifier,
                 for: indexPath
-            ) as! UITableViewCell
+            )
 
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = "Logout"

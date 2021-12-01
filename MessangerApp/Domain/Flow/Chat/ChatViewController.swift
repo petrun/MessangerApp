@@ -115,43 +115,12 @@ class ChatViewController: MessagesViewController {
 
         // InputTextView
         messageInputBar.inputTextView.isImagePasteEnabled = false
-//        messageInputBar.backgroundView.backgroundColor = .systemBackground
-//        messageInputBar.inputTextView.backgroundColor = .systemBackground
-
-//        messageInputBar.isTranslucent = true
-//        messageInputBar.separatorLine.isHidden = true
-//        messageInputBar.backgroundView.backgroundColor = UIColor.white
-//        messageInputBar.inputTextView.backgroundColor = .white
-//        messageInputBar.inputTextView.placeholderTextColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 1)
-//        messageInputBar.inputTextView.textContainerInset = UIEdgeInsets(top: 14, left: 30, bottom: 14, right: 36)
-//        messageInputBar.inputTextView.placeholderLabelInsets = UIEdgeInsets(top: 14, left: 36, bottom: 14, right: 36)
-//        messageInputBar.inputTextView.layer.borderColor = #colorLiteral(red: 0.7411764706, green: 0.7411764706, blue: 0.7411764706, alpha: 0.4033635232)
-//        messageInputBar.inputTextView.layer.borderWidth = 0.2
-//        messageInputBar.inputTextView.layer.cornerRadius = 18.0
-//        messageInputBar.inputTextView.layer.masksToBounds = true
-//        messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 14, left: 0, bottom: 14, right: 0)
-//
-////        messageView.textView.placeholderText = "New message..."
-////        messageView.textView.placeholderTextColor = .lightGray
-//
-//        messageInputBar.inputTextView.placeholderLabel.text = "New message..."
-//
-//        messageInputBar.inputTextView.layer.backgroundColor = UIColor.green.cgColor
-//        messageInputBar.rightStackView.layer.backgroundColor = UIColor.red.cgColor
-//
-//        messageInputBar.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        messageInputBar.layer.shadowRadius = 5
-//        messageInputBar.layer.shadowOpacity = 0.3
-//        messageInputBar.layer.shadowOffset = CGSize(width: 0, height: 4)
-//
-//        configureSendButton()
     }
 
     private func configureSendButton() {
         messageInputBar.sendButton.setImage(Asset.Icons.comment.image, for: .normal)
         messageInputBar.sendButton.tintColor = .blue
 
-//        messageInputBar.sendButton.applyGradients(cornerRadius: 10)
         messageInputBar.setRightStackViewWidthConstant(to: 56, animated: false)
         messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 6, right: 30)
         messageInputBar.sendButton.setSize(CGSize(width: 48, height: 48), animated: false)
@@ -179,10 +148,6 @@ class ChatViewController: MessagesViewController {
             self?.showImageGallery(camera: false)
         }
 
-        actionSheet.addAction(title: "Location") { _ in
-            print("share Location")
-        }
-
         actionSheet.addCancelAction(title: "Cancel")
 
         present(actionSheet, animated: true)
@@ -204,10 +169,10 @@ class ChatViewController: MessagesViewController {
 
         print("Call scrollViewDidEndDecelerating")
         viewModel.loadMoreMessages { [weak self] in
-            guard let self = self else { return }
-            print("CALL COMPLETION")
-            self.messagesCollectionView.reloadDataAndKeepOffset()
-            self.refreshController.endRefreshing()
+            DispatchQueue.main.async { [weak self] in
+                self?.messagesCollectionView.reloadDataAndKeepOffset()
+                self?.refreshController.endRefreshing()
+            }
         }
     }
 
@@ -227,8 +192,11 @@ class ChatViewController: MessagesViewController {
 
 extension ChatViewController: ChatViewModelDelegate {
     func reloadData() {
-        messagesCollectionView.reloadData()
-        messagesCollectionView.scrollToLastItem()
+        DispatchQueue.main.async { [weak self] in
+            print("CALL ChatViewController:reloadData")
+            self?.messagesCollectionView.reloadData()
+            self?.messagesCollectionView.scrollToLastItem()
+        }
     }
 
     func updateTypingIndicator(_ isTyping: Bool) {

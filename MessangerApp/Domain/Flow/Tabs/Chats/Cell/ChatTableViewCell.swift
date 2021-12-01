@@ -110,8 +110,8 @@ final class ChatTableViewCell: UITableViewCell {
     func configure(chat: Chat) {
         profileImageView.image = Asset.avatar.image
         usernameLabel.text = chat.title ?? "Empty chat name"
-        descriptionLabel.text = "Actually Tabitha"
-        dateLabel.text = Date().timeElapsed() // 8/25/19
+        descriptionLabel.text = chat.lastMessageKind?.previewText
+        dateLabel.text = chat.lastUpdateAt.timeElapsed()
         unreadCountLabel.text = "1"
     }
 }

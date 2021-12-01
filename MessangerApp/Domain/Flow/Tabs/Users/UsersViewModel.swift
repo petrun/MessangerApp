@@ -23,23 +23,27 @@ final class UsersViewModel {
     weak var delegate: UsersViewModelDelegate?
     var coordinatorHandler: UsersCoordinatorDelegate?
 
+    private let chatStorage: ChatStorageProtocol
+    private let currentUser: User
+    private let logger: LoggerService
     private var users: [User] = [] {
         didSet {
             delegate?.reloadData()
         }
     }
-    private let authService: AuthServiceProtocol
     private let userStorage: UserStorageProtocol
-    private let logger: LoggerService
+
 
     init(
-        authService: AuthServiceProtocol,
-        userStorage: UserStorageProtocol,
-        logger: LoggerService
+        chatStorage: ChatStorageProtocol,
+        logger: LoggerService,
+        userSession: UserSessionProtocol,
+        userStorage: UserStorageProtocol
     ) {
-        self.authService = authService
-        self.userStorage = userStorage
+        self.chatStorage = chatStorage
         self.logger = logger
+        currentUser = userSession.user!
+        self.userStorage = userStorage
 
         // Add test users
 //        for i in 1...200 {
@@ -53,16 +57,12 @@ final class UsersViewModel {
 
 extension UsersViewModel: UsersViewModelProtocol {
     func loadUsers() {
-        userStorage.getPage(
-            lastSnapshot: nil,
-            currentUserId: authService.currentUserId!,
-            limit: 25
-        ) { result in
+        userStorage.getUsers(currentUserId: currentUser.uid) { [weak self] result in
             switch result {
             case .success(let users):
-                self.users = users
+                self?.users = users
             case .failure(let error):
-                print("Failure load users \(error)")
+                self?.logger.info("Failure load users \(error.localizedDescription)")
             }
         }
     }
@@ -76,6 +76,33 @@ extension UsersViewModel: UsersViewModelProtocol {
     }
 
     func didSelectRowAt(indexPath: IndexPath) {
-        coordinatorHandler?.showChat(user: itemForRowAt(indexPath: indexPath))
+        let recipient = itemForRowAt(indexPath: indexPath)
+
+        chatStorage.getChat(for: [recipient, currentUser]) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let chat):
+                self.logger.info("Chat found", context: chat)
+                self.coordinatorHandler?.showChat(chat: chat)
+            case .failure(let error):
+                switch error {
+                case ChatStorageError.chatNotFound(let errorMessage):
+                    self.logger.info("Chat not found", context: errorMessage)
+
+                    self.chatStorage.createChat(recipient: recipient) { [weak self] result in
+                        switch result {
+                        case .success(let chat):
+                            self?.logger.info("Chat created", context: chat)
+                            self?.coordinatorHandler?.showChat(chat: chat)
+                        case .failure(let error):
+                            self?.logger.error("Can't create chat", context: error)
+                        }
+                    }
+                default:
+                    self.logger.error("Can't init chat", context: error)
+                }
+            }
+        }
     }
 }

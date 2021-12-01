@@ -3,7 +3,6 @@ import FirebaseAuth
 protocol AuthServiceProtocol {
     typealias UserId = String
     var currentUserId: String? { get }
-    var currentUser: User? { get }
 
     func login(
         withEmail email: String,
@@ -25,11 +24,6 @@ class AuthService: AuthServiceProtocol {
 
     var currentUserId: String? {
         Auth.auth().currentUser?.uid
-    }
-
-    var currentUser: User? {
-        guard let uid = Auth.auth().currentUser?.uid else { return nil }
-        return User(uid: uid, name: "Andy")
     }
 
     func login(

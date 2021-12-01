@@ -20,12 +20,17 @@ final class AppCoordinator: Coordinator {
     }
 
     func present(animated: Bool, onDismissed: (() -> Void)?) {
-        let authService = resolver.resolve(AuthServiceProtocol.self)!
+        let userSession = resolver.resolve(UserSessionProtocol.self)!
 
-        let coordinator: Coordinator = authService.currentUserId != nil ?
-            MainTabBarCoordinator(router: router, resolver: resolver) :
-            LoginCoordinator(router: router, resolver: resolver)
+        // TODO: - Show loader while load user data
+        userSession.restoreUserData { [weak self] user in
+            guard let self = self else { return }
 
-        coordinator.present(animated: animated, onDismissed: onDismissed)
+            let coordinator: Coordinator = user != nil ?
+                MainTabBarCoordinator(router: self.router, resolver: self.resolver) :
+                LoginCoordinator(router: self.router, resolver: self.resolver)
+
+            coordinator.present(animated: animated, onDismissed: onDismissed)
+        }
     }
 }

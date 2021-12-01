@@ -16,15 +16,12 @@ class UsersViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Users"
-
-//        view.backgroundColor = .yellow
+        title = L10n.Users.title
 
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: userCellIdentifier)
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 65, bottom: 0, right: 0)
 
         viewModel.delegate = self
-
         viewModel.loadUsers()
     }
 }
@@ -44,7 +41,6 @@ extension UsersViewController {
         let user = viewModel.itemForRowAt(indexPath: indexPath)
         cell.configure(user: user)
 
-//        cell.textLabel?.text = user.name
         return cell
     }
 
@@ -65,27 +61,4 @@ extension UsersViewController: UsersViewModelDelegate {
     func reloadData() {
         tableView.reloadData()
     }
-}
-
-extension UsersViewController {
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let y = scrollView.contentOffset.y
-        let h = scrollView.contentSize.height
-        let s = scrollView.frame.size.height
-        print("y=\(y) h=\(h) s=\(s) \(y + s)")
-        if y > h / 1.1 {
-            print("scroll")
-        }
-    }
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let position = scrollView.contentOffset.y
-//        let contentSizeHeight = tableView.contentSize.height
-//        let scrollHeight = scrollView.frame.size.height
-////        print("contentSizeHeight = \(contentSizeHeight) scrollHeight = \(scrollHeight) position = \(position)")
-//        guard position > contentSizeHeight - 100 - scrollHeight else {
-//            return
-//        }
-//        print(position)
-//        //fetchData pagination = true
-//    }
 }

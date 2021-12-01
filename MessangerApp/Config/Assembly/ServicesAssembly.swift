@@ -16,10 +16,15 @@ class ServicesAssembly: Assembly {
         container.autoregister(FileStorageProtocol.self, initializer: FileStorage.init)
         .inObjectScope(ObjectScope.container)
 
+        // FirebaseFirestoreWrapperProtocol
+        container.autoregister(FirebaseFirestoreWrapperProtocol.self, initializer: FirebaseFirestoreWrapper.init)
+        .inObjectScope(ObjectScope.container)
+
         // Logger
         container.register(LoggerService.self) {_ in
             let console = ConsoleDestination()
-            console.format = "$DHH:mm:ss.SSS$d $L [$N.$F:$l] $M $X"
+//            console.format = "$DHH:mm:ss.SSS$d $L [$N.$F:$l] $M $X"
+            console.format = "$L $M $X [$N.$F:$l]"
 
             console.levelString.verbose = "🐷"
             console.levelString.debug = "🛠️"
@@ -59,8 +64,20 @@ class ServicesAssembly: Assembly {
             )
         }
 
+        // UserSessionProtocol
+        container.autoregister(UserSessionProtocol.self, initializer: UserSession.init)
+        .inObjectScope(ObjectScope.container)
+
         // UserStorage
         container.autoregister(UserStorageProtocol.self, initializer: UserStorage.init)
+        .inObjectScope(ObjectScope.container)
+
+        // DataMappers
+
+        container.autoregister(ChatDataMapper.self, initializer: ChatDataMapper.init)
+        .inObjectScope(ObjectScope.container)
+
+        container.autoregister(MessageDataMapper.self, initializer: MessageDataMapper.init)
         .inObjectScope(ObjectScope.container)
     }
 }

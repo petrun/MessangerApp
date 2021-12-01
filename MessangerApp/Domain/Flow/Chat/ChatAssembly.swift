@@ -13,10 +13,10 @@ class ChatAssembly: Assembly {
         container.register(ChatViewModelProtocol.self) { (r: Resolver, chat: Chat) in
             ChatViewModel(
                 chat: chat,
-                authService: r.resolve(AuthServiceProtocol.self)!,
                 messageStorage: r.resolve(MessageStorageProtocol.self)!,
                 typingService: r.resolve(TypingServiceProtocol.self)!,
-                sendMessageHandler: r.resolve(SendMessageHandlerProtocol.self)!
+                sendMessageHandler: r.resolve(SendMessageHandlerProtocol.self)!,
+                userSession: r.resolve(UserSessionProtocol.self)!
             )
         }
 

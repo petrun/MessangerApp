@@ -9,7 +9,7 @@ import MessageKit
 
 extension ChatViewController: MessagesDataSource {
     func currentSender() -> SenderType {
-        viewModel.currentSender
+        viewModel.currentUser
     }
 
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
@@ -23,10 +23,9 @@ extension ChatViewController: MessagesDataSource {
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         guard indexPath.section % 3 == 0 else { return nil }
 
-        let showLoadMore = false // (indexPath.section == 0 && viewModel.messagesCount > chat.totalMessages)
-        let text = showLoadMore ? "Pull to load more" : MessageKitDateFormatter.shared.string(from: message.sentDate)
-        let font = showLoadMore ? UIFont.systemFont(ofSize: 13) : UIFont.boldSystemFont(ofSize: 10)
-        let color = showLoadMore ? UIColor.systemBlue : UIColor.darkGray
+        let text = MessageKitDateFormatter.shared.string(from: message.sentDate)
+        let font = UIFont.boldSystemFont(ofSize: 10)
+        let color = UIColor.darkGray
 
         return NSAttributedString(
             string: text,

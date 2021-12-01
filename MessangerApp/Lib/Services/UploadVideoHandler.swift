@@ -18,6 +18,10 @@ protocol UploadVideoHandlerProtocol {
     )
 }
 
+enum UploadVideoError: Error {
+    case emptyThumbOrVideoUrl
+}
+
 final class UploadVideoHandler {
     private let fileStorage: FileStorageProtocol
 
@@ -27,27 +31,55 @@ final class UploadVideoHandler {
 }
 
 extension UploadVideoHandler: UploadVideoHandlerProtocol {
+    private class UploadResult {
+        var thumbUrl: URL?
+        var videoUrl: URL?
+        var error: Error?
+    }
+
     func uploadVideo(
         chatId: String,
         video: Video,
         completion: @escaping (Result<ThumbURLVideoURL, Error>) -> Void
     ) {
-        getThumbAndUpload(chatId: chatId, video: video) { [weak self] result in
-            guard let self = self else { return }
+        let uploadResult = UploadResult()
+        let dispatchGroup = DispatchGroup()
 
+        dispatchGroup.enter()
+        getThumbAndUpload(chatId: chatId, video: video) { result in
             switch result {
             case .success(let thumbUrl):
-                self.getVideoAndUpload(chatId: chatId, video: video) { result in
-                    switch result {
-                    case .success(let videoUrl):
-                        completion(.success(ThumbURLVideoURL(thumbUrl: thumbUrl, videoUrl: videoUrl)))
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
-                }
+                uploadResult.thumbUrl = thumbUrl
             case .failure(let error):
+                uploadResult.error = error
+            }
+            dispatchGroup.leave()
+        }
+
+        dispatchGroup.enter()
+        getVideoAndUpload(chatId: chatId, video: video) { result in
+            switch result {
+            case .success(let videoUrl):
+                uploadResult.videoUrl = videoUrl
+            case .failure(let error):
+                uploadResult.error = error
+            }
+            dispatchGroup.leave()
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            if let error = uploadResult.error {
                 completion(.failure(error))
             }
+
+            guard
+                let thumbUrl = uploadResult.thumbUrl, let videoUrl = uploadResult.videoUrl
+            else {
+                completion(.failure(UploadVideoError.emptyThumbOrVideoUrl))
+                return
+            }
+
+            completion(.success(ThumbURLVideoURL(thumbUrl: thumbUrl, videoUrl: videoUrl)))
         }
     }
 
