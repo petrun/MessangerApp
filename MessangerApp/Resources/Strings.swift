@@ -26,14 +26,14 @@ internal enum L10n {
     internal static let placeholder = L10n.tr("Localizable", "email.placeholder")
   }
 
+  internal enum Error {
+    /// Error
+    internal static let title = L10n.tr("Localizable", "error.title")
+  }
+
   internal enum FullName {
     /// Full Name
     internal static let placeholder = L10n.tr("Localizable", "full_name.placeholder")
-  }
-
-  internal enum Groups {
-    /// Groups
-    internal static let title = L10n.tr("Localizable", "groups.title")
   }
 
   internal enum IHaveAnAccount {
