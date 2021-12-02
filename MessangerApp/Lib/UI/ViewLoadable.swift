@@ -20,11 +20,3 @@ extension ViewLoadable where Self: UIViewController {
         return customView
     }
 }
-
-open class ViewController<ViewType: UIView>: UIViewController, ViewLoadable {
-    public typealias MainView = ViewType
-
-    open override func loadView() {
-        view = MainView()
-    }
-}
