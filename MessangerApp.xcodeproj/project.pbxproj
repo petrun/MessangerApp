@@ -14,7 +14,7 @@
 		A10181BE2741C5820039A63C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10181BD2741C5820039A63C /* Message.swift */; };
 		A10181C42741C9860039A63C /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10181C32741C9860039A63C /* FileStorage.swift */; };
 		A105DDBE272D7C5C0067A5ED /* UIButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDBD272D7C5C0067A5ED /* UIButtons.swift */; };
-		A105DDCA272D96D30067A5ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDC9272D96D30067A5ED /* ViewController.swift */; };
+		A105DDCA272D96D30067A5ED /* ViewLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDC9272D96D30067A5ED /* ViewLoadable.swift */; };
 		A105DDCD272D97490067A5ED /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDCC272D97490067A5ED /* LoginView.swift */; };
 		A105DDD1272DC5AE0067A5ED /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDD0272DC5AE0067A5ED /* RegistrationView.swift */; };
 		A105DDD4272DC5D50067A5ED /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105DDD3272DC5D50067A5ED /* RegistrationViewController.swift */; };
@@ -138,7 +138,7 @@
 		A10181BD2741C5820039A63C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		A10181C32741C9860039A63C /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		A105DDBD272D7C5C0067A5ED /* UIButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtons.swift; sourceTree = "<group>"; };
-		A105DDC9272D96D30067A5ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A105DDC9272D96D30067A5ED /* ViewLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLoadable.swift; sourceTree = "<group>"; };
 		A105DDCC272D97490067A5ED /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A105DDD0272DC5AE0067A5ED /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		A105DDD3272DC5D50067A5ED /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -283,14 +283,6 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		A105DDC8272D96C50067A5ED /* Generics */ = {
-			isa = PBXGroup;
-			children = (
-				A105DDC9272D96D30067A5ED /* ViewController.swift */,
-			);
-			path = Generics;
-			sourceTree = "<group>";
-		};
 		A11025E82737487400C9C498 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				A1E8C6D527565FF900428293 /* FirebaseFirestoreWrapper.swift */,
+				A10181C32741C9860039A63C /* FileStorage.swift */,
 				A19F841D2756B2E80084E15C /* Query+Extension.swift */,
 			);
 			path = Firebase;
@@ -653,7 +646,6 @@
 				A1533A342743DB2A0070CD64 /* Firebase */,
 				A1C1EB3E272B0D1D0060ECF3 /* Coordinator */,
 				A1DA94BD27320CE600C37852 /* Services */,
-				A105DDC8272D96C50067A5ED /* Generics */,
 				A1C1EB83272B6A910060ECF3 /* UI */,
 				A1C1EB5E272B36BC0060ECF3 /* Logger */,
 				A1C1EB33272B0B620060ECF3 /* Router */,
@@ -665,8 +657,9 @@
 		A1C1EB46272B20F70060ECF3 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				A161D6A427386D5D00240FD8 /* Model */,
 				A18110F12737EA410013221A /* Flow */,
+				A161D6A427386D5D00240FD8 /* Model */,
+				A1CD1FFD2758EEAB0092EB04 /* Services */,
 				A105DDBC272D7C420067A5ED /* UI */,
 			);
 			path = Domain;
@@ -696,6 +689,7 @@
 		A1C1EB83272B6A910060ECF3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A105DDC9272D96D30067A5ED /* ViewLoadable.swift */,
 				A1C1EB84272B6A9E0060ECF3 /* UIView+Add.swift */,
 				A1C1EB9B272C2A660060ECF3 /* UIColor+Extension.swift */,
 				A14721A2272EF0A300C5B6FE /* UIKit+Preview.swift */,
@@ -713,6 +707,38 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
+		A1CD1FFD2758EEAB0092EB04 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A1CD20002759007D0092EB04 /* Chat */,
+				A1CD1FFF2758EF7F0092EB04 /* User */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A1CD1FFF2758EF7F0092EB04 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				A1DA94BE27320CFE00C37852 /* AuthService.swift */,
+				A1742634273DBB1800679ECE /* UserStorage.swift */,
+				A1210732274D81EF0052E330 /* UserProfile.swift */,
+				A1386C4327540A9400E8065F /* UserSession.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		A1CD20002759007D0092EB04 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A139FA932742A6060081A473 /* ChatStorage.swift */,
+				A192172F2747CC2E0063F7C1 /* MessageStorage.swift */,
+				A1B8E3182749BA300050F86D /* TypingService.swift */,
+				A1DEF420274B17D7003BFB88 /* SendMessageHandler.swift */,
+				A15120D1274BE12700502271 /* UploadVideoHandler.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		A1CD68572730B2B900F33E04 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,17 +754,7 @@
 		A1DA94BD27320CE600C37852 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				A1DA94BE27320CFE00C37852 /* AuthService.swift */,
-				A1742634273DBB1800679ECE /* UserStorage.swift */,
-				A10181C32741C9860039A63C /* FileStorage.swift */,
-				A139FA932742A6060081A473 /* ChatStorage.swift */,
-				A192172F2747CC2E0063F7C1 /* MessageStorage.swift */,
-				A1B8E3182749BA300050F86D /* TypingService.swift */,
-				A1DEF420274B17D7003BFB88 /* SendMessageHandler.swift */,
-				A15120D1274BE12700502271 /* UploadVideoHandler.swift */,
-				A1210732274D81EF0052E330 /* UserProfile.swift */,
 				A11D541D27525C9B00B7B977 /* Helpers.swift */,
-				A1386C4327540A9400E8065F /* UserSession.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -981,7 +997,7 @@
 				A191F0F0273C4AF800AABBFE /* SettingsProfileItemTableViewCell.swift in Sources */,
 				A1C1EB3C272B0CA90060ECF3 /* WindowRootRouter.swift in Sources */,
 				A197B1FF273E853600AB6FD7 /* ProfileCoordinator.swift in Sources */,
-				A105DDCA272D96D30067A5ED /* ViewController.swift in Sources */,
+				A105DDCA272D96D30067A5ED /* ViewLoadable.swift in Sources */,
 				A191F0F4273C670A00AABBFE /* SettingsView.swift in Sources */,
 				A1CD685B2730B2B900F33E04 /* Strings.swift in Sources */,
 				A1742654273DC26900679ECE /* User.swift in Sources */,

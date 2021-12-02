@@ -12,7 +12,7 @@ class ServicesAssembly: Assembly {
         container.autoregister(ChatStorageProtocol.self, initializer: ChatStorage.init)
         .inObjectScope(ObjectScope.container)
 
-        // FileStorageService
+        // FileStorage
         container.autoregister(FileStorageProtocol.self, initializer: FileStorage.init)
         .inObjectScope(ObjectScope.container)
 
