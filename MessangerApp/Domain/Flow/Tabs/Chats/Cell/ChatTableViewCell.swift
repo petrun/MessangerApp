@@ -112,6 +112,8 @@ final class ChatTableViewCell: UITableViewCell {
         usernameLabel.text = chat.title ?? "Empty chat name"
         descriptionLabel.text = chat.lastMessageKind?.previewText
         dateLabel.text = chat.lastUpdateAt.timeElapsed()
-        unreadCountLabel.text = "1"
+
+        unreadCountView.isHidden = true
+//        unreadCountLabel.text = "1"
     }
 }

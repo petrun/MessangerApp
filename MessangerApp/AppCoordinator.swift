@@ -27,8 +27,7 @@ final class AppCoordinator: Coordinator {
             guard let self = self else { return }
 
             let uid = userSession.uid
-
-            var coordinator: Coordinator
+            let coordinator: Coordinator
 
             switch (uid, user) {
             case (_, let user?):
