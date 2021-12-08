@@ -26,9 +26,21 @@ final class AppCoordinator: Coordinator {
         userSession.restoreUserData { [weak self] user in
             guard let self = self else { return }
 
-            let coordinator: Coordinator = user != nil ?
-                MainTabBarCoordinator(router: self.router, resolver: self.resolver) :
-                LoginCoordinator(router: self.router, resolver: self.resolver)
+            let uid = userSession.uid
+
+            var coordinator: Coordinator
+
+            switch (uid, user) {
+            case (_, let user?):
+                print("Is logged in", user)
+                coordinator = MainTabBarCoordinator(router: self.router, resolver: self.resolver)
+            case (let uid?, _):
+                print("Need complete profile")
+                coordinator = CompleteProfileCoordinator(uid: uid, router: self.router, resolver: self.resolver)
+            case (nil, nil):
+                print("Is not logged in")
+                coordinator = LoginCoordinator(router: self.router, resolver: self.resolver)
+            }
 
             coordinator.present(animated: animated, onDismissed: onDismissed)
         }

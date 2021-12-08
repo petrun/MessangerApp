@@ -41,16 +41,29 @@ class ChatViewController: MessagesViewController {
         $0.onTouchUpInside { [weak self] _ in self?.attachButtonPressed() }
     }
 
-    private lazy var leftBarButtonView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+    private lazy var leftBarButtonView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50)).then {
+        $0.add {
+            titleLabel
+            subTitleLabel
+        }
+    }
+
     private lazy var titleLabel = UILabel(frame: CGRect(x: 5, y: 0, width: 180, height: 25)).then {
         $0.textAlignment = .left
         $0.font = .systemFont(ofSize: 16, weight: .medium)
         $0.adjustsFontSizeToFitWidth = true
     }
+
     private lazy var subTitleLabel = UILabel(frame: CGRect(x: 5, y: 22, width: 180, height: 20)).then {
         $0.textAlignment = .left
         $0.font = .systemFont(ofSize: 13, weight: .medium)
         $0.adjustsFontSizeToFitWidth = true
+    }
+
+    private lazy var avatarImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.image = Asset.avatar.image
     }
 
     override func viewDidLoad() {
@@ -58,8 +71,7 @@ class ChatViewController: MessagesViewController {
 
         viewModel.delegate = self
 
-        configureLeftBarButton()
-        configureCustomTitle()
+        configureNavigationBar()
 
         configureMessagesCollectionView()
         configureMessageInputBar()
@@ -67,27 +79,20 @@ class ChatViewController: MessagesViewController {
         viewModel.start()
     }
 
-    private func configureLeftBarButton() {
+    private func configureNavigationBar() {
         navigationItem.leftBarButtonItems = [
             UIBarButtonItem(
                 image: UIImage(systemName: "chevron.left"),
                 style: .plain,
                 target: self,
                 action: #selector(backButtonPressed)
-            )
+            ),
+            UIBarButtonItem(customView: leftBarButtonView)
         ]
-    }
-
-    private func configureCustomTitle() {
-        leftBarButtonView.add {
-            titleLabel
-            subTitleLabel
-        }
-
-        let letfBarButtonItem = UIBarButtonItem(customView: leftBarButtonView)
-        navigationItem.leftBarButtonItems?.append(letfBarButtonItem)
 
         titleLabel.text = viewModel.chatTitle
+
+        // TODO: Add avatar view
     }
 
     private func configureMessagesCollectionView() {
@@ -130,9 +135,7 @@ class ChatViewController: MessagesViewController {
     // MARK: - Actions
 
     @objc private func backButtonPressed() {
-        // TODO: remove listeners
-
-        navigationController?.popToRootViewController(animated: true)
+        viewModel.backButtonPressed()
     }
 
     private func attachButtonPressed() {

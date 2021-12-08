@@ -12,44 +12,48 @@ import SnapKit
 
 private extension Style {
     enum CompleteProfileView {
-//        static let logoImageSize = CGSize(width: 150, height: 150)
         static let addPhotoButtonSize = CGSize(width: 150, height: 150)
-        static let addPhotoButtonTintColor = BaseColors.white
+        static let addPhotoButtonTintColor = BaseColors.blue
+        static let titleLabelTextColor = BaseColors.black
     }
 }
 
 class CompleteProfileView: UIView {
     // MARK: - Properties
 
-    lazy var imagePicker = UIImagePickerController().then {
-        $0.sourceType = .photoLibrary
-        $0.allowsEditing = true
+    lazy var addPhotoContainer = AddPhotoContainer()
+
+    lazy var nameTextField = BaseTextField().then {
+        $0.autocapitalizationType = .none
+        $0.placeholder = "Name"
     }
 
-    lazy var addPhotoButton = UIButton(type: .system).then {
-        $0.setImage(Asset.plusPhoto.image, for: .normal)
-        $0.tintColor = Style.CompleteProfileView.addPhotoButtonTintColor
-        $0.imageView?.contentMode = .scaleAspectFill
-        $0.layer.masksToBounds = true
-    }
+    lazy var nameContainerView = InputContainerWithValidation(
+        textField: nameTextField
+    )
+
+    lazy var submitButton = UIButton(submitTitle: "Submit")
 
     // MARK: - Private Properties
 
-//    private lazy var logoImageView = UIImageView().then {
-//        $0.contentMode = .scaleAspectFit
-//        $0.clipsToBounds = true
-//        $0.image = Asset.Logo.main.image
-//    }
+    private lazy var style = Style.CompleteProfileView.self
+
+    private lazy var titleLabel = UILabel().then {
+        $0.textAlignment = .center
+        $0.text = "Complete profile"
+        $0.textColor = style.titleLabelTextColor
+        $0.font = Style.Fonts.headingTwo
+    }
 
     private lazy var stack = UIStackView().then { stack in
         stack.axis = .vertical
         stack.spacing = Style.Spacers.space1
         stack.distribution = .fill
         [
-//            logoImageView,
-//            emailContainerView,
-//            passwordContainerView,
-//            signUpButton
+            titleLabel,
+            addPhotoContainer,
+            nameContainerView,
+            submitButton
         ].forEach { stack.addArrangedSubview($0) }
     }
 
@@ -71,48 +75,20 @@ class CompleteProfileView: UIView {
 
     private func setupStyle() {
         backgroundColor = Style.backgroundColor
-        addPhotoButton.layer.cornerRadius = Style.CompleteProfileView.addPhotoButtonSize.height / 2
     }
 
     private func addSubviews() {
         add {
-            addPhotoButton
-//            logoImageView
-//            stack
-//            haveAccountButton
+            stack
         }
     }
 
     private func makeConstraints() {
-//        logoImageView.snp.makeConstraints { make in
-//            make.top.equalTo(safeAreaLayoutGuide)
-//            make.centerX.equalTo(self)
-//            make.size.equalTo(Style.RegistrationView.logoImageSize)
-//        }
-//
-//        stack.snp.makeConstraints { make in
-//            make.top.equalTo(logoImageView.snp.bottom).offset(Style.Spacers.space2)
-//            make.left.equalTo(Style.Spacers.space2)
-//            make.right.equalTo(-Style.Spacers.space2)
-//        }
-
-
-        addPhotoButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide)
-            make.centerX.equalTo(self)
-            make.size.equalTo(Style.CompleteProfileView.addPhotoButtonSize)
+        stack.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(Style.Spacers.space2)
+            make.left.equalTo(Style.Spacers.space2)
+            make.right.equalTo(-Style.Spacers.space2)
         }
-//
-//        stack.snp.makeConstraints { make in
-//            make.top.equalTo(addPhotoButton.snp.bottom).offset(Style.Spacers.space2)
-//            make.left.equalTo(Style.Spacers.space2)
-//            make.right.equalTo(-Style.Spacers.space2)
-//        }
-
-//        haveAccountButton.snp.makeConstraints { make in
-//            make.bottom.equalTo(safeAreaLayoutGuide)
-//            make.centerX.equalTo(self)
-//        }
     }
 }
 

@@ -24,6 +24,7 @@ protocol ChatViewModelProtocol {
     func messageForItem(at indexPath: IndexPath) -> MessageType
     func loadMoreMessages(completion: @escaping () -> Void)
     func isTyping()
+    func backButtonPressed()
 
     // Send messages
     func sendMessage(text: String)
@@ -33,6 +34,7 @@ protocol ChatViewModelProtocol {
 
 class ChatViewModel {
     weak var delegate: ChatViewModelDelegate?
+    var coordinatorHandler: ChatCoordinatorDelegate?
     var chatTitle: String
     let currentUser: User
 
@@ -68,12 +70,13 @@ class ChatViewModel {
     }
 
     deinit {
-        // TODO: Remove listeners
-        print("Deinit")
+        print("Deinit ChatViewModel")
 
         if typingCounter > 0 {
             typingService.set(typing: false, chatId: chat.id, userId: currentUser.uid)
         }
+
+        // Remove listeners
         typingListener?.remove()
         newMessagesListener?.remove()
     }
@@ -205,5 +208,9 @@ extension ChatViewModel: ChatViewModelProtocol {
                 )
             }
         }
+    }
+
+    func backButtonPressed() {
+        coordinatorHandler?.dismiss()
     }
 }

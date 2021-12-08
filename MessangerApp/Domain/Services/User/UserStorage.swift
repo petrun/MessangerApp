@@ -10,7 +10,7 @@ import FirebaseFirestoreSwift
 
 protocol UserStorageProtocol {
 //    func addUser(name: String, completion: @escaping (Result<String, Error>) -> Void)
-    func addUser(user: User, completion: @escaping (Error?) -> Void)
+    func updateUser(uid: String, data: [String: Any], completion: @escaping (Error?) -> Void)
     func getUser(uid: String, completion: @escaping (Result<User, Error>) -> Void)
     func getUsers(currentUserId: String, completion: @escaping (Result<[User], Error>) -> Void)
 }
@@ -26,15 +26,11 @@ class UserStorage {
 }
 
 extension UserStorage: UserStorageProtocol {
-    func addUser(user: User, completion: @escaping (Error?) -> Void) {
-        do {
-            firestoreWrapper.setData(
-                ref: db.collection(collectionName).document(user.uid),
-                data: try Firestore.Encoder().encode(user)
-            ) { error in
-                completion(error)
-            }
-        } catch {
+    func updateUser(uid: String, data: [String: Any], completion: @escaping (Error?) -> Void) {
+        firestoreWrapper.updateData(
+            ref: db.collection(collectionName).document(uid),
+            data: data
+        ) { error in
             completion(error)
         }
     }

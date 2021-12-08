@@ -13,14 +13,13 @@ protocol CacheProtocol {
 }
 
 class Cache: CacheProtocol {
-    // TODO: - use NSCache
-    private var storage: [String: Any] = [:]
+    private var storage = NSCache<NSString, AnyObject>()
 
     func get(key: String) -> Any? {
-        storage[key]
+        storage.object(forKey: key as NSString)
     }
 
     func set(key: String, data: Any) {
-        storage[key] = data
+        storage.setObject(data as AnyObject, forKey: key as NSString)
     }
 }

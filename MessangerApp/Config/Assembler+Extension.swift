@@ -6,9 +6,10 @@ extension Assembler {
             ServicesAssembly(),
 
             ChatAssembly(),
+            CompleteProfileAssembly(),
             LoginAssembly(),
             RegistrationAssembly(),
-            ProfileAssembly(),
+            EditProfileAssembly(),
 
             // Tabs
             ChatsAssembly(),

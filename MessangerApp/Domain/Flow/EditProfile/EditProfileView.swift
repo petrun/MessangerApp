@@ -11,14 +11,13 @@ import SnapKit
 // MARK: - Style
 
 private extension Style {
-    enum ProfileView {
-//        static let logoImageSize = CGSize(width: 150, height: 150)
+    enum EditProfileView {
         static let addPhotoButtonSize = CGSize(width: 150, height: 150)
         static let addPhotoButtonTintColor = BaseColors.white
     }
 }
 
-class ProfileView: UIView {
+class EditProfileView: UIView {
     // MARK: - Properties
 
     lazy var imagePicker = UIImagePickerController().then {
@@ -28,28 +27,30 @@ class ProfileView: UIView {
 
     lazy var addPhotoButton = UIButton(type: .system).then {
         $0.setImage(Asset.plusPhoto.image, for: .normal)
-        $0.tintColor = Style.ProfileView.addPhotoButtonTintColor
+        $0.tintColor = style.addPhotoButtonTintColor
         $0.imageView?.contentMode = .scaleAspectFill
         $0.layer.masksToBounds = true
     }
 
+    lazy var nameTextField = BaseTextField().then {
+        $0.autocapitalizationType = .none
+        $0.placeholder = "Name"
+    }
+
+    lazy var nameContainerView = InputContainerWithValidation(
+        textField: nameTextField
+    )
+
     // MARK: - Private Properties
 
-//    private lazy var logoImageView = UIImageView().then {
-//        $0.contentMode = .scaleAspectFit
-//        $0.clipsToBounds = true
-//        $0.image = Asset.Logo.main.image
-//    }
+    private lazy var style = Style.EditProfileView.self
 
     private lazy var stack = UIStackView().then { stack in
         stack.axis = .vertical
         stack.spacing = Style.Spacers.space1
         stack.distribution = .fill
         [
-//            logoImageView,
-//            emailContainerView,
-//            passwordContainerView,
-//            signUpButton
+            nameContainerView
         ].forEach { stack.addArrangedSubview($0) }
     }
 
@@ -71,48 +72,28 @@ class ProfileView: UIView {
 
     private func setupStyle() {
         backgroundColor = Style.backgroundColor
-        addPhotoButton.layer.cornerRadius = Style.ProfileView.addPhotoButtonSize.height / 2
+        addPhotoButton.layer.cornerRadius = style.addPhotoButtonSize.height / 2
     }
 
     private func addSubviews() {
         add {
             addPhotoButton
-//            logoImageView
-//            stack
-//            haveAccountButton
+            stack
         }
     }
 
     private func makeConstraints() {
-//        logoImageView.snp.makeConstraints { make in
-//            make.top.equalTo(safeAreaLayoutGuide)
-//            make.centerX.equalTo(self)
-//            make.size.equalTo(Style.RegistrationView.logoImageSize)
-//        }
-//
-//        stack.snp.makeConstraints { make in
-//            make.top.equalTo(logoImageView.snp.bottom).offset(Style.Spacers.space2)
-//            make.left.equalTo(Style.Spacers.space2)
-//            make.right.equalTo(-Style.Spacers.space2)
-//        }
-
-
         addPhotoButton.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.centerX.equalTo(self)
-            make.size.equalTo(Style.ProfileView.addPhotoButtonSize)
+            make.size.equalTo(style.addPhotoButtonSize)
         }
-//
-//        stack.snp.makeConstraints { make in
-//            make.top.equalTo(addPhotoButton.snp.bottom).offset(Style.Spacers.space2)
-//            make.left.equalTo(Style.Spacers.space2)
-//            make.right.equalTo(-Style.Spacers.space2)
-//        }
 
-//        haveAccountButton.snp.makeConstraints { make in
-//            make.bottom.equalTo(safeAreaLayoutGuide)
-//            make.centerX.equalTo(self)
-//        }
+        stack.snp.makeConstraints { make in
+            make.top.equalTo(addPhotoButton.snp.bottom).offset(Style.Spacers.space2)
+            make.left.equalTo(Style.Spacers.space2)
+            make.right.equalTo(-Style.Spacers.space2)
+        }
     }
 }
 
@@ -121,6 +102,6 @@ import SwiftUI
 @available(iOS 13, *)
 struct ProfileViewPreview: PreviewProvider {
     static var previews: some View {
-        ProfileView().embedForPreview()
+        EditProfileView().embedForPreview()
     }
 }

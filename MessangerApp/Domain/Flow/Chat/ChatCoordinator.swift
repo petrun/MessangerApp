@@ -7,6 +7,10 @@
 
 import Swinject
 
+protocol ChatCoordinatorDelegate: AnyObject {
+    func dismiss()
+}
+
 final class ChatCoordinator: Coordinator {
     var children: [Coordinator] = []
     var router: Router
@@ -22,10 +26,16 @@ final class ChatCoordinator: Coordinator {
     }
 
     func present(animated: Bool, onDismissed: (() -> Void)?) {
-        router.present(
-            resolver.resolve(ChatViewController.self, argument: chat)!,
-            animated: animated,
-            onDismissed: onDismissed
-        )
+        let viewController = resolver.resolve(ChatViewController.self, argument: chat)!
+
+        (viewController.viewModel as? ChatViewModel)?.coordinatorHandler = self
+
+        router.present(viewController, animated: animated, onDismissed: onDismissed)
+    }
+}
+
+extension ChatCoordinator: ChatCoordinatorDelegate {
+    func dismiss() {
+        router.dismiss(animated: true)
     }
 }

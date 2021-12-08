@@ -10,7 +10,7 @@ import Swinject
 protocol SettingsCoordinatorDelegate: AnyObject {
     func logout()
     func showLink()
-    func showProfile()
+    func showProfile(user: User)
 }
 
 final class SettingsCoordinator: Coordinator {
@@ -48,7 +48,13 @@ extension SettingsCoordinator: SettingsCoordinatorDelegate {
         print("Show link")
     }
 
-    func showProfile() {
+    func showProfile(user: User) {
         print("Touch showProfile")
+
+        EditProfileCoordinator(
+            user: user,
+            router: router,
+            resolver: resolver
+        ).present(animated: true, onDismissed: nil)
     }
 }

@@ -63,6 +63,8 @@ class LoginView: UIView {
         ].forEach { stack.addArrangedSubview($0) }
     }
 
+    // MARK: - Lifecycle
+
     init() {
         super.init(frame: .zero)
 

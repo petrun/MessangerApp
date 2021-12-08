@@ -7,7 +7,11 @@
 
 import Swinject
 
-final class ProfileCoordinator: Coordinator {
+protocol EditProfileCoordinatorDelegate: AnyObject {
+    func dismiss()
+}
+
+final class EditProfileCoordinator: Coordinator {
     var children: [Coordinator] = []
     var router: Router
 
@@ -22,13 +26,16 @@ final class ProfileCoordinator: Coordinator {
     }
 
     func present(animated: Bool, onDismissed: (() -> Void)?) {
-        let viewController = resolver.resolve(ProfileViewController.self, argument: user)!
-//        container.resolve(Animal.self, argument: "Spirit")!
+        let viewController = resolver.resolve(EditProfileViewController.self, argument: user)!
 
-//        if let viewModel = viewController.viewModel as? RegistrationViewModel {
-//            viewModel.coordinatorHandler = self
-//        }
+        (viewController.viewModel as? EditProfileViewModel)?.coordinatorHandler = self
 
         router.present(viewController, animated: animated, onDismissed: onDismissed)
+    }
+}
+
+extension EditProfileCoordinator: EditProfileCoordinatorDelegate {
+    func dismiss() {
+        router.dismiss(animated: true)
     }
 }

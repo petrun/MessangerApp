@@ -8,6 +8,8 @@
 import Foundation
 
 protocol SettingsViewModelProtocol: AnyObject {
+    var currentUser: User { get }
+
     func numberOfSections() -> Int
     func numberOfRowsInSection(section: Int) -> Int
     func item(for indexPath: IndexPath) -> SettingItemType
@@ -21,20 +23,18 @@ enum SettingItemType {
 }
 
 final class SettingsViewModel {
+    var coordinatorHandler: SettingsCoordinatorDelegate?
+
+    let currentUser: User
     private let items: [[SettingItemType]] = [
         [.profile],
         [.link, .link],
         [.logout]
     ]
 
-//    private let authService: AuthServiceProtocol
-//    private let logger: LoggerService
-    var coordinatorHandler: SettingsCoordinatorDelegate?
-
-//    init(authService: AuthServiceProtocol, logger: LoggerService) {
-//        self.authService = authService
-//        self.logger = logger
-//    }
+    init(userSession: UserSessionProtocol) {
+        currentUser = userSession.user!
+    }
 }
 
 extension SettingsViewModel: SettingsViewModelProtocol {
@@ -53,7 +53,7 @@ extension SettingsViewModel: SettingsViewModelProtocol {
     func didSelectRowAt(indexPath: IndexPath) {
         switch self.item(for: indexPath) {
         case .profile:
-            coordinatorHandler?.showProfile()
+            coordinatorHandler?.showProfile(user: currentUser)
         case .link:
             coordinatorHandler?.showLink()
         case .logout:

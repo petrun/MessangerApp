@@ -1,3 +1,4 @@
+import SDWebImage
 import Then
 import UIKit
 
@@ -68,9 +69,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 for: indexPath
             ) as! SettingsProfileItemTableViewCell
 
-            cell.profileImageView.image = Asset.plusPhoto.image
-            cell.usernameLabel.text = "Username"
-            cell.descriptionLabel.text = "Description"
+            cell.configure(user: viewModel.currentUser)
+
             return cell
         case .link:
             let cell = tableView.dequeueReusableCell(
@@ -110,13 +110,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
 
         viewModel.didSelectRowAt(indexPath: indexPath)
-
-//        tableView.deselectRow(at: indexPath, animated: false)
-//        guard indexPath.row == 1 else { return }
-//        let vc = UIViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-
-//        print("Select row \(indexPath.row)")
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

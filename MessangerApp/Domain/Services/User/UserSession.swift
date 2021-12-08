@@ -9,6 +9,7 @@ import Foundation
 
 protocol UserSessionProtocol {
     var user: User? { get set }
+    var uid: String? { get }
     func restoreUserData(completion: @escaping (User?) -> Void)
 }
 
@@ -36,5 +37,9 @@ extension UserSession: UserSessionProtocol {
             self.user = user
             completion(user)
         }
+    }
+
+    var uid: String? {
+        authService.currentUserId
     }
 }

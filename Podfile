@@ -1,13 +1,8 @@
 platform :ios, '13.0'
 
 target 'MessangerApp' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
-  # ignore all warnings from all dependencies
   inhibit_all_warnings!
-
-  # Pods for MessangerApp
 
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
@@ -26,13 +21,6 @@ target 'MessangerApp' do
   pod 'SwiftyBeaver'
   pod 'Swinject'
   pod 'SwinjectAutoregistration'
-
-  #pod 'RealmSwift'
-
-  #pod 'ProgressHUD'
-
-  #pod 'InputBarAccessoryView'
-
 end
 
 post_install do |installer|

@@ -15,49 +15,50 @@ class CompleteProfileViewController: ViewController<CompleteProfileView> {
     // MARK: - Private Properties
 
     private var profileImage: UIImage?
+    private lazy var validator = Validator()
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        mainView.imagePicker.delegate = self
+        mainView.addPhotoContainer.imagePicker.delegate = self
 
+        initValidator()
         addTargets()
     }
 
     // MARK: - Private Methods
 
     private func addTargets() {
-        mainView.addPhotoButton.addTarget(self, action: #selector(handleAddProfilePhoto), for: .touchUpInside)
-//        mainView.signUpButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-//        mainView.haveAccountButton.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
+        mainView.addPhotoContainer.addPhotoButton.addTarget(
+            self,
+            action: #selector(handleAddProfilePhoto),
+            for: .touchUpInside
+        )
+        mainView.submitButton.addTarget(self, action: #selector(handleSubmitForm), for: .touchUpInside)
+    }
+
+    private func initValidator() {
+        validator.styleTransformers(
+            success: ValidatorStyleTransformers.success,
+            error: ValidatorStyleTransformers.error
+        )
+
+        validator.registerField(
+            mainView.nameTextField,
+            errorLabel: mainView.nameContainerView.errorLabel,
+            rules: [RequiredRule(), MinLengthRule(length: 5)])
     }
 
     // MARK: - Selectors
 
-//    @objc func handleShowLogin() {
-//        viewModel.handleShowLogin()
-//    }
+    @objc private func handleSubmitForm() {
+        validator.validate(self)
+    }
 
-//    @objc func handleSignUp() {
-//        let validator = Validator()
-//
-//        validator.registerField(
-//            mainView.emailTextField,
-//            errorLabel: mainView.emailContainerView.errorLabel,
-//            rules: [RequiredRule(), EmailRule()])
-//
-//        validator.registerField(
-//            mainView.passwordTextField,
-//            errorLabel: mainView.passwordContainerView.errorLabel,
-//            rules: [RequiredRule(), MinLengthRule(length: 5)])
-//
-//        validator.validate(self)
-//    }
-
-    @objc func handleAddProfilePhoto() {
-        present(mainView.imagePicker, animated: true)
+    @objc private func handleAddProfilePhoto() {
+        present(mainView.addPhotoContainer.imagePicker, animated: true)
     }
 }
 
@@ -69,12 +70,26 @@ extension CompleteProfileViewController: UIImagePickerControllerDelegate, UINavi
 
         profileImage = image
 
-        mainView.addPhotoButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
-
-        mainView.addPhotoButton.layer.borderColor = UIColor.white.cgColor
-        mainView.addPhotoButton.layer.borderWidth = 3
+        mainView.addPhotoContainer.setImage(image.withRenderingMode(.alwaysOriginal))
 
         dismiss(animated: true)
+    }
+}
+
+// MARK: - ValidationDelegate
+extension CompleteProfileViewController: ValidationDelegate {
+    func validationSuccessful() {
+        guard
+            let name = mainView.nameTextField.text
+        else {
+            return
+        }
+
+        viewModel.createProfile(image: profileImage, name: name)
+    }
+
+    func validationFailed(_ errors: [(Validatable, ValidationError)]) {
+        print("Validation FAILED!")
     }
 }
 

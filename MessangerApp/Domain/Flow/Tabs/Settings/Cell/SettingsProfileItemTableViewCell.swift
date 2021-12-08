@@ -14,6 +14,7 @@ final class SettingsProfileItemTableViewCell: UITableViewCell {
 
     lazy var profileImageView = UIImageView().then {
         $0.layer.cornerRadius = style.profileImageSize.height / 2
+        $0.clipsToBounds = true
     }
 
     lazy var usernameLabel = UILabel().then {
@@ -46,12 +47,6 @@ final class SettingsProfileItemTableViewCell: UITableViewCell {
             stack
         }
 
-//        self.heightAnchor.constraint(equalToConstant: 80).isActive = true
-
-//        contentView.snp.makeConstraints { make in
-//            make.height.equalTo(80)
-//        }
-
         profileImageView.snp.makeConstraints { make in
             make.centerY.equalTo(self)
             make.left.equalTo(16)
@@ -63,21 +58,24 @@ final class SettingsProfileItemTableViewCell: UITableViewCell {
             make.left.equalTo(profileImageView.snp.right).offset(16)
             make.right.equalTo(16)
         }
-
-//        profileImageView.snp.makeConstraints { make in
-//            make.centerY.equalTo(self)
-//            make.left.equalTo(16)
-//            make.size.equalTo(self.style.profileImageSize)
-//        }
-//
-//        usernameLabel.snp.makeConstraints { make in
-//            make.top.equalTo(12)
-//            make.left.equalTo(profileImageView).offset(12)
-//            make.size.equalTo(self.style.profileImageSize)
-//        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(user: User) {
+        profileImageView.image = Asset.avatar.image
+        usernameLabel.text = user.name
+//        onlineLabel.text = "last seen 1 hour ago"
+
+        if let profileImageUrl = user.profileImageUrl {
+            profileImageView.sd_setImage(with: profileImageUrl)
+        } else {
+            profileImageView.image = Asset.plusPhoto.image
+        }
+
+        usernameLabel.text = user.name
+//        descriptionLabel.text = "Description"
     }
 }

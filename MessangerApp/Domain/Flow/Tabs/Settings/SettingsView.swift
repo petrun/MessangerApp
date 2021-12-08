@@ -13,8 +13,6 @@ import SnapKit
 private extension Style {
     enum SettingsView {
         static let logoImageSize = CGSize(width: 150, height: 150)
-//        static let addPhotoButtonSize = CGSize(width: 150, height: 150)
-//        static let addPhotoButtonTintColor = BaseColors.white
     }
 }
 
