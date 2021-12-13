@@ -21,11 +21,11 @@ class EditProfileViewModel {
     var coordinatorHandler: EditProfileCoordinatorDelegate?
 
     private let user: User
-    private let updateProfileHandler: UpdateProfileHandlerProtocol
+    private let editProfileHandler: EditProfileHandlerProtocol
 
-    init(user: User, updateProfileHandler: UpdateProfileHandlerProtocol) {
+    init(user: User, editProfileHandler: EditProfileHandlerProtocol) {
         self.user = user
-        self.updateProfileHandler = updateProfileHandler
+        self.editProfileHandler = editProfileHandler
         print(user)
     }
 }
@@ -39,7 +39,7 @@ extension EditProfileViewModel: EditProfileViewModelProtocol {
     func updateProfile(data: EditProfileData) {
         print("tapDoneButton")
 
-        updateProfileHandler.updateProfile(
+        editProfileHandler.updateProfile(
             uid: user.uid,
             image: data.image,
             name: data.name

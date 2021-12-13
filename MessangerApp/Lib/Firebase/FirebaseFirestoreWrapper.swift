@@ -6,6 +6,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 enum FirebaseError: Error {
     case documentNotFound

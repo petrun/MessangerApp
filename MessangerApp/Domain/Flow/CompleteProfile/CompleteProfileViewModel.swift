@@ -15,11 +15,11 @@ final class CompleteProfileViewModel {
     var coordinatorHandler: CompleteProfileCoordinatorDelegate?
 
     private let uid: String
-    private let updateProfileHandler: UpdateProfileHandlerProtocol
+    private let editProfileHandler: EditProfileHandlerProtocol
 
-    init(uid: String, updateProfileHandler: UpdateProfileHandlerProtocol) {
+    init(uid: String, editProfileHandler: EditProfileHandlerProtocol) {
         self.uid = uid
-        self.updateProfileHandler = updateProfileHandler
+        self.editProfileHandler = editProfileHandler
     }
 
     deinit {
@@ -29,7 +29,7 @@ final class CompleteProfileViewModel {
 
 extension CompleteProfileViewModel: CompleteProfileViewModelProtocol {
     func createProfile(image: UIImage?, name: String) {
-        updateProfileHandler.updateProfile(uid: uid, image: image, name: name) { [weak self] error in
+        editProfileHandler.createProfile(uid: uid, image: image, name: name) { [weak self] error in
             if let error = error {
                 showAlert(title: "Error", message: error.localizedDescription)
                 return

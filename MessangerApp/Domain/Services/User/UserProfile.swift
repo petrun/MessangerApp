@@ -42,6 +42,7 @@ extension UserProfile: UserProfileProtocol {
                 completion(user)
             case .failure(let error):
                 print(error)
+                completion(nil)
             }
         }
     }

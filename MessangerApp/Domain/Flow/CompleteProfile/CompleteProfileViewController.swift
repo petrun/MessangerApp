@@ -48,7 +48,8 @@ class CompleteProfileViewController: ViewController<CompleteProfileView> {
         validator.registerField(
             mainView.nameTextField,
             errorLabel: mainView.nameContainerView.errorLabel,
-            rules: [RequiredRule(), MinLengthRule(length: 5)])
+            rules: [RequiredRule(), MinLengthRule(length: 4)]
+        )
     }
 
     // MARK: - Selectors
@@ -92,42 +93,3 @@ extension CompleteProfileViewController: ValidationDelegate {
         print("Validation FAILED!")
     }
 }
-
-// extension CompleteProfileViewController: ValidationDelegate {
-//    func validationSuccessful() {
-//        print("validationSuccessful")
-////        guard let profileImage = profileImage else {
-////            print("DEBUG: Please select a profile image...")
-////            return
-////        }
-//
-//        guard
-//            let email = mainView.emailTextField.text,
-//            let password = mainView.passwordTextField.text
-////            let fullname = mainView.fullnameTextField.text,
-////            let username = mainView.usernameTextField.text?.lowercased(),
-////            let imageData = profileImage.jpegData(compressionQuality: 0.3)
-//        else {
-//            return
-//        }
-//
-//        viewModel.handleSignUp(
-//            email: email,
-//            password: password
-////            fullname: fullname,
-////            username: username,
-////            imageData: imageData
-//        )
-//    }
-//
-//    func validationFailed(_ errors: [(Validatable, ValidationError)]) {
-//        for (field, error) in errors {
-//            if let field = field as? UITextField {
-//                field.layer.borderColor = UIColor.red.cgColor
-//                field.layer.borderWidth = 1
-//            }
-//            error.errorLabel?.text = error.errorMessage // works if you added labels
-//            error.errorLabel?.isHidden = false
-//        }
-//    }
-// }

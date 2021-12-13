@@ -8,8 +8,8 @@
 import MessageKit
 
 struct Chat {
-    let id: String // = UUID().uuidString
-    let lastUpdateAt: Date  // = Date()
+    let id: String
+    let lastUpdateAt: Date
     let recipient: User
     let lastMessageKind: MessageKind?
 

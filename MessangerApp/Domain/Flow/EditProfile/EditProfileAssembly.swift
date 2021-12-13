@@ -13,7 +13,7 @@ class EditProfileAssembly: Assembly {
         container.register(EditProfileViewModelProtocol.self) { (r: Resolver, user: User) in
             EditProfileViewModel(
                 user: user,
-                updateProfileHandler: r.resolve(UpdateProfileHandlerProtocol.self)!
+                editProfileHandler: r.resolve(EditProfileHandlerProtocol.self)!
             )
         }
 

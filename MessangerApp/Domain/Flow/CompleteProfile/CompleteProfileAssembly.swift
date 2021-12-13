@@ -15,7 +15,7 @@ class CompleteProfileAssembly: Assembly {
         container.register(CompleteProfileViewModelProtocol.self) { (r: Resolver, uid: String) in
             CompleteProfileViewModel(
                 uid: uid,
-                updateProfileHandler: r.resolve(UpdateProfileHandlerProtocol.self)!
+                editProfileHandler: r.resolve(EditProfileHandlerProtocol.self)!
             )
         }
 
