@@ -22,6 +22,7 @@ Used Frameworks:
 - SnapKit
 - SwiftLint
 - SwiftyBeaver
+- SwiftGen
 - Swinject
 
 ## Screens
